@@ -1,0 +1,15 @@
+.toast-container-main {
+  z-index: 10000;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toast-container-mobile {
+  z-index: 10000;
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}

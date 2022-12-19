@@ -1,0 +1,330 @@
+@import '../node_modules/bootstrap/scss/functions';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+//Color
+$primary   : #cc3366;
+$secondary : #a3a3a3;
+$success   : #21ab56;
+$warning   : #ab7f21;
+$danger    : #ed5565;
+$muted     : #717791;
+$light     : #f2f1f2;
+$lighter   : #fafafa;
+$dark      : #384059;
+$green     : #23c6c8;
+
+//Grayscale colors
+$black      : #000000;
+$blue       : #3478f6;
+$gray       : #717791;
+$white      : #fff;
+$gray-100   : #f8f9fa;
+$gray-200   : #e9ecef;
+$gray-300   : #c4c4c4;
+$gray-400   : #ced4da;
+$gray-500   : #adb5bd;
+// $gray-600: #6c757d;
+$gray-700   : #384059;
+$gray-800   : #343a40;
+$gray-900   : #384059;
+$black      : #000;
+
+// Spacer
+$spacer       : 1.25rem;
+$spacer-custom: 1rem;
+$spacers      : (0: 0,
+  c: $spacer * 0.35,
+  1: $spacer * 0.25,
+  1c: $spacer-custom * 0.75,
+  2: $spacer * 0.5,
+  2c: $spacer-custom * 0.875,
+  3: $spacer,
+  3c: $spacer-custom,
+  4: $spacer * 2,
+  4c: $spacer-custom * 1.125,
+  5: $spacer * 3,
+  5c: $spacer-custom * 1.25,
+);
+
+// Breakpoints
+$grid-breakpoints: (xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+// Border
+$border-radius   : 10px;
+$border-radius-sm: 5px;
+$border-radius-lg: 20px;
+
+//Font
+$font-family-sans-serif: 'Inter',
+system-ui,
+-apple-system,
+'Segoe UI',
+Roboto,
+'Helvetica Neue',
+Arial,
+'Noto Sans',
+'Liberation Sans',
+sans-serif,
+'Apple Color Emoji',
+'Segoe UI Emoji',
+'Segoe UI Symbol',
+'Noto Color Emoji';
+// $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+//   'Liberation Mono', 'Courier New', monospace;
+// $font-family-base: var(--#{$variable-prefix}font-sans-serif);
+// $font-family-code: var(--#{$variable-prefix}font-monospace);
+
+// $font-size-root affects the value of `rem`, which is used for as well font sizes, paddings, and margins
+// $font-size-base affects the font size of the body text
+$font-size-root: null;
+$font-size-base: 1rem; // Assumes the browser default, typically `16px`
+$font-size-sm  : $font-size-base * 0.875;
+$font-size-lg  : $font-size-base * 1.25;
+
+$font-weight-lighter: lighter;
+$font-weight-light  : 400;
+$font-weight-normal : 500;
+$font-weight-bold   : 600;
+$font-weight-bolder : 700;
+$font-weight-base   : $font-weight-light;
+
+$line-height-base: 1.5;
+$line-height-sm  : 1.25;
+$line-height-lg  : 2;
+
+$h1-font-size: $font-size-base * 2.5;
+$h2-font-size: $font-size-base * 2;
+$h3-font-size: $font-size-base * 1.75;
+$h4-font-size: $font-size-base * 1.5;
+$h5-font-size: $font-size-base * 1.25;
+$h6-font-size: $font-size-base;
+
+$font-sizes: (1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size,
+  7: 14px,
+  8: 12px,
+  9: 10px,
+);
+
+$headings-color        : $dark;
+$headings-margin-bottom: 0;
+$headings-font-weight  : $font-weight-bolder;
+
+// Color
+$body-color: $dark; //this is the text color
+$body-bg   : $light;
+
+$theme-colors: ('primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'danger': $danger,
+  'warning': $warning,
+  'muted': $muted,
+  'light': $light,
+  'lighter': $lighter,
+  'dark': $dark,
+  'dark-50': $dark,
+  'carousel-btn': #00000033,
+  'white': $white,
+  'black': $black,
+  'blue': $blue,
+  'gray': $gray,
+  'gray-100': $gray-100,
+  'gray-300': $gray-300,
+  'green': $green,
+  'transparent': transparent,
+);
+
+$colors: ('blue': $blue,
+  'green': $green,
+  'white': $white,
+  'muted' : $muted,
+  'gray' : $gray,
+  'gray-300' : $gray-300,
+);
+
+// Common
+$component-active-bg: $primary;
+$container-padding-x: $spacer;
+$container-max-widths: (sm: 1160px,
+);
+
+$card-border-width: 0;
+$card-cap-bg      : $white;
+
+// Modal
+$modal-xs                 : 350px;
+$modal-backdrop-opacity   : 0.8;
+$modal-header-border-width: 0;
+$modal-footer-border-width: 0;
+$modal-sm                 : 419px;
+$modal-md                 : 512px;
+$modal-lg                 : 668px;
+$modal-xl                 : 1140px;
+$modal-inner-padding      : map-get($map: $spacers,
+  $key: '4',
+);
+$modal-header-padding-y    : 10px;
+$modal-header-padding-x    : 10px;
+$modal-content-border-width: 0;
+// Button
+$btn-padding-y-sm          : 12px;
+$btn-padding-x-sm          : 12px;
+$btn-padding-y-lg          : 18px;
+$btn-padding-x-lg          : 18px;
+$btn-font-size-lg          : 18px;
+$btn-font-size-sm          : 16px;
+$btn-border-radius         : $border-radius;
+$btn-border-radius-sm      : $border-radius;
+$btn-border-radius-lg      : $border-radius;
+$btn-link-color            : $blue;
+$btn-link-hover-color      : shift-color($blue, 20%);
+$btn-close-width           : 32px;
+$btn-close-height          : $btn-close-width;
+$btn-close-bg              : url("data:image/svg+xml,<svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M16 0C12.8355 0 9.74207 0.938383 7.11088 2.69649C4.4797 4.45459 2.42894 6.95345 1.21793 9.87706C0.00693262 12.8007 -0.309921 16.0177 0.307443 19.1214C0.924806 22.2251 2.44866 25.0761 4.6863 27.3137C6.92394 29.5513 9.77486 31.0752 12.8786 31.6926C15.9823 32.3099 19.1993 31.9931 22.1229 30.7821C25.0466 29.5711 27.5454 27.5203 29.3035 24.8891C31.0616 22.2579 32 19.1645 32 16C32 11.7565 30.3143 7.68687 27.3137 4.68629C24.3131 1.68571 20.2435 0 16 0ZM22.2609 19.4783C23.0293 20.2467 23.0293 21.4925 22.2609 22.2609C21.4925 23.0293 20.2467 23.0293 19.4783 22.2609L16 18.7826L12.5217 22.2609C11.7533 23.0293 10.5075 23.0293 9.73914 22.2609C8.97074 21.4925 8.97074 20.2467 9.73914 19.4783L13.2174 16L9.73914 12.5217C8.97074 11.7533 8.97074 10.5075 9.73914 9.73913C10.5075 8.97073 11.7533 8.97073 12.5217 9.73913L16 13.2174L19.4783 9.73913C20.2467 8.97073 21.4925 8.97073 22.2609 9.73913C23.0293 10.5075 23.0293 11.7533 22.2609 12.5217L18.7826 16L22.2609 19.4783Z' fill='#9B9FAC'/></svg>");
+$btn-white-space           : nowrap;
+
+// Input
+$input-border-width        : 1px;
+$input-focus-border-color  : $primary;
+$input-box-shadow          : none;
+$input-focus-box-shadow    : none;
+$input-btn-focus-box-shadow: none;
+$input-btn-focus-width     : 0;
+$input-bg                  : transparent;
+$input-placeholder-color   : $secondary;
+
+// Form
+$form-select-border-width: 0;
+$form-select-focus-width : 0;
+$enable-validation-icons : false;
+$form-check-margin-bottom: 0;
+$input-disabled-bg       : none;
+
+//Link
+$link-decoration: none;
+
+// Alert
+$alert-color-scale: -100%;
+
+// Others
+$active-background: $light;
+$active-border    : $primary;
+
+$breadcrumb-divider       : none;
+// Offcanvas
+$offcanvas-vertical-height: auto;
+
+// Nav
+$navbar-light-color       : $dark;
+$navbar-light-active-color: $primary;
+$nav-link-font-weight     : $font-weight-bold;
+
+$nav-link-padding-y               : $spacer * 0.5;
+$nav-link-padding-x               : $spacer;
+$nav-link-color                   : inherit;
+$nav-tabs-border-width            : 0;
+$nav-tabs-border-radius           : 0;
+$nav-tabs-link-active-color       : $primary;
+$nav-tabs-link-active-bg          : transparent;
+$nav-tabs-link-active-border-color: transparent;
+$nav-tabs-link-hover-border-color : transparent;
+// $nav-tabs-border-width: 3px;
+
+//Position
+$position-values: (0: 0,
+  20: 20%,
+  50: 50%,
+  100: 100%,
+);
+
+//Toast
+$toast-padding-x       : $spacer;
+$toast-padding-y       : $spacer;
+$toast-font-size       : $font-size-base;
+$toast-background-color: $white;
+$toast-border-width    : 0;
+$toast-spacing         : $spacer;
+
+//Placeholder
+$placeholder-opacity-max: 1;
+$placeholder-opacity-min: 0.5;
+
+// Dropdown
+$dropdown-link-hover-bg    : $light;
+$dropdown-item-padding-y   : $spacer-custom * 0.5;
+$dropdown-link-active-bg   : $light;
+$dropdown-link-active-color: $dark;
+
+//List group
+$list-group-item-padding-y: $spacer * 0.75;
+$list-group-item-padding-x: $spacer;
+$list-group-border-color  : $light;
+$list-group-active-bg     : $light;
+$list-group-active-color  : $dark;
+
+$enable-negative-margins: true;
+
+//Tooltip
+$tooltip-opacity: 0.6;
+
+//Accordion
+$accordion-bg                 : $white;
+$accordion-button-active-color: $dark;
+$accordion-button-active-bg   : $white;
+$accordion-button-padding-y   : $spacer;
+
+$paragraph-margin-bottom: 0;
+
+//Popover
+$popover-header-bg    : $white;
+$popover-border-width : 0;
+$popover-max-width    : 460px;
+$popover-border-radius: $border-radius;
+
+
+//Carousel
+$carousel-indicator-width    : 6px;
+$carousel-indicator-height   : 6px;
+$carousel-indicator-spacer   : 5px;
+$carousel-indicator-active-bg: $dark;
+$carousel-indicator-opacity  : .3;
+
+.carousel .carousel-indicators button {
+  border-radius: 50%;
+}
+
+// @media (max-width: map-get($grid-breakpoints, 'sm')) {
+//   body {
+//     font-size: 14px;
+//   }
+// }
+
+// @media (max-width: map-get($grid-breakpoints, 'md')) {
+//   $font-size-base: 1rem;
+// }
+
+:export {
+  primary  : $primary;
+  secondary: $secondary;
+  success  : $success;
+  warning  : $warning;
+  danger   : $danger;
+  muted    : $muted;
+  light    : $light;
+  lighter  : $lighter;
+  dark     : $dark;
+  white    : $white;
+  gray     : $gray;
+  gray-300 : $gray-300
+}

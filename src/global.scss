@@ -1,0 +1,198 @@
+@import './bootstrap-custom.scss';
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+#app {
+  // height: 100%;
+  min-height                : 100%;
+  // min-width: 1160px;
+  // background: #e5e5e5;
+  -webkit-overflow-scrolling: touch;
+  font-family               : 'Inter';
+  scroll-behavior           : auto;
+
+  .has-overlay {
+    overflow: hidden;
+  }
+}
+
+html,
+body {
+  overflow-x: hidden; // NOTE: Important for hiding vertical scrollbar
+}
+
+body {
+  position              : relative; // NOTE: Important for hiding vertical scrollbar
+  background            : #e5e5e5;
+  font-smooth           : auto;
+  -webkit-font-smoothing: antialiased;
+  -ms-overflow-style    : none;
+  scrollbar-width       : none;
+
+  &::-webkit-scrollbar {
+    width     : 0;
+    height    : 0;
+    background: transparent;
+    display   : none;
+  }
+}
+
+.app-width {
+  min-width: 1440px;
+  width    : 1440px;
+}
+
+.page-width {
+  width: 1120px;
+}
+
+.app-max-width {
+  max-width: 1440px !important;
+}
+
+.content-max-width {
+  max-width: 1120px !important;
+}
+
+.container {
+  min-width: 1160px !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-bottom: 0;
+}
+
+.max-line__ellipses {
+  overflow          : hidden;
+  text-overflow     : ellipsis;
+  display           : -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  /* number of lines to show */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 27px;
+  width : 27px;
+
+  &.carousel-small {
+    height: 20px;
+    width : 20px;
+  }
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance   : none;
+  appearance        : none;
+  margin            : 0;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width   : none !important;
+
+  &::-webkit-scrollbar {
+    width  : 0;
+    height : 0;
+    display: none;
+  }
+}
+
+.overlay {
+  position : fixed !important;
+  /* Sit on top of the page content */
+  width    : 100% !important;
+  /* Full width (cover the whole page) */
+  height   : 100% !important;
+  /* Full height (cover the whole page) */
+  top      : 0;
+  left     : 0;
+  right    : 0;
+  bottom   : 0;
+  z-index  : 100 !important;
+  /* Specify a stack order in case you're using a different order for other elements */
+  cursor   : pointer;
+  /* Add a pointer on hover */
+  transform: none !important;
+}
+
+.width-fit {
+  width: fit-content !important;
+}
+
+.pre-discount-price {
+  text-decoration: line-through;
+  color          : $muted;
+}
+
+.image-hover:hover {
+  opacity     : 0.7;
+  border-color: $secondary !important;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.btn-link {
+  font-weight    : $font-weight-bold;
+  text-decoration: none;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.object-fit-contain {
+  object-fit: contain;
+}
+
+button {
+
+  &.btn:disabled,
+  &.btn.disabled,
+  &fieldset:disabled .btn {
+    background: $muted;
+    border    : $muted;
+    opacity   : 1;
+  }
+}
+
+.rounded-top-3 {
+  border-radius: $border-radius-lg $border-radius-lg 0 0;
+}
+
+.form-check-input:checked[type='radio'] {
+  background-color: $blue;
+  border-color    : $blue;
+}
+
+.form-check-input[type='checkbox'] {
+  width : 20px;
+  height: 20px;
+}
+
+.btn-outline-danger {
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: $white !important;
+  }
+}
+
+.capitalize-first-letter::first-letter {
+  text-transform: capitalize;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
