@@ -26,11 +26,14 @@ const Layout: React.FC<Props> = (props) => {
       route: '/user/account',
     },
   ];
+
+  const isHideMenu = ['/search'].includes(location.pathname);
+
   return (
     <div>
       {children}
       <>
-        <BottomMenu menus={menus} location={location} />
+        {!isHideMenu && <BottomMenu menus={menus} location={location} />}
         {/* <FloaterChat className={styles.floatChat} onClick={handleOAChat} /> */}
       </>
     </div>

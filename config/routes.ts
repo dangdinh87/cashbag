@@ -16,10 +16,10 @@ export default [
       //   path: '/profile',
       //   component: '@/pages/profile',
       // },
-      // {
-      //   path: '/search',
-      //   component: '@/pages/search-result',
-      // },
+      {
+        path: '/search',
+        component: '@/pages/search',
+      },
     ],
   },
   {

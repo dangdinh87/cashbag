@@ -27,7 +27,7 @@ function BrandBonusItem({ brand, viewMoreBrand, viewDetailBrand }) {
   }, [brand._id]);
 
   return (
-    <div className="mb-2 p-3 bg-light rounded-2">
+    <div className="mb-1 p-3 bg-light rounded-2">
       <div className="d-flex align-content-center justify-content-start mb-3">
         <div
           style={{ backgroundColor: brand.primaryColor, height: 48, width: 48 }}

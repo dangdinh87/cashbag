@@ -75,6 +75,11 @@ export default {
     getProductByBrandBonus: (brandId): IApi => ({
       url: `/brand/${brandId}/brand-bonus-products`,
       method: methods.get,
-    })
+    }),
+    getSearchBrandBonus: (): IApi => ({
+      url: `/brand/sellers/search`,
+      method: methods.get,
+    }),
+
   }
 }

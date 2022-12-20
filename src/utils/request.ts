@@ -56,12 +56,21 @@ async function getDefaultOption(options: any) {
  * @param type request type
  */
 async function call(url: any, options: any, type?: any) {
-  const requestEndpoint = type || process.env.API_ENDPOINT;
+  const requestEndpoint = type || ApiConst.endpointType.appEndpoint;
   const endpointUrl = requestEndpoint + url;
   const headers = await getDefaultOption(options);
-  options = { ...options, headers };
-  const requestRes = await request(endpointUrl, options);
-  return requestRes;
+
+  const newOptions = { headers, ...options };
+
+  if (options.file) {
+    newOptions.headers = {
+      Authorization: headers.Authorization,
+    };
+    newOptions.body = new FormData();
+    newOptions.body.append('file', options.file);
+    newOptions.body.append('data', JSON.stringify(options.bodyData));
+  }
+  return await request(endpointUrl, newOptions);
 }
 
 export default {

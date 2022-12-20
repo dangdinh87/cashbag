@@ -25,8 +25,17 @@ const getProductByBrandBonus = (params: any, brandId: string): any => {
   });
 };
 
+const getSearchBrandBonus = (params: any) => {
+  const api = ApiConst.brand.getSearchBrandBonus();
+  return request.call(api.url, {
+    method: api.method,
+    params,
+  });
+}
+
 export default {
   getBrandBonus,
   getBrandByCategory,
-  getProductByBrandBonus
+  getProductByBrandBonus,
+  getSearchBrandBonus
 };

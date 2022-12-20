@@ -1,6 +1,8 @@
-import AppImage from '@/components/app/app-image';
-import { helper } from '@/utils';
-import { Col, Ratio, Row } from 'react-bootstrap';
+import AppButton from '@/components/app/app-button';
+import { ArrowRightIcon, GridIcon } from '@/configs/assets';
+import classnames from 'classnames';
+import { Row } from 'react-bootstrap';
+import ProductItem from '../product-item';
 
 function ProductListBrandBonus({ productList, brand }) {
   const { products = [], total } = productList;
@@ -12,35 +14,46 @@ function ProductListBrandBonus({ productList, brand }) {
           {total} sản phẩm
         </p>
       </div>
-      <Row className="w-auto flex-nowrap overflow-scroll hide-scrollbar mx-n3 px-3">
-        {products.map((product) => {
+      <Row className="w-auto flex-nowrap overflow-scroll hide-scrollbar mx-n3 px-3 mt-2">
+        {products.map((product, index) => {
           return (
-            <Col
+            <div
               key={product._id}
               style={{ width: 160 }}
-              className="w-100 px-0"
+              className={classnames('px-0 me-2')}
             >
-              <ProductItemBrandBonus product={product} />
-            </Col>
+              <ProductItem product={product} />
+            </div>
           );
         })}
+        <ViewMoreProductList brand={brand} />
       </Row>
+      <AppButton
+        showNext
+        className="w-100 text-gray bg-white py-2 fs-7 border-0 rounded-2 fw-bolder mt-2"
+      >
+        Xem tất cả
+      </AppButton>
     </>
   );
 }
 
 export default ProductListBrandBonus;
 
-const ProductItemBrandBonus = ({ product }) => {
+const ViewMoreProductList = ({ brand }) => {
   return (
-    <div className="p-2 w-100">
-      {/* <Ratio aspectRatio={'1x1'}> */}
-        <AppImage
-          src={helper.getPhotoURL(product.photo)}
-          className="w-100"
-          width={150}
-        />
-      {/* </Ratio> */}
+    <div
+      style={{
+        width: 160,
+        color: brand.primaryColor,
+      }}
+      className="bg-white rounded-1 d-flex flex-column justify-content-center align-items-center"
+    >
+      <GridIcon width={40} />
+      <div className="d-flex align-items-center justify-content-center">
+        <p className="ms-1 fs-7 fw-bolder">Xem tất cả</p>
+        <ArrowRightIcon />
+      </div>
     </div>
   );
 };

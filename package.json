@@ -25,6 +25,7 @@
     "@umijs/plugin-sass": "^1.1.1",
     "bootstrap": "5.1.1",
     "classnames": "^2.3.1",
+    "lodash": "^4.17.21",
     "node-sass": "^4.9.0",
     "react": "17.x",
     "react-bootstrap": "^2.0.0-rc.0",

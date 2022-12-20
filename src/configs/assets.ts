@@ -7,6 +7,9 @@ export { ReactComponent as SearchIcon } from '@/assets/icons/ic_search.svg';
 export { ReactComponent as CalendarIcon } from '@/assets/icons/ic_calendar.svg';
 export { ReactComponent as GridIcon } from '@/assets/icons/ic_grid.svg';
 export { ReactComponent as ArrowRightIcon } from '@/assets/icons/ic_arrow_right.svg';
+export { ReactComponent as ArrowLeftIcon } from '@/assets/icons/ic_arrow_left.svg';
+export { ReactComponent as CloseIcon } from '@/assets/icons/ic_close.svg';
+// export { ReactComponent as SearchIcon } from '@/assets/icons/ic_search_sm.svg';
 export default {
   bg: {
     bgDefault: require('@/assets/backgrounds/bg_default_placeholder.svg'),
