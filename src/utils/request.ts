@@ -38,7 +38,6 @@ async function getDefaultOption(options: any) {
     ...options.headers,
   };
   const { authToken } = await storage.getUserToken();
-  console.log(authToken)
   if (authToken) {
     result = { ...result, Authorization: `Bearer ${authToken}` };
   }

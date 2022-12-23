@@ -1,22 +1,19 @@
 import { Effect, Reducer } from 'umi';
 
 import { ResponseCode } from '@/configs/app';
-import {
-  serviceBrand,
-  serviceNews
-} from '@/services';
+import { serviceBrand, serviceNews } from '@/services';
 
 export interface ISearchState {
   listBrandBonus?: any[];
   listBrand?: any[];
   filterListBrandBonus?: any;
-  filterListBrand?: any
+  filterListBrand?: any;
 }
 const initState: ISearchState = {
   listBrandBonus: [],
   filterListBrandBonus: {},
   listBrand: [],
-  filterListBrand: {}
+  filterListBrand: {},
 };
 
 interface ISearchModel {
@@ -24,7 +21,7 @@ interface ISearchModel {
   state: ISearchState;
   effects: {
     getBrandsBonus: Effect;
-    getBrands: Effect
+    getBrandAll: Effect;
   };
   reducers: {
     updateState: Reducer<ISearchState>;
@@ -37,12 +34,17 @@ const SearchModel: ISearchModel = {
   state: initState,
   effects: {
     *getBrandsBonus({ payload }, { call, put, select }) {
-      const response = yield call(serviceBrand.getSearchBrandBonus, payload.data);
+      const response = yield call(
+        serviceBrand.getSearchBrandBonus,
+        payload.data,
+      );
       if (response?.code !== ResponseCode.success) {
         return;
       }
       const { data } = response;
-      const { listBrandBonus, filterListBrandBonus } = yield select((_: any) => _.searchState);
+      const { listBrandBonus, filterListBrandBonus } = yield select(
+        (_: any) => _.searchState,
+      );
 
       if (payload.isLoadMore) {
         yield put({
@@ -52,13 +54,12 @@ const SearchModel: ISearchModel = {
             filterListBrandBonus: {
               ...filterListBrandBonus,
               nextPageToken: data.nextPageToken,
-              keyword: payload.data.keyword
-            }
+              keyword: payload.data.keyword,
+            },
           },
         });
-        return
+        return;
       }
-
 
       yield put({
         type: 'updateState',
@@ -66,25 +67,47 @@ const SearchModel: ISearchModel = {
           listBrandBonus: data.data,
           filterListBrandBonus: {
             nextPageToken: data.nextPageToken,
-            keyword: payload.data.keyword
-          }
+            keyword: payload.data.keyword,
+          },
         },
       });
     },
 
-    *getBrands({ }, { call, put }) {
-      const response = yield call(serviceBrand.getBrandBonus);
+    *getBrandAll({ payload }, { call, put, select }) {
+      const response = yield call(serviceBrand.getBrandAll, payload.data);
       if (response?.code !== ResponseCode.success) {
+        return;
+      }
+      const { data } = response;
+      const { listBrand, filterListBrand } = yield select(
+        (_: any) => _.searchState,
+      );
+
+      if (payload.isLoadMore) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            listBrand: [...listBrand, ...data.data],
+            filterListBrand: {
+              ...filterListBrand,
+              nextPageToken: data.nextPageToken,
+              keyword: payload.data.keyword,
+            },
+          },
+        });
         return;
       }
       yield put({
         type: 'updateState',
         payload: {
-          brandBonus: response.data.data,
-        },
+          listBrand: response.data.data,
+          filterListBrand: {
+            nextPageToken: data.nextPageToken,
+            keyword: payload.data.keyword,
+          },
+        }
       });
     },
-
   },
   reducers: {
     updateState(state, action) {
@@ -98,7 +121,6 @@ const SearchModel: ISearchModel = {
         ...initState,
       };
     },
-
   },
 };
 

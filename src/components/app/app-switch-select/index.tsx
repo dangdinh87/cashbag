@@ -1,13 +1,11 @@
 import { Segmented } from 'antd';
 
-import './index.scss';
-
 function AppSwitchSelect({ options = [], onChange }) {
   return (
     <Segmented
       block
       options={options}
-      onChange={(value) => console.log(value)}
+      onChange={onChange}
       onResize={undefined}
       onResizeCapture={undefined}
     />

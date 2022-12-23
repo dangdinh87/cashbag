@@ -1,4 +1,3 @@
-import path from 'path';
 import { defineConfig } from 'umi';
 
 import routes from './routes';
@@ -35,5 +34,6 @@ export default defineConfig({
   },
   headScripts: [
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
-  ]
+  ],
+  ignoreMomentLocales: true
 });

@@ -80,6 +80,9 @@ export default {
       url: `/brand/sellers/search`,
       method: methods.get,
     }),
-
+    getBrandAll: (): IApi => ({
+      url: `/brand/all`,
+      method: methods.get,
+    }),
   }
 }
