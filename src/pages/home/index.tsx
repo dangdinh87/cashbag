@@ -2,7 +2,7 @@ import AppCarousel from '@/components/app/app-carousel';
 import AppImage from '@/components/app/app-image';
 import Header from '@/components/app/header';
 import { helper, navigator } from '@/utils';
-import { Key, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Ratio } from 'react-bootstrap';
 import { connect } from 'umi';
 import BrandBonusItem from './components/brand-bonus';

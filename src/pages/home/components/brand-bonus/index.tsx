@@ -2,14 +2,14 @@ import AppImage from '@/components/app/app-image';
 import AppSpacer from '@/components/app/app-spacer';
 import { ArrowRightIcon, CalendarIcon } from '@/configs/assets';
 import { serviceBrand } from '@/services';
-import { helper } from '@/utils';
+import { helper, navigator } from '@/utils';
 import { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
 import ProductListBrandBonus from './components/product-brand-bonus';
 import SellerItem from './components/seller-item';
 import ViewMoreSeller from './components/view-more';
 
-function BrandBonusItem({ brand, viewMoreBrand, viewDetailBrand }) {
+function BrandBonusItem({ brand, viewDetailBrand }) {
   const [productList, setProductList] = useState<any>({});
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +25,10 @@ function BrandBonusItem({ brand, viewMoreBrand, viewDetailBrand }) {
     };
     fetchData();
   }, [brand._id]);
+
+  const viewMoreBrand = () => {
+    navigator.pushPath(`brand-bonus/${brand._id}`);
+  };
 
   return (
     <div className="mb-1 p-3 bg-light rounded-2">
@@ -77,7 +81,11 @@ function BrandBonusItem({ brand, viewMoreBrand, viewDetailBrand }) {
       {productList.total > 0 && (
         <div className="mt-2">
           <AppSpacer className="bg-gray-300 mx-n3 mb-2" size={1} />
-          <ProductListBrandBonus productList={productList} brand={brand} />
+          <ProductListBrandBonus
+            productList={productList}
+            brand={brand}
+            classNameViewMore="border-0"
+          />
         </div>
       )}
     </div>

@@ -3,7 +3,7 @@ import { isBrowser, RequestConfig } from 'umi';
 import api from 'zmp-sdk';
 
 import { AppConst } from '@/configs';
-import { helper } from '@/utils';
+import { helper, navigator } from '@/utils';
 import AppInitializer from './components/app/init';
 import { loading } from './components/app/loading-indicator/manager';
 import { toast } from './components/app/toast/manager';
@@ -85,7 +85,8 @@ export const request: RequestConfig = {
       destroyLoading();
       if (response.status === 404) {
         // logger.error('API error:', response);
-        helper.handle404Error();
+        // helper.handle404Error();
+        navigator.replacePath('/');
       }
 
       if (response.status === 401) {

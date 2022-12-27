@@ -11,9 +11,13 @@ interface Props {
   location: Location;
 }
 const BottomMenu: React.FC<Props> = ({ menus, location }) => {
+  const isVisibleMenu = ['/home', '/search'].some((el) =>
+    el.includes(location.pathname),
+  );
+
   return (
     <>
-      <AppSpacer size={68} />
+      <AppSpacer size={54} />
       <Navbar fixed="bottom" className="bg-white py-0 shadow">
         <Nav fill className="w-100 fs-8" defaultActiveKey={location.pathname}>
           {menus.map((item, index) => (
@@ -23,8 +27,8 @@ const BottomMenu: React.FC<Props> = ({ menus, location }) => {
                 onClick={() => navigator.replacePath(item.route)}
                 className="d-flex flex-column align-items-center justify-content-center"
               >
-                <div className="mb-1">{item.icon}</div>
-                {item.name}
+                <div className="my-1">{item.icon}</div>
+                {/* {item.name} */}
               </Nav.Link>
             </Nav.Item>
           ))}

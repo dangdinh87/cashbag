@@ -72,16 +72,44 @@ export default {
       url: '/brand/categories/features',
       method: methods.get,
     }),
-    getProductByBrandBonus: (brandId): IApi => ({
-      url: `/brand/${brandId}/brand-bonus-products`,
-      method: methods.get,
-    }),
     getSearchBrandBonus: (): IApi => ({
       url: `/brand/sellers/search`,
       method: methods.get,
     }),
     getBrandAll: (): IApi => ({
       url: `/brand/all`,
+      method: methods.get,
+    }),
+    getBrandInfo: (brandId): IApi => ({
+      url: `/brand/${brandId}/info`,
+      method: methods.get,
+    }),
+    getProductByBrandBonus: (brandId): IApi => ({
+      url: `/brand/${brandId}/brand-bonus-products`,
+      method: methods.get,
+    }),
+    getBrandNewest: (brandId): IApi => ({
+      url: `/brand/${brandId}/sellers-newest`,
+      method: methods.get,
+    }),
+    getSellerByBrandBonus: (brandId): IApi => ({
+      url: `/brand/${brandId}/sellers`,
+      method: methods.get,
+    }),
+    searchSellerByBrandBonus: (brandId): IApi => ({
+      url: `/brand/${brandId}/search`,
+      method: methods.get,
+    }),
+    getCategoriesByBrand: (brandId): IApi => ({
+      url: `/brand/${brandId}/categories`,
+      method: methods.get,
+    }),
+    getDetailCategoryBrand: (categoryId): IApi => ({
+      url: `/brand/brand-categories/${categoryId}`,
+      method: methods.get,
+    }),
+    getGuidesByBrand: (brandId): IApi => ({
+      url: `/brand/${brandId}/guides`,
       method: methods.get,
     }),
   }

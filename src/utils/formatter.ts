@@ -244,6 +244,13 @@ function formatShortNumberCash(value: number) {
   return `${value} đ`;
 }
 
+function formatShortNumber(value: number) {
+  if (value > 1000000000) return `${(value / 1000000000).toFixed(1)} tỷ`;
+  if (value > 1000000) return `${(value / 1000000).toFixed(1)} triệu`;
+  if (value > 1000) return `${(value / 1000).toFixed(1)} ngàn`;
+  return value;
+}
+
 export default {
   cashToWords,
   numberToWords,
@@ -261,5 +268,6 @@ export default {
   time,
   relativeDateTime,
   getDayCount,
-  formatShortNumberCash
+  formatShortNumberCash,
+  formatShortNumber
 };

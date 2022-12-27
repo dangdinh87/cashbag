@@ -12,10 +12,18 @@ export default [
         path: '/home',
         component: '@/pages/home',
       },
-      // {
-      //   path: '/profile',
-      //   component: '@/pages/profile',
-      // },
+      {
+        path: '/brand-bonus/:brandId',
+        component: '@/pages/brand-bonus',
+      },
+      {
+        path: '/brand/:brandId',
+        component: '@/pages/brand',
+      },
+      {
+        path: '/category/:categoryId',
+        component: '@/pages/category',
+      },
       {
         path: '/search',
         component: '@/pages/search',

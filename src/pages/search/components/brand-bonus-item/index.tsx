@@ -38,7 +38,7 @@ function BrandBonusItem({ brand, seller }) {
               {getTagRemaining(seller)}
             </div>
             <div className="rounded-2 bg-light text-gray fs-9 px-2 py-0 w-fit">
-              {brand.name}
+              {brand?.name}
             </div>
           </div>
           <AppImage

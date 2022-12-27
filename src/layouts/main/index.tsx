@@ -27,7 +27,9 @@ const Layout: React.FC<Props> = (props) => {
     },
   ];
 
-  const isHideMenu = ['/search'].includes(location.pathname);
+  const isHideMenu = ['/search', '/category', 'brand'].some((el) =>
+    location.pathname.includes(el),
+  );
 
   return (
     <div>

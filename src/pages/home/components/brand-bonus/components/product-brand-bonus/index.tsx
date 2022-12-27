@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { Row } from 'react-bootstrap';
 import ProductItem from '../product-item';
 
-function ProductListBrandBonus({ productList, brand }) {
+function ProductListBrandBonus({ productList, brand, classNameViewMore }) {
   const { products = [], total } = productList;
   return (
     <>
@@ -26,11 +26,17 @@ function ProductListBrandBonus({ productList, brand }) {
             </div>
           );
         })}
-        <ViewMoreProductList brand={brand} />
+        <ViewMoreProductList
+          brand={brand}
+          classNameViewMore={classNameViewMore}
+        />
       </Row>
       <AppButton
         showNext
-        className="w-100 text-gray bg-white py-2 fs-7 border-0 rounded-2 fw-bolder mt-2"
+        className={classnames(
+          classNameViewMore,
+          'w-100 text-gray bg-white py-2 fs-7 rounded-2 fw-bolder mt-2',
+        )}
       >
         Xem tất cả
       </AppButton>
@@ -40,14 +46,17 @@ function ProductListBrandBonus({ productList, brand }) {
 
 export default ProductListBrandBonus;
 
-const ViewMoreProductList = ({ brand }) => {
+const ViewMoreProductList = ({ brand, classNameViewMore }) => {
   return (
     <div
       style={{
         width: 160,
         color: brand.primaryColor,
       }}
-      className="bg-white rounded-1 d-flex flex-column justify-content-center align-items-center"
+      className={classnames(
+        classNameViewMore,
+        'bg-white rounded-1 d-flex flex-column justify-content-center align-items-center',
+      )}
     >
       <GridIcon width={40} />
       <div className="d-flex align-items-center justify-content-center">

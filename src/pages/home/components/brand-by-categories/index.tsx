@@ -1,6 +1,6 @@
 import AppImage from '@/components/app/app-image';
 import { ArrowRightIcon } from '@/configs/assets';
-import { formatter, helper } from '@/utils';
+import { formatter, helper, navigator } from '@/utils';
 import classnames from 'classnames';
 
 function BrandByCategoryItem({ item }) {
@@ -35,6 +35,7 @@ function BrandByCategoryItem({ item }) {
             <div
               className="rounded-2 d-flex justify-content-between align-items-center h-100 bg-white flex-shrink-0 p-2 me-2"
               style={{ width: '66%' }}
+              onClick={() => navigator.pushPath(`/brand/${brand._id}`)}
             >
               <div
                 className={classnames(

@@ -1,0 +1,150 @@
+import AppButton from '@/components/app/app-button';
+import AppImage from '@/components/app/app-image';
+import AppPage from '@/components/app/app-page';
+import AppSpacer from '@/components/app/app-spacer';
+import Section from '@/components/common/section';
+import { helper } from '@/utils';
+import { useEffect } from 'react';
+import { ListGroup } from 'react-bootstrap';
+import { connect, useParams } from 'umi';
+
+function CategoryDetailPage({
+  dispatch,
+  categoryDetailState,
+  brandDetailState,
+  loading,
+}) {
+  const { categoryId } = useParams<{ categoryId: string }>();
+  const { category } = categoryDetailState;
+  const { brandInfo, guides = [] } = brandDetailState;
+  const getDetailCategoryBrand = () => {
+    dispatch({
+      type: 'categoryDetailState/getDetailCategoryBrand',
+      payload: {
+        categoryId,
+      },
+    });
+  };
+
+  // const getGuidesByBrand = () => {
+  //   dispatch({
+  //     type: 'categoryDetailPage/getGuidesByBrand',
+  //     payload: {
+  //       brandId,
+  //     },
+  //   });
+  // };
+
+  useEffect(() => {
+    getDetailCategoryBrand();
+    return () => {
+      dispatch({
+        type: 'categoryDetailState/clearState',
+      });
+    };
+  }, []);
+
+  if (!categoryId || !brandInfo || !category) return <></>;
+
+  return (
+    <AppPage title={brandInfo?.name} className="p-3">
+      <div className="rounded-2 overflow-hidden position-relative">
+        <div className="w-100 position-relative">
+          <AppImage
+            src={helper.getPhotoURL(brandInfo?.cover)}
+            className="w-100"
+          ></AppImage>
+          <div
+            className="position-absolute top-100 start-50 translate-middle bg-white px-3 py-2 rounded-2"
+            style={{ zIndex: 1, width: '40%' }}
+          >
+            <AppImage
+              src={helper.getPhotoURL(brandInfo.logo)}
+              className="w-100"
+            />
+          </div>
+        </div>
+        <div className="fs-5 text-gray text-center px-4 fw-bolder pt-4 pb-3 bg-white">
+          {category?.name}
+        </div>
+
+        <div className="d-flex bg-white justify-content-evenly">
+          {category.cashbackInfo?.length > 0 ? (
+            <>
+              {category.cashbackInfo.map((item, index) => {
+                const isLast = category.cashbackInfo.length - 1 === index;
+                return (
+                  <>
+                    <div className="text-center w-50 py-3 border-top border-light">
+                      <p className="text-primary fs-6 fw-bolder">
+                        {item.cashback}
+                      </p>
+                      <p className="fs-8 text-gray">{item.desc}</p>
+                    </div>
+                    {!isLast && (
+                      <AppSpacer
+                        direction="horizontal"
+                        size={1}
+                        className="h-auto bg-light"
+                      />
+                    )}
+                  </>
+                );
+              })}
+            </>
+          ) : (
+            <p className="text-primary fs-6 fw-bolder pb-3">
+              {category.cashbackText}
+            </p>
+          )}
+        </div>
+      </div>
+      <AppButton
+        showNext
+        className="bg-primary w-100 rounded-0 py-2c position-fixed bottom-0 start-0"
+        style={{ zIndex: 100 }}
+      >
+        Mua ngay
+      </AppButton>
+      <Section
+        className="mt-3"
+        brand={brandInfo}
+        mainTitle={'Hoàn Tiền Như Thế Nào'}
+        title={'Đọc kỹ trước khi mua sắm'}
+      >
+        {guides.map((guide) => {
+          return (
+            <div className="mt-3">
+              <p className="text-primary fw-bolder fs-8 mb-2">{guide.desc}</p>
+              <ListGroup>
+                {guide.items.map((item) => {
+                  return (
+                    <ListGroup.Item key={item.name}>
+                      <div className="d-flex justify-content-between align-items-center">
+                        <AppImage
+                          src={helper.getPhotoURL(item.icon)}
+                          width="20"
+                          height="20"
+                          className="flex-shrink-0"
+                        />
+                        <p className="fs-8 text-gray ms-3">{item.desc}</p>
+                      </div>
+                    </ListGroup.Item>
+                  );
+                })}
+              </ListGroup>
+            </div>
+          );
+        })}
+      </Section>
+    </AppPage>
+  );
+}
+
+export default connect(
+  ({ categoryDetailState, brandDetailState, loading }: any) => ({
+    categoryDetailState,
+    brandDetailState,
+    loading,
+  }),
+)(CategoryDetailPage);
