@@ -1,16 +1,13 @@
 import { Effect, Reducer } from 'umi';
 
 import { ResponseCode } from '@/configs/app';
-import {
-  serviceBrand,
-  serviceNews
-} from '@/services';
+import { serviceBrand, serviceNews } from '@/services';
 
 export interface IBrandBonusState {
-  filterSearchSellers: any
+  filterSearchSellers: any;
 }
 const initState: IBrandBonusState = {
-  filterSearchSellers: {}
+  filterSearchSellers: {},
 };
 
 interface IBrandBonusModel {
@@ -59,21 +56,52 @@ const BrandBonusModel: IBrandBonusModel = {
       });
     },
 
-    *getProductByBrandBonus({ payload }, { call, put }) {
-      const response = yield call(serviceBrand.getProductByBrandBonus, payload.params, payload.brandId);
+    *getProductByBrandBonus({ payload }, { call, put, select }) {
+      const response = yield call(
+        serviceBrand.getProductByBrandBonus,
+        payload.data,
+        payload.brandId,
+      );
       if (response?.code !== ResponseCode.success) {
         return;
       }
+      const { products, filterProducts } = yield select(
+        (_: any) => _.brandBonusState,
+      );
+
+      if (payload.isLoadMore) {
+        // console.log([...products, ...response.data.products]);
+        yield put({
+          type: 'updateState',
+          payload: {
+            products: [...products, ...response.data.products],
+            filterSellers: {
+              ...filterProducts,
+              nextPageToken: response.data.nextPageToken,
+            },
+          },
+        });
+        return;
+      }
+
       yield put({
         type: 'updateState',
         payload: {
-          products: response.data,
+          products: response.data.products,
+          filterProducts: {
+            nextPageToken: response.data.nextPageToken
+          },
+          totalProducts: response.data.total
         },
       });
     },
 
     *getSellersByBrand({ payload }, { call, put, select }) {
-      const response = yield call(serviceBrand.getSellerByBrandBonus, payload.data, payload.brandId);
+      const response = yield call(
+        serviceBrand.getSellerByBrandBonus,
+        payload.data,
+        payload.brandId,
+      );
       if (response?.code !== ResponseCode.success) {
         return;
       }
@@ -101,13 +129,17 @@ const BrandBonusModel: IBrandBonusModel = {
           filterSellers: {
             nextPageToken: response.data.nextPageToken,
           },
-          totalSellers: response.data.totalSellers
+          totalSellers: response.data.totalSellers,
         },
       });
     },
 
     *searchSellersByBrand({ payload }, { call, put, select }) {
-      const response = yield call(serviceBrand.searchSellerByBrandBonus, payload.data, payload.brandId);
+      const response = yield call(
+        serviceBrand.searchSellerByBrandBonus,
+        payload.data,
+        payload.brandId,
+      );
       if (response?.code !== ResponseCode.success) {
         return;
       }
@@ -140,8 +172,6 @@ const BrandBonusModel: IBrandBonusModel = {
         },
       });
     },
-
-
   },
   reducers: {
     updateState(state, action) {
@@ -155,7 +185,6 @@ const BrandBonusModel: IBrandBonusModel = {
         ...initState,
       };
     },
-
   },
 };
 

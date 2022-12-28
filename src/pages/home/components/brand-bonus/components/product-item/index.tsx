@@ -1,10 +1,14 @@
 import AppImage from '@/components/app/app-image';
 import { formatter, helper } from '@/utils';
+import classnames from 'classnames';
 import { Ratio } from 'react-bootstrap';
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, onClick = null, className }) => {
   return (
-    <div className="p-1 w-100 bg-white rounded-2">
+    <div
+      className={classnames('p-1 w-100 bg-white rounded-2', className)}
+      onClick={onClick}
+    >
       <Ratio aspectRatio={'1x1'}>
         <AppImage
           src={helper.getPhotoURL(product.photo)}

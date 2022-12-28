@@ -121,7 +121,11 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
                     },
                   )}
                   style={{ width: 105 }}
-                  onClick={() => navigator.pushPath(`/category/${element._id}`)}
+                  onClick={() =>
+                    navigator.pushPath(
+                      `/category/${brandInfo._id}/${element._id}`,
+                    )
+                  }
                 >
                   <div className="d-flex flex-column justify-content-between h-100">
                     <p className="fs-8 mb-auto text-gray lh-sm max-line__ellipses">
@@ -154,12 +158,12 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
       >
         {guides.map((guide) => {
           return (
-            <div className="mt-3">
+            <div className="mt-3" key={guide._id}>
               <p className="text-primary fw-bolder fs-8 mb-2">{guide.desc}</p>
               <ListGroup>
                 {guide.items.map((item) => {
                   return (
-                    <ListGroup.Item key={item.name}>
+                    <ListGroup.Item key={item._id}>
                       <div className="d-flex justify-content-between align-items-center">
                         <AppImage
                           src={helper.getPhotoURL(item.icon)}

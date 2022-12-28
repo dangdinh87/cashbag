@@ -269,5 +269,5 @@ export default {
   relativeDateTime,
   getDayCount,
   formatShortNumberCash,
-  formatShortNumber
+  formatShortNumber,
 };

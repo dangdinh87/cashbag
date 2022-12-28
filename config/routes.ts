@@ -21,7 +21,7 @@ export default [
         component: '@/pages/brand',
       },
       {
-        path: '/category/:categoryId',
+        path: '/category/:brandId/:categoryId',
         component: '@/pages/category',
       },
       {

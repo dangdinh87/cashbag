@@ -74,6 +74,9 @@ function BrandByCategoryItem({ item }) {
                     { 'me-2': !isLast },
                   )}
                   style={{ width: 105 }}
+                  onClick={() =>
+                    navigator.pushPath(`/category/${brand._id}/${element._id}`)
+                  }
                 >
                   <div className="d-flex flex-column justify-content-between h-100">
                     <p className="fs-8 mb-auto text-gray lh-sm max-line__ellipses">

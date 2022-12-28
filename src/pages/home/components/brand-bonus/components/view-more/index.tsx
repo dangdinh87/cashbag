@@ -1,5 +1,4 @@
 import { GridIcon } from '@/configs/assets';
-import React from 'react';
 
 export default function ViewMoreSeller({ brand, viewMoreBrand, total }) {
   return (

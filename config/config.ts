@@ -33,6 +33,6 @@ export default defineConfig({
     'process.env.API_ENDPOINT': 'https://svc.cashbag.vn/api',
   },
   headScripts: [
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js',
   ],
 });

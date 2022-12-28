@@ -5,8 +5,8 @@ import { helper, navigator } from '@/utils';
 import { useEffect } from 'react';
 import { Ratio } from 'react-bootstrap';
 import { connect } from 'umi';
-import BrandBonusItem from './components/brand-bonus';
-import BrandByCategoryItem from './components/brand-by-categories';
+import BrandBonusSection from './components/brand-bonus';
+import BrandByCategorySection from './components/brand-by-categories';
 
 function HomePage({ dispatch, homeState, loading }) {
   const { homeBanners = [], brandBonus = [], brandByCategory = [] } = homeState;
@@ -54,16 +54,13 @@ function HomePage({ dispatch, homeState, loading }) {
       );
     });
 
-  const viewMoreBrand = () => {};
-
   const viewDetailBrand = () => {};
 
   const brandBonusList = brandBonus.map((brand: any) => {
     return (
-      <BrandBonusItem
+      <BrandBonusSection
         key={brand._id}
         brand={brand}
-        viewMoreBrand={viewMoreBrand}
         viewDetailBrand={viewDetailBrand}
       />
     );
@@ -72,7 +69,7 @@ function HomePage({ dispatch, homeState, loading }) {
   const brandByCategoryList = brandByCategory
     .sort(helper.sortByValue('order'))
     .map((item) => {
-      return <BrandByCategoryItem key={item._id} item={item} />;
+      return <BrandByCategorySection key={item._id} item={item} />;
     });
 
   const handleClickSearch = () => navigator.pushPath('/search');

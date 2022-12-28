@@ -17,10 +17,11 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
     sellers,
     searchSellers,
     brandsNewest = [],
-    products,
+    products = [],
     filterSellers,
     filterSearchSellers,
     totalSellers,
+    totalProducts,
   } = brandBonusState;
 
   const getBrandNewest = () => {
@@ -43,7 +44,6 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
     dispatch({
       type: 'brandBonusState/getProductByBrandBonus',
       payload: {
-        params: {},
         brandId,
       },
     });
@@ -143,7 +143,7 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
         title={`${brandsNewest?.length} thương hiệu hoàn tiền`}
         className="my-2"
       >
-        <div className="d-flex overflow-auto hide-scrollbar mx-n3 px-3">
+        <div className="d-flex overflow-auto hide-scrollbar mx-n3 px-3 mt-2">
           {brandsNewest.map((seller) => {
             return (
               <AppImage
@@ -157,7 +157,7 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
         </div>
       </Section>
       <AppSpacer size={5} className="bg-light mx-n3" />
-      {products?.total > 0 && (
+      {totalProducts > 0 && (
         <>
           <Section
             brand={brandInfo}
@@ -167,6 +167,7 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
           >
             <ProductListBrandBonus
               brand={brandInfo}
+              total={totalProducts}
               productList={products}
               classNameViewMore="border border-light"
             />

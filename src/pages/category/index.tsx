@@ -4,7 +4,7 @@ import AppPage from '@/components/app/app-page';
 import AppSpacer from '@/components/app/app-spacer';
 import Section from '@/components/common/section';
 import { helper } from '@/utils';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { connect, useParams } from 'umi';
 
@@ -14,9 +14,9 @@ function CategoryDetailPage({
   brandDetailState,
   loading,
 }) {
-  const { categoryId } = useParams<{ categoryId: string }>();
+  const { categoryId, brandId } = useParams<{ categoryId: string }>();
   const { category } = categoryDetailState;
-  const { brandInfo, guides = [] } = brandDetailState;
+  const { brandInfo, guides } = brandDetailState;
   const getDetailCategoryBrand = () => {
     dispatch({
       type: 'categoryDetailState/getDetailCategoryBrand',
@@ -26,16 +26,21 @@ function CategoryDetailPage({
     });
   };
 
-  // const getGuidesByBrand = () => {
-  //   dispatch({
-  //     type: 'categoryDetailPage/getGuidesByBrand',
-  //     payload: {
-  //       brandId,
-  //     },
-  //   });
-  // };
-
   useEffect(() => {
+    dispatch({
+      type: 'brandDetailState/getBrandInfo',
+      payload: {
+        brandId,
+      },
+    });
+
+    dispatch({
+      type: 'brandDetailState/getGuidesByBrand',
+      payload: {
+        brandId,
+      },
+    });
+
     getDetailCategoryBrand();
     return () => {
       dispatch({
@@ -44,7 +49,7 @@ function CategoryDetailPage({
     };
   }, []);
 
-  if (!categoryId || !brandInfo || !category) return <></>;
+  if (!categoryId || !brandId || !category) return <></>;
 
   return (
     <AppPage title={brandInfo?.name} className="p-3">
@@ -74,7 +79,7 @@ function CategoryDetailPage({
               {category.cashbackInfo.map((item, index) => {
                 const isLast = category.cashbackInfo.length - 1 === index;
                 return (
-                  <>
+                  <React.Fragment key={item.cashback}>
                     <div className="text-center w-50 py-3 border-top border-light">
                       <p className="text-primary fs-6 fw-bolder">
                         {item.cashback}
@@ -88,7 +93,7 @@ function CategoryDetailPage({
                         className="h-auto bg-light"
                       />
                     )}
-                  </>
+                  </React.Fragment>
                 );
               })}
             </>
@@ -114,12 +119,12 @@ function CategoryDetailPage({
       >
         {guides.map((guide) => {
           return (
-            <div className="mt-3">
+            <div className="mt-3" key={guide._id}>
               <p className="text-primary fw-bolder fs-8 mb-2">{guide.desc}</p>
               <ListGroup>
-                {guide.items.map((item) => {
+                {guide.items.map((item, index) => {
                   return (
-                    <ListGroup.Item key={item.name}>
+                    <ListGroup.Item key={index}>
                       <div className="d-flex justify-content-between align-items-center">
                         <AppImage
                           src={helper.getPhotoURL(item.icon)}

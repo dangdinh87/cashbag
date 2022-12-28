@@ -35,6 +35,7 @@ async function getDefaultOption(options: any) {
     // ['App-Version']: headers.appVersion,
     // ['App-Version-Code']: headers.appVersionCode,
     // ...headers,
+    // version: 1.2,
     ...options.headers,
   };
   const { authToken } = await storage.getUserToken();
@@ -59,7 +60,9 @@ async function call(url: any, options: any, type?: any) {
   const endpointUrl = requestEndpoint + url;
   const headers = await getDefaultOption(options);
 
-  const newOptions = { headers, ...options };
+  const newOptions = {
+    headers, ...options,
+  };
 
   if (options.file) {
     newOptions.headers = {

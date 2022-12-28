@@ -24,7 +24,9 @@ function BrandByCategoryItem({ item }) {
         </div>
       </div>
       {brands.map((item) => {
-        return <BrandNormalLine item={item} key={item._id} />;
+        return (
+          <BrandNormalLine item={item} key={item._id} itemClassName={''} />
+        );
       })}
     </div>
   );

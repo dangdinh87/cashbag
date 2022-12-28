@@ -6,6 +6,7 @@ const getBrandBonus = (params: any): any => {
   return request.call(api.url, {
     method: api.method,
     params,
+    Version: 1.2
   });
 };
 
@@ -31,7 +32,7 @@ const getSearchBrandBonus = (params: any) => {
     method: api.method,
     params,
   });
-}
+};
 
 const getBrandAll = (params: any) => {
   const api = ApiConst.brand.getBrandAll();
@@ -39,7 +40,7 @@ const getBrandAll = (params: any) => {
     method: api.method,
     params,
   });
-}
+};
 
 const getBrandInfo = (brandId: string) => {
   const api = ApiConst.brand.getBrandInfo(brandId);
@@ -47,57 +48,56 @@ const getBrandInfo = (brandId: string) => {
     method: api.method,
     // params,
     // Version: 1.2
-
   });
-}
+};
 
 const getBrandNewest = (brandId: string) => {
-  console.log(brandId)
+  console.log(brandId);
   const api = ApiConst.brand.getBrandNewest(brandId);
   return request.call(api.url, {
     method: api.method,
     // params,
   });
-}
+};
 
 const getSellerByBrandBonus = (params: any, brandId: string) => {
   const api = ApiConst.brand.getSellerByBrandBonus(brandId);
   return request.call(api.url, {
     method: api.method,
     params,
-    Version: 1.1
+    Version: 1.1,
   });
-}
+};
 
 const searchSellerByBrandBonus = (params: any, brandId: string) => {
   const api = ApiConst.brand.searchSellerByBrandBonus(brandId);
   return request.call(api.url, {
     method: api.method,
     params,
-    Version: 1.1
+    Version: 1.1,
   });
-}
+};
 
 const getCategoriesByBrand = (brandId: string) => {
   const api = ApiConst.brand.getCategoriesByBrand(brandId);
   return request.call(api.url, {
     method: api.method,
   });
-}
+};
 
 const getDetailCategoryBrand = (categoryId: string) => {
   const api = ApiConst.brand.getDetailCategoryBrand(categoryId);
   return request.call(api.url, {
     method: api.method,
   });
-}
+};
 
 const getGuidesByBrand = (brandId: string) => {
   const api = ApiConst.brand.getGuidesByBrand(brandId);
   return request.call(api.url, {
     method: api.method,
   });
-}
+};
 
 export default {
   getBrandBonus,
@@ -111,5 +111,5 @@ export default {
   searchSellerByBrandBonus,
   getCategoriesByBrand,
   getDetailCategoryBrand,
-  getGuidesByBrand
+  getGuidesByBrand,
 };

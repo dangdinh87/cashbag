@@ -68,7 +68,7 @@ const AppSearchBox: React.FC<Props> = React.forwardRef<any, Props>(
             className="border-0 pe-0"
             style={{ background: 'inherit' }}
           >
-            <SearchIcon className='text-gray' width={16} height={16} />
+            <SearchIcon className="text-gray" width={16} height={16} />
           </InputGroup.Text>
         )}
         <FormControl

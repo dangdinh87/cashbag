@@ -1,8 +1,9 @@
-import { storage } from "@/utils";
+import { storage } from '@/utils';
 import {
   browserName,
   browserVersion,
-  deviceType, osVersion
+  deviceType,
+  osVersion,
 } from 'react-device-detect';
 
 const methods = {
@@ -32,10 +33,11 @@ function getDefaultHeader() {
   }
   const deviceId = storage.getDeviceId();
   const splitted = appVersion.split('.');
-  const appVersionCode = `${Number(splitted[0]) * 10000 +
+  const appVersionCode = `${
+    Number(splitted[0]) * 10000 +
     Number(splitted[1]) * 100 +
     Number(splitted[2])
-    }`;
+  }`;
 
   const query = {
     apiVersion,
@@ -112,5 +114,5 @@ export default {
       url: `/brand/${brandId}/guides`,
       method: methods.get,
     }),
-  }
-}
+  },
+};

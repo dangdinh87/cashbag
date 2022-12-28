@@ -1,19 +1,17 @@
 import { Effect, Reducer } from 'umi';
 
 import { ResponseCode } from '@/configs/app';
-import {
-  serviceBrand
-} from '@/services';
+import { serviceBrand } from '@/services';
 
 export interface ICategoryDetailState {
-  brandInfo: any,
+  brandInfo: any;
   categories: any[];
-  guides: any[]
+  guides: any[];
 }
 const initState: ICategoryDetailState = {
   brandInfo: {},
   categories: [],
-  guides: []
+  guides: [],
 };
 
 interface ICategoryDetailModel {
@@ -33,7 +31,10 @@ const CategoryDetailModel: ICategoryDetailModel = {
   state: initState,
   effects: {
     *getDetailCategoryBrand({ payload }, { call, put }) {
-      const response = yield call(serviceBrand.getDetailCategoryBrand, payload.categoryId);
+      const response = yield call(
+        serviceBrand.getDetailCategoryBrand,
+        payload.categoryId,
+      );
       if (response?.code !== ResponseCode.success) {
         return;
       }
@@ -69,7 +70,6 @@ const CategoryDetailModel: ICategoryDetailModel = {
         ...initState,
       };
     },
-
   },
 };
 

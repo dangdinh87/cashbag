@@ -9,8 +9,9 @@ import ProductListBrandBonus from './components/product-brand-bonus';
 import SellerItem from './components/seller-item';
 import ViewMoreSeller from './components/view-more';
 
-function BrandBonusItem({ brand, viewDetailBrand }) {
+function BrandBonusSection({ brand, viewDetailBrand }) {
   const [productList, setProductList] = useState<any>({});
+
   useEffect(() => {
     const fetchData = async () => {
       const {
@@ -82,7 +83,8 @@ function BrandBonusItem({ brand, viewDetailBrand }) {
         <div className="mt-2">
           <AppSpacer className="bg-gray-300 mx-n3 mb-2" size={1} />
           <ProductListBrandBonus
-            productList={productList}
+            productList={productList.products}
+            total={productList.total}
             brand={brand}
             classNameViewMore="border-0"
           />
@@ -92,4 +94,4 @@ function BrandBonusItem({ brand, viewDetailBrand }) {
   );
 }
 
-export default BrandBonusItem;
+export default BrandBonusSection;

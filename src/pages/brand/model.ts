@@ -1,19 +1,17 @@
 import { Effect, Reducer } from 'umi';
 
 import { ResponseCode } from '@/configs/app';
-import {
-  serviceBrand
-} from '@/services';
+import { serviceBrand } from '@/services';
 
 export interface IBrandDetailState {
-  brandInfo: any,
+  brandInfo: any;
   categories: any[];
-  guides: any[]
+  guides: any[];
 }
 const initState: IBrandDetailState = {
   brandInfo: {},
   categories: [],
-  guides: []
+  guides: [],
 };
 
 interface IBrandDetailModel {
@@ -47,7 +45,10 @@ const BrandDetailModel: IBrandDetailModel = {
       });
     },
     *getCategoriesByBrand({ payload }, { call, put }) {
-      const response = yield call(serviceBrand.getCategoriesByBrand, payload.brandId);
+      const response = yield call(
+        serviceBrand.getCategoriesByBrand,
+        payload.brandId,
+      );
       if (response?.code !== ResponseCode.success) {
         return;
       }
@@ -59,7 +60,10 @@ const BrandDetailModel: IBrandDetailModel = {
       });
     },
     *getGuidesByBrand({ payload }, { call, put }) {
-      const response = yield call(serviceBrand.getGuidesByBrand, payload.brandId);
+      const response = yield call(
+        serviceBrand.getGuidesByBrand,
+        payload.brandId,
+      );
       if (response?.code !== ResponseCode.success) {
         return;
       }
@@ -83,7 +87,6 @@ const BrandDetailModel: IBrandDetailModel = {
         ...initState,
       };
     },
-
   },
 };
 
