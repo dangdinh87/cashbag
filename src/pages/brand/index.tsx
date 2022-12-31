@@ -1,6 +1,7 @@
 import AppButton from '@/components/app/app-button';
 import AppImage from '@/components/app/app-image';
 import AppPage from '@/components/app/app-page';
+import ScrollToTopOnMount from '@/components/app/scroll-to-top';
 import Section from '@/components/common/section';
 import { formatter, helper, navigator } from '@/utils';
 import classNames from 'classnames';
@@ -42,146 +43,149 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
     getBrandInfo();
     getCategoriesByBrand();
     getGuidesByBrand();
-    // return () => {
-    //   dispatch({
-    //     type: 'brandDetailState/clearState',
-    //   });
-    // };
+    return () => {
+      dispatch({
+        type: 'brandDetailState/clearState',
+      });
+    };
   }, []);
 
-  if (!brandId || !brandInfo) return <></>;
+  if (!brandId || !brandInfo?.name) return <></>;
 
   return (
-    <AppPage title={brandInfo?.name} className="p-3">
-      <div className="rounded-2">
-        <div className="w-100 position-relative">
-          <AppImage
-            src={helper.getPhotoURL(brandInfo?.cover)}
-            className="w-100  rounded-top"
-          ></AppImage>
-          <div
-            className="position-absolute top-100 start-50 translate-middle bg-white px-3 py-2 rounded-2"
-            style={{ zIndex: 1, width: '40%' }}
-          >
+    <ScrollToTopOnMount trigger={location.pathname}>
+      <AppPage title={brandInfo?.name} className="p-3">
+        <div className="rounded-2">
+          <div className="w-100 position-relative">
             <AppImage
-              src={helper.getPhotoURL(brandInfo.logo)}
-              className="w-100"
+              src={helper.getPhotoURL(brandInfo?.cover)}
+              className="w-100 rounded-top"
+              // style={{ minHeight: '200px' }}
             />
+            <div
+              className="position-absolute top-100 start-50 translate-middle bg-white px-3 py-2 rounded-2"
+              style={{ zIndex: 1, width: '40%' }}
+            >
+              <AppImage
+                src={helper.getPhotoURL(brandInfo.logo)}
+                className="w-100"
+              />
+            </div>
           </div>
-        </div>
-        <div className="d-flex bg-white justify-content-evenly align-items-center p-4">
-          {brandInfo.statistic?.transactionTotal > 0 && (
-            <>
-              <div className="text-center">
-                <p className="text-primary fs-6 fw-bolder">
-                  {formatter.formatShortNumber(
-                    brandInfo.statistic.transactionTotal,
-                  )}
-                </p>
-                <p className="fs-8 text-gray">Đơn hàng</p>
-              </div>
-              <div className="text-center">
-                <p className="text-primary fs-6 fw-bolder">
-                  {formatter.formatShortNumberCash(
-                    brandInfo.statistic.cashbackTotal,
-                  )}
-                </p>
-                <p className="fs-8 text-gray">Tiền đã hoàn</p>
-              </div>
-            </>
-          )}
-        </div>
-        <AppButton
-          showNext
-          className="bg-primary w-100 rounded-bottom rounded-0 py-2c"
-        >
-          Mua ngay
-        </AppButton>
-      </div>
-      {categories.length > 0 && (
-        <Section
-          className="mt-4"
-          brand={brandInfo}
-          mainTitle={'DANH MỤC HOÀN TIỀN'}
-          title={`${categories.length} danh mục hoàn tiền`}
-        >
-          <div
-            className="my-2 mx-n3 px-3 overflow-scroll hide-scrollbar d-flex"
-            style={{ height: 105 }}
-          >
-            {categories?.map((element, index) => {
-              const isLast = index === categories?.length - 1;
-              return (
-                <div
-                  key={element._id}
-                  className={classNames(
-                    'p-2 bg-white rounded-2 flex-shrink-0',
-                    {
-                      'me-2': !isLast,
-                    },
-                  )}
-                  style={{ width: 105 }}
-                  onClick={() =>
-                    navigator.pushPath(
-                      `/category/${brandInfo._id}/${element._id}`,
-                    )
-                  }
-                >
-                  <div className="d-flex flex-column justify-content-between h-100">
-                    <p className="fs-8 mb-auto text-gray lh-sm max-line__ellipses">
-                      {element.name}
-                    </p>
-                    <div>
-                      <p className="text-primary fs-8">Hoàn tiền</p>
-                      <p className="text-primary fs-6 fw-bolder ">
-                        {element.cashbackText}
-                      </p>
-                    </div>
-                  </div>
+          <div className="d-flex bg-white justify-content-evenly align-items-center p-4">
+            {brandInfo.statistic?.transactionTotal > 0 && (
+              <>
+                <div className="text-center">
+                  <p className="text-primary fs-6 fw-bolder">
+                    {formatter.formatShortNumber(
+                      brandInfo.statistic.transactionTotal,
+                    )}
+                  </p>
+                  <p className="fs-8 text-gray">Đơn hàng</p>
                 </div>
-              );
-            })}
+                <div className="text-center">
+                  <p className="text-primary fs-6 fw-bolder">
+                    {formatter.formatShortNumberCash(
+                      brandInfo.statistic.cashbackTotal,
+                    )}
+                  </p>
+                  <p className="fs-8 text-gray">Tiền đã hoàn</p>
+                </div>
+              </>
+            )}
           </div>
           <AppButton
             showNext
-            className="w-100 text-gray bg-white py-2 fs-7 rounded-2 fw-bolder mt-2 border-0"
+            className="bg-primary w-100 rounded-bottom rounded-0 py-2c"
           >
-            Xem tất cả
+            Mua ngay
           </AppButton>
-        </Section>
-      )}
-      <Section
-        className="mt-3"
-        brand={brandInfo}
-        mainTitle={'Hoàn Tiền Như Thế Nào'}
-        title={'Đọc kỹ trước khi mua sắm'}
-      >
-        {guides.map((guide) => {
-          return (
-            <div className="mt-3" key={guide._id}>
-              <p className="text-primary fw-bolder fs-8 mb-2">{guide.desc}</p>
-              <ListGroup>
-                {guide.items.map((item) => {
-                  return (
-                    <ListGroup.Item key={item._id}>
-                      <div className="d-flex justify-content-between align-items-center">
-                        <AppImage
-                          src={helper.getPhotoURL(item.icon)}
-                          width="20"
-                          height="20"
-                          className="flex-shrink-0"
-                        />
-                        <p className="fs-8 text-gray ms-3">{item.desc}</p>
+        </div>
+        {categories.length > 0 && (
+          <Section
+            className="mt-4"
+            brand={brandInfo}
+            mainTitle={'DANH MỤC HOÀN TIỀN'}
+            title={`${categories.length} danh mục hoàn tiền`}
+          >
+            <div
+              className="my-2 mx-n3 px-3 overflow-scroll hide-scrollbar d-flex"
+              style={{ height: 105 }}
+            >
+              {categories?.map((element, index) => {
+                const isLast = index === categories?.length - 1;
+                return (
+                  <div
+                    key={element._id}
+                    className={classNames(
+                      'p-2 bg-white rounded-2 flex-shrink-0',
+                      {
+                        'me-2': !isLast,
+                      },
+                    )}
+                    style={{ width: 105 }}
+                    onClick={() =>
+                      navigator.pushPath(
+                        `/category/${brandInfo._id}/${element._id}`,
+                      )
+                    }
+                  >
+                    <div className="d-flex flex-column justify-content-between h-100">
+                      <p className="fs-8 mb-auto text-gray lh-sm max-line__ellipses">
+                        {element.name}
+                      </p>
+                      <div>
+                        <p className="text-primary fs-8">Hoàn tiền</p>
+                        <p className="text-primary fs-6 fw-bolder ">
+                          {element.cashbackText}
+                        </p>
                       </div>
-                    </ListGroup.Item>
-                  );
-                })}
-              </ListGroup>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
-      </Section>
-    </AppPage>
+            {/* <AppButton
+              showNext
+              className="w-100 text-gray bg-white py-2 fs-7 rounded-2 fw-bolder mt-2 border-0"
+            >
+              Xem tất cả
+            </AppButton> */}
+          </Section>
+        )}
+        <Section
+          className="mt-3"
+          brand={brandInfo}
+          mainTitle={'Hoàn Tiền Như Thế Nào'}
+          title={'Đọc kỹ trước khi mua sắm'}
+        >
+          {guides.map((guide) => {
+            return (
+              <div className="mt-3" key={guide._id}>
+                <p className="text-primary fw-bolder fs-8 mb-2">{guide.desc}</p>
+                <ListGroup>
+                  {guide.items.map((item) => {
+                    return (
+                      <ListGroup.Item key={item._id}>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <AppImage
+                            src={helper.getPhotoURL(item.icon)}
+                            width="20"
+                            height="20"
+                            className="flex-shrink-0"
+                          />
+                          <p className="fs-8 text-gray ms-3">{item.desc}</p>
+                        </div>
+                      </ListGroup.Item>
+                    );
+                  })}
+                </ListGroup>
+              </div>
+            );
+          })}
+        </Section>
+      </AppPage>
+    </ScrollToTopOnMount>
   );
 }
 

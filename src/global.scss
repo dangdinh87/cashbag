@@ -2,10 +2,7 @@
 @import '../node_modules/bootstrap/scss/bootstrap';
 
 #app {
-  // height: 100%;
   min-height                : 100%;
-  // min-width: 1160px;
-  // background: #e5e5e5;
   -webkit-overflow-scrolling: touch;
   font-family               : 'Inter';
   scroll-behavior           : auto;
@@ -235,4 +232,8 @@ button {
 
 .form-control::placeholder {
   font-size: 12px
+}
+
+.min-h-100 {
+  min-height: 100vh;
 }

@@ -14,6 +14,11 @@ function HomePage({ dispatch, homeState, loading }) {
   const getNews = () => {
     dispatch({
       type: 'homeState/getHomeBanners',
+      payload: {
+        data: {
+          type: 'primary',
+        },
+      },
     });
   };
 
@@ -30,6 +35,12 @@ function HomePage({ dispatch, homeState, loading }) {
   };
 
   useEffect(() => {
+    if (
+      homeBanners.length > 0 ||
+      brandBonus.length > 0 ||
+      brandByCategory.length > 0
+    )
+      return;
     getNews();
     getBrandBonus();
     getBrandByCategories();
@@ -78,7 +89,13 @@ function HomePage({ dispatch, homeState, loading }) {
     <div className="w-100 h-100">
       <Header onClickSearch={handleClickSearch} className="px-3" />
       <div className="px-3">
-        <AppCarousel className="mt-2" content={homeBannerImages} />
+        <AppCarousel
+          carouselProps={{
+            controls: false,
+          }}
+          className="mt-2"
+          content={homeBannerImages}
+        />
       </div>
       {brandBonusList}
       {brandByCategoryList}

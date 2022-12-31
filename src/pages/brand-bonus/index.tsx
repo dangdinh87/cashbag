@@ -136,7 +136,7 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
         loading={loading.effects['brandBonusState/searchSellersByBrand']}
         dispatch={dispatch}
       />
-      <AppSpacer size={5} className="bg-light mx-n3" />
+      {/* <AppSpacer size={5} className="bg-light mx-n3" /> */}
       <Section
         brand={brandInfo}
         mainTitle={'Mới nhất'}
@@ -191,14 +191,14 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
           {sellers?.map((item, index) => {
             return (
               <>
+                {(index === 5 ||
+                  (totalSellers < 6 && sellers?.length === index - 1)) &&
+                  sectionNotice()}
                 <BrandBonusItem
                   brand={brandInfo}
                   seller={item}
                   key={item._id}
                 />
-                {(index === 5 ||
-                  (totalSellers < 6 && sellers?.length === index - 1)) &&
-                  sectionNotice()}
               </>
             );
           })}

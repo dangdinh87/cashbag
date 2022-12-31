@@ -21,7 +21,7 @@ async function getPhoneNumber() {
 async function openChat() {
   return await api.openChat({
     type: 'oa',
-    id: ZaloConst.oaId as string,
+    id: ZaloConst.oaId,
     fail: (err) => {
       console.log(err);
       toast.error();
@@ -58,6 +58,22 @@ async function setOnBoarded() {
   });
 }
 
+function login() {
+  return api.login({
+    fail: (error) => {
+      console.log(error);
+    },
+  });
+}
+
+function getAccessToken() {
+  return api.getAccessToken({
+    fail: (error) => {
+      console.log(error);
+    },
+  });
+}
+
 export default {
   initZalo,
   getPhoneNumber,
@@ -65,4 +81,6 @@ export default {
   getAppData,
   setOnBoarded,
   clearAppData,
+  login,
+  getAccessToken,
 };

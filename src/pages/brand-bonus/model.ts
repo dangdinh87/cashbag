@@ -70,7 +70,6 @@ const BrandBonusModel: IBrandBonusModel = {
       );
 
       if (payload.isLoadMore) {
-        // console.log([...products, ...response.data.products]);
         yield put({
           type: 'updateState',
           payload: {

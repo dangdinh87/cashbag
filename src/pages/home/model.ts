@@ -10,11 +10,13 @@ export interface IHomeState {
   homeBanners?: any[];
   brandBonus?: any[];
   brandByCategory?: any[];
+  categories?: any[];
 }
 const initState: IHomeState = {
   homeBanners: [],
   brandBonus: [],
   brandByCategory: [],
+  categories: [],
 };
 
 interface IHomeModel {
@@ -36,8 +38,8 @@ const HomeModel: IHomeModel = {
   namespace: 'homeState',
   state: initState,
   effects: {
-    *getHomeBanners({ }, { call, put }) {
-      const response = yield call(serviceNews.getNews);
+    *getHomeBanners({ payload }, { call, put }) {
+      const response = yield call(serviceNews.getNews, payload.data);
       if (response?.code !== ResponseCode.success) {
         return;
       }
@@ -48,7 +50,6 @@ const HomeModel: IHomeModel = {
         },
       });
     },
-
     *getBrandBonus({ }, { call, put }) {
       const response = yield call(serviceBrand.getBrandBonus);
       if (response?.code !== ResponseCode.success) {
@@ -61,7 +62,6 @@ const HomeModel: IHomeModel = {
         },
       });
     },
-
     *getBrandByCategory({ }, { call, put }) {
       const response = yield call(serviceBrand.getBrandByCategory);
       if (response?.code !== ResponseCode.success) {
@@ -73,7 +73,6 @@ const HomeModel: IHomeModel = {
           brandByCategory: response.data.data,
         },
       });
-
     },
   },
   reducers: {

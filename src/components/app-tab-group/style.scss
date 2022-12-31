@@ -1,0 +1,56 @@
+@import 'src/bootstrap-custom.scss';
+
+.app-tab {
+  z-index: 1000 !important;
+  .tab-item {
+    cursor: pointer;
+  }
+  &.horizontal {
+    flex-direction: row;
+    .tab-item {
+      border-bottom: 3px solid transparent;
+    }
+    &.light {
+      .tab-item {
+        &.active {
+          border-bottom: 3px solid $primary;
+        }
+        &:hover {
+          border-bottom: 3px solid shift-color($primary, 20%);
+        }
+      }
+    }
+    &.dark {
+      .tab-item {
+        &.active,
+        &:hover {
+          border-bottom: 3px solid $white;
+        }
+      }
+    }
+  }
+  &.vertical {
+    flex-direction: column;
+    .tab-item {
+      border-left: 3px solid transparent;
+    }
+    &.light {
+      .tab-item {
+        &.active {
+          border-left: 3px solid $primary;
+        }
+        &:hover {
+          border-left: 3px solid shift-color($primary, 20%);
+        }
+      }
+    }
+    &.dark {
+      .tab-item {
+        &.active,
+        &:hover {
+          border-left: 3px solid $white;
+        }
+      }
+    }
+  }
+}

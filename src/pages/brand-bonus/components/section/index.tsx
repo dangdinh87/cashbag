@@ -21,7 +21,7 @@ function Section({ className = '', brand, title, mainTitle, children }) {
         </div>
         <div className="ms-2 flex-column d-flex justify-content-center">
           <p className="text-uppercase fs-9 text-muted">{title}</p>
-          <p className="fs-6 text-gray fw-bolder">{mainTitle}</p>
+          <p className="fs-7 text-gray fw-bolder">{mainTitle}</p>
         </div>
       </div>
       {children}

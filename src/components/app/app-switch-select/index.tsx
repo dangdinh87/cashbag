@@ -1,9 +1,10 @@
 import { Segmented } from 'antd';
 
-function AppSwitchSelect({ options = [], onChange }) {
+function AppSwitchSelect({ options = [], onChange, className, block = true }) {
   return (
     <Segmented
-      block
+      className={className}
+      block={block}
       options={options}
       onChange={onChange}
       onResize={undefined}

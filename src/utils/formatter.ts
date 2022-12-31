@@ -78,7 +78,7 @@ const date = (value) => {
   if (!value) {
     return '';
   }
-  return moment(value).format(AppConst.format.dateOnlySlash);
+  return moment(value).format(AppConst.format.dateOnly);
 };
 
 function prefixPhoneNumber(rawValue, prefix = AppConst.phoneNumberPrefix) {

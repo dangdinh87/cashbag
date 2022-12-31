@@ -6,15 +6,15 @@ interface Props {
   loading: Loading;
 }
 const AppInitializer: React.FC<Props> = ({ dispatch, loading, children }) => {
-  // useEffect(() => {
-  //   dispatch({
-  //     type: 'mainState/initApp',
-  //   });
-  // }, []);
+  useEffect(() => {
+    dispatch({
+      type: 'mainState/initApp',
+    });
+  }, []);
 
-  // if (loading.effects['mainState/initApp']) {
-  //   return <></>;
-  // }
+  if (loading.effects['mainState/initApp']) {
+    return <></>;
+  }
 
   return <>{children}</>;
 };

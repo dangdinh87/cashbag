@@ -1,4 +1,5 @@
 import BottomMenu from '@/components/app/bottom-menu';
+import ScrollToTopOnMount from '@/components/app/scroll-to-top';
 import { HomeIcon, OrderIcon, UserIcon } from '@/configs/assets';
 import React from 'react';
 import { Location } from 'umi';
@@ -18,7 +19,7 @@ const Layout: React.FC<Props> = (props) => {
     {
       icon: <OrderIcon />,
       name: 'Đơn hàng',
-      route: '/order',
+      route: '/transaction',
     },
     {
       icon: <UserIcon />,
@@ -32,6 +33,7 @@ const Layout: React.FC<Props> = (props) => {
   );
 
   return (
+    // <ScrollToTopOnMount trigger={location.pathname}>
     <div>
       {children}
       <>
@@ -39,6 +41,7 @@ const Layout: React.FC<Props> = (props) => {
         {/* <FloaterChat className={styles.floatChat} onClick={handleOAChat} /> */}
       </>
     </div>
+    // </ScrollToTopOnMount>
   );
 };
 export default Layout;

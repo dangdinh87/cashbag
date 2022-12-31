@@ -28,6 +28,14 @@ export default [
         path: '/search',
         component: '@/pages/search',
       },
+      {
+        path: '/transaction',
+        component: '@/pages/transaction',
+      },
+      {
+        path: '/transaction/:transactionId',
+        component: '@/pages/transaction-detail',
+      },
     ],
   },
   {

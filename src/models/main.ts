@@ -5,10 +5,11 @@ import { AppConst } from '@/configs';
 //   IUser,
 // } from '@/interfaces';
 import {
+  serviceUser,
   // serviceUser,
   serviceZalo,
 } from '@/services';
-import { helper, storage } from '@/utils';
+import { helper, storage, navigator } from '@/utils';
 
 export interface IMainState {
   // user: IUser;
@@ -47,46 +48,34 @@ const MainModel: IMainModel = {
   state: initState,
   effects: {
     // NOTE: For initialize home page after when SSR is applied for main app. Temporary unused!!
-    // *init({ payload }, { put, all }) {
-    //   yield put({
-    //     type: 'getCartItems',
-    //   });
-    //   yield put({
-    //     type: 'getCategories',
-    //   });
-    //   yield put({
-    //     type: 'getProductCities',
-    //   });
-    //   yield put({
-    //     type: 'getCartItems',
-    //   });
-    // },
     *initApp({ callback }, { call, put }) {
       yield call(serviceZalo.initZalo);
-      // const zaloAppData = yield call(serviceZalo.getAppData);
-      // console.log(zaloAppData);
-      // yield put({ type: 'updateState', payload: { zaloAppData } });
-
-      // yield put({ type: 'getAppData' });
-      // const result = { isLoggedIn: false, user: null };
-      // const { authToken } = yield call(storage.getUserToken);
-      // if (!authToken) {
-      //   yield put({ type: 'updateState', payload: result });
-      //   callback?.();
+      const zaloAppData = yield call(serviceZalo.getAppData);
+      console.log("zaloAppData: ", zaloAppData)
+      yield put({ type: 'updateState', payload: { zaloAppData } });
+      yield put({ type: 'getAppData' });
+      const result = { isLoggedIn: false, user: null };
+      const { authToken } = yield call(storage.getUserToken);
+      if (!authToken) {
+        const accessToken = yield call(serviceZalo.getAccessToken);
+        const { data } = yield call(serviceUser.loginZalo, {
+          token: accessToken,
+        });
+        yield call(storage.setUserToken, data.token);
+      }
+      navigator.pushPath('/home')
+      // const loginRes = yield call(serviceZalo.login);
+      // if (!loginRes) {
       //   return;
       // }
-      // const { data, code } = yield call(serviceUser.getUserDetail);
-      // if (
-      //   code === AppConst.ResponseCode.permission ||
-      //   code !== AppConst.ResponseCode.success
-      // ) {
-      //   yield call(storage.clearUserToken);
-      // } else {
-      //   result.user = data.user;
-      //   result.isLoggedIn = true;
+
+      // const { data } = yield call(serviceUser.loginWithZalo, {
+      //   token: accessToken,
+      // });
+      // if (!data) {
+      //   return;
       // }
-      // yield put({ type: 'updateState', payload: result });
-      // callback?.(data.user);
+      // yield call(storage.setUserToken, data.token);
     },
     *openZaloChat(_, { call }) {
       yield call(serviceZalo.openChat);

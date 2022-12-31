@@ -1,6 +1,6 @@
 import AppImage from '@/components/app/app-image';
 import { ArrowRightIcon } from '@/configs/assets';
-import { formatter, helper } from '@/utils';
+import { formatter, helper, navigator } from '@/utils';
 import classnames from 'classnames';
 
 function BrandNormalLine({ item, itemClassName }) {
@@ -18,6 +18,7 @@ function BrandNormalLine({ item, itemClassName }) {
           'rounded-2 d-flex justify-content-between align-items-center h-100 bg-white flex-shrink-0 p-2 me-2',
         )}
         style={{ width: '66%' }}
+        onClick={() => navigator.pushPath(`/brand/${brand._id}`)}
       >
         <div
           className={classnames(
@@ -57,6 +58,9 @@ function BrandNormalLine({ item, itemClassName }) {
               itemClassName,
             )}
             style={{ width: 105 }}
+            onClick={() =>
+              navigator.pushPath(`/category/${brand._id}/${element._id}`)
+            }
           >
             <div className="d-flex flex-column justify-content-between h-100">
               <p className="fs-8 mb-auto text-gray lh-sm max-line__ellipses">

@@ -33,11 +33,10 @@ function getDefaultHeader() {
   }
   const deviceId = storage.getDeviceId();
   const splitted = appVersion.split('.');
-  const appVersionCode = `${
-    Number(splitted[0]) * 10000 +
+  const appVersionCode = `${Number(splitted[0]) * 10000 +
     Number(splitted[1]) * 100 +
     Number(splitted[2])
-  }`;
+    }`;
 
   const query = {
     apiVersion,
@@ -67,11 +66,11 @@ export default {
   },
   brand: {
     getBrandBonus: (): IApi => ({
-      url: '/brand/brand-bonus',
+      url: '/brand/zalo/brand-bonus',
       method: methods.get,
     }),
     getBrandByCategory: (): IApi => ({
-      url: '/brand/categories/features',
+      url: '/brand/zalo/brand-group-by-category',
       method: methods.get,
     }),
     getSearchBrandBonus: (): IApi => ({
@@ -79,7 +78,7 @@ export default {
       method: methods.get,
     }),
     getBrandAll: (): IApi => ({
-      url: `/brand/all`,
+      url: `/brand/zalo/brands`,
       method: methods.get,
     }),
     getBrandInfo: (brandId): IApi => ({
@@ -115,4 +114,25 @@ export default {
       method: methods.get,
     }),
   },
+  transaction: {
+    getListTransaction: (): IApi => ({
+      url: '/transaction-online/transactions',
+      method: methods.get,
+    }),
+    getDetailTransaction: (transactionId): IApi => ({
+      url: `/transaction-online/transactions/${transactionId}`,
+      method: methods.get,
+    }),
+  },
+  user: {
+    loginZalo: (): IApi => ({
+      url: '/user/login',
+      method: methods.post,
+    }),
+    getUserDetail: (): IApi => ({
+      url: '/api/user/me',
+      method: methods.get,
+    }
+    )
+  }
 };

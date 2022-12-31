@@ -58,7 +58,8 @@ function CategoryDetailPage({
           <AppImage
             src={helper.getPhotoURL(brandInfo?.cover)}
             className="w-100"
-          ></AppImage>
+            // style={{ minHeight: '200px' }}
+          />
           <div
             className="position-absolute top-100 start-50 translate-middle bg-white px-3 py-2 rounded-2"
             style={{ zIndex: 1, width: '40%' }}
@@ -104,13 +105,6 @@ function CategoryDetailPage({
           )}
         </div>
       </div>
-      <AppButton
-        showNext
-        className="bg-primary w-100 rounded-0 py-2c position-fixed bottom-0 start-0"
-        style={{ zIndex: 100 }}
-      >
-        Mua ngay
-      </AppButton>
       <Section
         className="mt-3"
         brand={brandInfo}
@@ -142,6 +136,14 @@ function CategoryDetailPage({
           );
         })}
       </Section>
+      <AppSpacer size={60} />
+      <AppButton
+        showNext
+        className="bg-primary w-100 rounded-0 py-2c position-fixed bottom-0 start-0"
+        style={{ zIndex: 100 }}
+      >
+        Mua ngay
+      </AppButton>
     </AppPage>
   );
 }

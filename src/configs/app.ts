@@ -9,28 +9,10 @@ export enum ResponseCode {
   permission = 3,
 }
 
-export enum CheckoutTypes {
-  cart,
-  payment,
-}
-
-const viewMoreCount = 5;
-
-const bannerType = {
-  homeNews: 'home_news',
-  homeBanner: 'home_banner',
-  communityBanner: 'community_banner',
-  groupTopSale_banner: 'group_top_sale_banner',
-  groupNewestBanner: 'group_newest_banner',
-  campaignBanner: 'campaign_banner',
-  productPromotion: 'product_promotion',
-};
-const defaultPageLimit = 20;
-
 const format = {
   timeDate: 'HH:mm DD-MM-YYYY',
   dateTime: 'DD/MM/YYYY - HH:mm',
-  dateOnly: 'DD-MM-YYYY',
+  dateOnly: 'DD/MM/YYYY',
   dateWithDayMonthOnly: 'DD/MM',
   month: 'MM/YYYY',
   inputNumberFormatter: /\B(?=(\d{3})+(?!\d))/g,
@@ -40,20 +22,37 @@ const format = {
 
 const phoneNumberPrefix = '+84';
 
-const genders = { male: 'male', female: 'female', other: 'other' };
-const defaultUserName = 'User';
+const filterState = {
+  order: {
+    cashback: 'Đã hoàn tiền',
+    pending: 'Đang xử lý',
+    approved: 'Đã xác nhận',
+    rejected: 'Đã hủy',
+  },
+  cashback: {
+    cashback: 'Hoàn tiền',
+    pending: 'Đang chờ duyệt',
+    approved: 'Đang chờ duyệt',
+    rejected: 'Hoàn tiền không thành công',
+  }
+};
+
+const colorState = {
+  cashback: {
+    cashback: '#23C6C8',
+    pending: '#F8AC59',
+    approved: '#F8AC59',
+    rejected: '#ED5565',
+  }
+}
 
 export default {
   phoneNumberPrefix,
-  defaultUserName,
-  genders,
   format,
-  CheckoutTypes,
   ToastTypes,
   ResponseCode,
-  viewMoreCount,
-  bannerType,
-  defaultPageLimit,
+  filterState,
+  colorState,
   localStorage: {
     authToken: 'authToken',
     keywords: 'keywords',
