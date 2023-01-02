@@ -33,7 +33,7 @@ const filterState = {
     cashback: 'Hoàn tiền',
     pending: 'Đang chờ duyệt',
     approved: 'Đang chờ duyệt',
-    rejected: 'Hoàn tiền không thành công',
+    rejected: 'không thành công',
   }
 };
 

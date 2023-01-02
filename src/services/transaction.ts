@@ -9,11 +9,10 @@ const getListTransaction = (params: any): any => {
   });
 };
 
-const getDetailTransaction = (params: any, transactionId): any => {
+const getDetailTransaction = (transactionId): any => {
   const api = ApiConst.transaction.getDetailTransaction(transactionId);
   return request.call(api.url, {
     method: api.method,
-    params,
   });
 };
 

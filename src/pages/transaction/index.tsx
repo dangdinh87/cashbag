@@ -1,16 +1,15 @@
 import AppTabGroup from '@/components/app-tab-group';
-import AppImage from '@/components/app/app-image';
 import AppSpacer from '@/components/app/app-spacer';
-import { AppConst } from '@/configs';
-import { ArrowRightIcon } from '@/configs/assets';
-import { formatter, helper, navigator } from '@/utils';
+import { navigator } from '@/utils';
 import { useEffect } from 'react';
-import { ListGroup, Ratio } from 'react-bootstrap';
+import { ListGroup, Spinner } from 'react-bootstrap';
 import { useDispatch, useLocation, useSelector } from 'umi';
+import EmptyTransaction from './components/transaction-empty';
 import TransactionItem from './components/transaction-item';
 
 function TransactionPage() {
-  const transactionState = useSelector((state: any) => state.transactionState);
+  const state = useSelector((state: any) => state);
+  const { loading, transactionState } = state;
   const { transactionList = [] } = transactionState;
   const dispatch = useDispatch();
   const { query } = useLocation() as any;
@@ -34,6 +33,10 @@ function TransactionPage() {
     });
   };
 
+  const handleClickTransaction = (transactionId) => {
+    navigator.pushPath(`/transaction/${transactionId}`);
+  };
+
   useEffect(() => {
     getListOrder(query.status);
   }, [query.status]);
@@ -44,6 +47,8 @@ function TransactionPage() {
     { _id: 'approved', name: 'Đã duyệt' },
     { _id: 'rejected', name: 'Đã hủy' },
   ];
+
+  const isLoading = loading.effects['transactionState/getListOrder'];
 
   return (
     <div className="bg-white" style={{ minHeight: 'calc(100vh - 50px)' }}>
@@ -63,14 +68,24 @@ function TransactionPage() {
         })}
       </AppTabGroup>
       <AppSpacer size={44} />
+      {}
       <ListGroup variant="flush">
-        {transactionList.map((transaction: any) => {
-          return (
-            <ListGroup.Item key={transaction._id} className="p-2">
-              <TransactionItem transaction={transaction} onClick={null} />
-            </ListGroup.Item>
-          );
-        })}
+        {isLoading ? (
+          <Spinner variant="border" className='mx-auto mt-3'/>
+        ) : transactionList?.length > 0 ? (
+          transactionList.map((transaction: any) => {
+            return (
+              <ListGroup.Item key={transaction._id} className="p-2">
+                <TransactionItem
+                  transaction={transaction}
+                  onClick={() => handleClickTransaction(transaction._id)}
+                />
+              </ListGroup.Item>
+            );
+          })
+        ) : (
+          <EmptyTransaction />
+        )}
       </ListGroup>
     </div>
   );

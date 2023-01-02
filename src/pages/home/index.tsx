@@ -1,6 +1,7 @@
 import AppCarousel from '@/components/app/app-carousel';
 import AppImage from '@/components/app/app-image';
 import Header from '@/components/app/header';
+import zalo from '@/services/zalo';
 import { helper, navigator } from '@/utils';
 import { useEffect } from 'react';
 import { Ratio } from 'react-bootstrap';
@@ -35,12 +36,12 @@ function HomePage({ dispatch, homeState, loading }) {
   };
 
   useEffect(() => {
-    if (
-      homeBanners.length > 0 ||
-      brandBonus.length > 0 ||
-      brandByCategory.length > 0
-    )
-      return;
+    // if (
+    //   homeBanners.length > 0 ||
+    //   brandBonus.length > 0 ||
+    //   brandByCategory.length > 0
+    // )
+    //   return;
     getNews();
     getBrandBonus();
     getBrandByCategories();

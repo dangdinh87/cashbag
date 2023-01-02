@@ -14,7 +14,7 @@ const AppPage: React.FC<Props> = ({
   children,
 }) => {
   return (
-    <div className={classNames('w-100 min-vh-100', className)}>
+    <div className={classNames('w-100 min-h-100', className)}>
       <MobileToolbar title={title} {...toolbarProps} />
       {children}
     </div>

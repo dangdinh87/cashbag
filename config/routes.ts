@@ -3,11 +3,11 @@ export default [
     path: '/',
     component: '@/layouts/main',
     routes: [
-      {
-        exact: true,
-        path: '/',
-        component: '@/pages/home',
-      },
+      // {
+      //   exact: true,
+      //   path: '/',
+      //   component: '@/pages/home',
+      // },
       {
         path: '/home',
         component: '@/pages/home',
@@ -27,6 +27,10 @@ export default [
       {
         path: '/search',
         component: '@/pages/search',
+      },
+      {
+        path: '/user',
+        component: '@/pages/profile',
       },
       {
         path: '/transaction',

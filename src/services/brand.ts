@@ -52,7 +52,6 @@ const getBrandInfo = (brandId: string) => {
 };
 
 const getBrandNewest = (brandId: string) => {
-  console.log(brandId);
   const api = ApiConst.brand.getBrandNewest(brandId);
   return request.call(api.url, {
     method: api.method,

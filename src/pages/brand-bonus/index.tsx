@@ -137,25 +137,28 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
         dispatch={dispatch}
       />
       {/* <AppSpacer size={5} className="bg-light mx-n3" /> */}
-      <Section
-        brand={brandInfo}
-        mainTitle={'Mới nhất'}
-        title={`${brandsNewest?.length} thương hiệu hoàn tiền`}
-        className="my-2"
-      >
-        <div className="d-flex overflow-auto hide-scrollbar mx-n3 px-3 mt-2">
-          {brandsNewest.map((seller) => {
-            return (
-              <AppImage
-                src={helper.getPhotoURL(seller.logo)}
-                width={72}
-                height={72}
-                className="object-fit-contain rounded-circle border-light me-2 border p-1"
-              />
-            );
-          })}
-        </div>
-      </Section>
+      {brandsNewest?.length > 0 && (
+        <Section
+          brand={brandInfo}
+          mainTitle={'Mới nhất'}
+          title={`${brandsNewest?.length} thương hiệu hoàn tiền`}
+          className="my-2"
+        >
+          <div className="d-flex overflow-auto hide-scrollbar mx-n3 px-3 mt-2">
+            {brandsNewest.map((seller) => {
+              return (
+                <AppImage
+                  src={helper.getPhotoURL(seller.logo)}
+                  width={72}
+                  height={72}
+                  className="object-fit-contain rounded-circle border-light me-2 border p-1"
+                />
+              );
+            })}
+          </div>
+        </Section>
+      )}
+
       <AppSpacer size={5} className="bg-light mx-n3" />
       {totalProducts > 0 && (
         <>
@@ -191,14 +194,14 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
           {sellers?.map((item, index) => {
             return (
               <>
-                {(index === 5 ||
-                  (totalSellers < 6 && sellers?.length === index - 1)) &&
-                  sectionNotice()}
                 <BrandBonusItem
                   brand={brandInfo}
                   seller={item}
                   key={item._id}
                 />
+                {(index === 5 ||
+                  (totalSellers < 6 && totalSellers === index + 1)) &&
+                  sectionNotice()}
               </>
             );
           })}

@@ -10,9 +10,16 @@ export { ReactComponent as ArrowRightIcon } from '@/assets/icons/ic_arrow_right.
 export { ReactComponent as ArrowLeftIcon } from '@/assets/icons/ic_arrow_left.svg';
 export { ReactComponent as CloseIcon } from '@/assets/icons/ic_close.svg';
 export { ReactComponent as CancelIcon } from '@/assets/icons/ic_cancel.svg';
-// export { ReactComponent as SearchIcon } from '@/assets/icons/ic_search_sm.svg';
+export { ReactComponent as SuccessIcon } from '@/assets/icons/ic_success.svg';
+export { ReactComponent as NoSuccessIcon } from '@/assets/icons/ic_no_success.svg';
+export { ReactComponent as WalletIcon } from '@/assets/icons/ic_wallet.svg';
+export { ReactComponent as HandIcon } from '@/assets/icons/ic_hand.svg';
+export { ReactComponent as ContactIcon } from '@/assets/icons/ic_contact.svg';
 export default {
   bg: {
     bgDefault: require('@/assets/backgrounds/bg_default_placeholder.svg'),
   },
+  image: {
+    emptyOrder: require('@/assets/images/photo_order_empty.jpg'),
+  }
 };

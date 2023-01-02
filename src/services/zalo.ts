@@ -58,21 +58,31 @@ async function setOnBoarded() {
   });
 }
 
-function login() {
-  return api.login({
+async function login() {
+  return await api.login({
     fail: (error) => {
       console.log(error);
     },
   });
 }
 
-function getAccessToken() {
-  return api.getAccessToken({
+async function getAccessToken() {
+  return await api.getAccessToken({
     fail: (error) => {
       console.log(error);
     },
   });
 }
+
+function openOutApp(url) {
+  return api.openOutApp({
+    url,
+    fail: (error) => {
+      console.log(error);
+    },
+  });
+}
+
 
 export default {
   initZalo,
@@ -83,4 +93,5 @@ export default {
   clearAppData,
   login,
   getAccessToken,
+  openOutApp
 };

@@ -33,11 +33,12 @@ function BrandByCategoryItem({ item }) {
       <div className="d-flex align-content-center justify-content-start mb-3">
         <div
           style={{ height: 48, width: 48 }}
-          className="d-flex align-items-center justify-content-center p-2 rounded-circle bg-white"
+          className="d-flex align-items-center justify-content-center p-2 rounded-circle bg-primary"
         >
           <AppImage
             src={helper.getPhotoURL(category.logo)}
             className="w-100 h-100 object-fit-contain"
+            style={{ filter: 'brightness(0) invert(1)' }}
           />
         </div>
         <div className="ms-2 flex-column d-flex justify-content-center">

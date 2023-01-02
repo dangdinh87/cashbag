@@ -60,7 +60,7 @@ export default {
   endpointType,
   news: {
     getNews: (): IApi => ({
-      url: '/common/banners',
+      url: '/common/zalo/banners',
       method: methods.get,
     }),
   },
@@ -126,11 +126,11 @@ export default {
   },
   user: {
     loginZalo: (): IApi => ({
-      url: '/user/login',
+      url: '/user/login-zalo',
       method: methods.post,
     }),
     getUserDetail: (): IApi => ({
-      url: '/api/user/me',
+      url: '/user/me',
       method: methods.get,
     }
     )

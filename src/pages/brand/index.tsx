@@ -52,6 +52,13 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
 
   if (!brandId || !brandInfo?.name) return <></>;
 
+  const getMinHeight = (size: any) => {
+    const { width, height } = size;
+    if (!width || !height) return 50;
+    const widthWidow = screen.width;
+    return (widthWidow * height) / width;
+  };
+
   return (
     <ScrollToTopOnMount trigger={location.pathname}>
       <AppPage title={brandInfo?.name} className="p-3">
@@ -59,8 +66,12 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
           <div className="w-100 position-relative">
             <AppImage
               src={helper.getPhotoURL(brandInfo?.cover)}
-              className="w-100 rounded-top"
-              // style={{ minHeight: '200px' }}
+              className="w-100 rounded-top h-auto object-fit-cover"
+              style={{
+                minHeight: getMinHeight(
+                  brandInfo?.cover?.sizes?.md || brandInfo?.cover?.sizes?.sm,
+                ),
+              }}
             />
             <div
               className="position-absolute top-100 start-50 translate-middle bg-white px-3 py-2 rounded-2"

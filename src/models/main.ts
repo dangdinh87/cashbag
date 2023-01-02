@@ -10,6 +10,7 @@ import {
   serviceZalo,
 } from '@/services';
 import { helper, storage, navigator } from '@/utils';
+import { loading } from '@/components/app/loading-indicator/manager';
 
 export interface IMainState {
   // user: IUser;
@@ -35,7 +36,6 @@ export interface IMainModel {
   effects: {
     initApp: Effect;
     openZaloChat: Effect;
-    setOnBoarded: Effect;
   };
   reducers: {
     updateState: Reducer<IMainState>;
@@ -49,12 +49,11 @@ const MainModel: IMainModel = {
   effects: {
     // NOTE: For initialize home page after when SSR is applied for main app. Temporary unused!!
     *initApp({ callback }, { call, put }) {
+      loading.show()
       yield call(serviceZalo.initZalo);
       const zaloAppData = yield call(serviceZalo.getAppData);
-      console.log("zaloAppData: ", zaloAppData)
       yield put({ type: 'updateState', payload: { zaloAppData } });
       yield put({ type: 'getAppData' });
-      const result = { isLoggedIn: false, user: null };
       const { authToken } = yield call(storage.getUserToken);
       if (!authToken) {
         const accessToken = yield call(serviceZalo.getAccessToken);
@@ -63,19 +62,8 @@ const MainModel: IMainModel = {
         });
         yield call(storage.setUserToken, data.token);
       }
-      navigator.pushPath('/home')
-      // const loginRes = yield call(serviceZalo.login);
-      // if (!loginRes) {
-      //   return;
-      // }
-
-      // const { data } = yield call(serviceUser.loginWithZalo, {
-      //   token: accessToken,
-      // });
-      // if (!data) {
-      //   return;
-      // }
-      // yield call(storage.setUserToken, data.token);
+      navigator.pushPath('/home');
+      loading.destroy()
     },
     *openZaloChat(_, { call }) {
       yield call(serviceZalo.openChat);
