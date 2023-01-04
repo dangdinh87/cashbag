@@ -1,4 +1,3 @@
-import { ResponseCode } from '@/configs/app';
 import { serviceTransaction } from '@/services';
 
 const initState = {
@@ -28,7 +27,6 @@ const TransactionModel = {
   },
   reducers: {
     updateState(state, action) {
-      console.log(state)
       return {
         ...state,
         ...action.payload,

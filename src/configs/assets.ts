@@ -21,5 +21,6 @@ export default {
   },
   image: {
     emptyOrder: require('@/assets/images/photo_order_empty.jpg'),
-  }
+    redirectLogo: require('@/assets/images/redirect_logo.png'),
+  },
 };

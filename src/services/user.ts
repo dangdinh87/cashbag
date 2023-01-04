@@ -19,5 +19,5 @@ const getDetailUser = (params): any => {
 
 export default {
   loginZalo,
-  getDetailUser
+  getDetailUser,
 };

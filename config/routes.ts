@@ -3,11 +3,15 @@ export default [
     path: '/',
     component: '@/layouts/main',
     routes: [
-      // {
-      //   exact: true,
-      //   path: '/',
-      //   component: '@/pages/home',
-      // },
+      {
+        exact: true,
+        path: '/',
+        component: '@/pages/home',
+      },
+      {
+        path: '/redirect',
+        component: '@/pages/redirect',
+      },
       {
         path: '/home',
         component: '@/pages/home',
@@ -40,10 +44,11 @@ export default [
         path: '/transaction/:transactionId',
         component: '@/pages/transaction-detail',
       },
+
     ],
   },
-  {
-    path: '**',
-    redirect: '/',
-  },
+  // {
+  //   path: '**',
+  //   redirect: '/',
+  // },
 ];

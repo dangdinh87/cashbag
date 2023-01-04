@@ -34,7 +34,7 @@ const filterState = {
     pending: 'Đang chờ duyệt',
     approved: 'Đang chờ duyệt',
     rejected: 'không thành công',
-  }
+  },
 };
 
 const colorState = {
@@ -43,8 +43,8 @@ const colorState = {
     pending: '#F8AC59',
     approved: '#F8AC59',
     rejected: '#ED5565',
-  }
-}
+  },
+};
 
 export default {
   phoneNumberPrefix,

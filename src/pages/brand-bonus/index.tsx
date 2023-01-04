@@ -125,6 +125,8 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
     );
   };
 
+  if (!brandInfo?.name) return <></>;
+
   return (
     <AppPage title={`Ngày vàng ${brandInfo?.name}`} className="bg-white px-3">
       <SearchSection

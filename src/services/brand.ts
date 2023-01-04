@@ -6,7 +6,7 @@ const getBrandBonus = (params: any): any => {
   return request.call(api.url, {
     method: api.method,
     params,
-    Version: 1.2
+    Version: 1.2,
   });
 };
 
@@ -98,6 +98,14 @@ const getGuidesByBrand = (brandId: string) => {
   });
 };
 
+const getLinkRedirect = (params: any, brandId: string) => {
+  const api = ApiConst.brand.getLink();
+  return request.call(api.url, {
+    method: api.method,
+    params,
+    Version: 1.0,
+  });
+};
 export default {
   getBrandBonus,
   getBrandByCategory,
@@ -111,4 +119,5 @@ export default {
   getCategoriesByBrand,
   getDetailCategoryBrand,
   getGuidesByBrand,
+  getLinkRedirect
 };

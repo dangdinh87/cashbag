@@ -113,6 +113,10 @@ export default {
       url: `/brand/${brandId}/guides`,
       method: methods.get,
     }),
+    getLink: (): IApi => ({
+      url: `/brand/zalo/click`,
+      method: methods.post,
+    }),
   },
   transaction: {
     getListTransaction: (): IApi => ({
@@ -132,7 +136,6 @@ export default {
     getUserDetail: (): IApi => ({
       url: '/user/me',
       method: methods.get,
-    }
-    )
-  }
+    }),
+  },
 };

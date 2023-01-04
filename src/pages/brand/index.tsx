@@ -40,6 +40,10 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
   };
 
   useEffect(() => {
+    helper.getWindow()?.scrollTo({ top: 0, behavior: 'auto' });
+  }, []);
+
+  useEffect(() => {
     getBrandInfo();
     getCategoriesByBrand();
     getGuidesByBrand();
@@ -53,10 +57,8 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
   if (!brandId || !brandInfo?.name) return <></>;
 
   const getMinHeight = (size: any) => {
-    const { width, height } = size;
-    if (!width || !height) return 50;
-    const widthWidow = screen.width;
-    return (widthWidow * height) / width;
+    const widthWidow = screen?.width;
+    return (widthWidow * size?.height) / size?.width;
   };
 
   return (

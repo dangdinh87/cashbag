@@ -49,7 +49,7 @@ const MainModel: IMainModel = {
   effects: {
     // NOTE: For initialize home page after when SSR is applied for main app. Temporary unused!!
     *initApp({ callback }, { call, put }) {
-      loading.show()
+      // loading.show();
       yield call(serviceZalo.initZalo);
       const zaloAppData = yield call(serviceZalo.getAppData);
       yield put({ type: 'updateState', payload: { zaloAppData } });
@@ -62,13 +62,12 @@ const MainModel: IMainModel = {
         });
         yield call(storage.setUserToken, data.token);
       }
-      navigator.pushPath('/home');
-      loading.destroy()
+      // navigator.pushPath('/home');
+      // loading.destroy();
     },
     *openZaloChat(_, { call }) {
       yield call(serviceZalo.openChat);
     },
-
   },
   reducers: {
     updateState(state, action) {

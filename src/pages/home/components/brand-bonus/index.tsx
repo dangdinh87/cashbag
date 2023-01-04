@@ -69,7 +69,11 @@ function BrandBonusSection({ brand, viewDetailBrand }) {
           })}
           <ViewMoreSeller
             brand={brand}
-            total={brand.totalSellers - 6}
+            total={
+              brand.totalSellers <= 6
+                ? brand.totalSellers
+                : brand.totalSellers - 6
+            }
             viewMoreBrand={viewMoreBrand}
           />
         </Row>

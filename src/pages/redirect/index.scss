@@ -1,0 +1,113 @@
+.box-center-affiliate {
+  z-index        : 2;
+  display        : grid;
+  justify-content: center;
+  align-items    : center;
+  width          : auto;
+  height         : auto;
+  border-radius  : 50%;
+  position       : absolute;
+}
+
+.circle {
+  position           : absolute;
+  animation          : scaling1 2s ease-in-out infinite;
+  // animation-delay : 1s;
+  background-color   : #cc3366;
+  border-radius      : 50%;
+
+}
+
+.circle1 {
+  height : 100px;
+  width  : 100px;
+  opacity: 0.4;
+}
+
+.circle2 {
+  height : 140px;
+  width  : 140px;
+  opacity: 0.2;
+}
+
+.image-center-affiliate {
+  width   : 180px;
+  position: relative;
+  top     : -13%;
+  right   : 6%;
+
+  animation         : scaling2 2s ease-in-out infinite;
+  // animation-delay: 1s;
+}
+
+@keyframes scaling1 {
+  0% {
+    transform        : scale(1);
+    -webkit-transform: scale(1)
+  }
+
+  50% {
+    transform        : scale(2);
+    -webkit-transform: scale(2)
+  }
+
+  100% {
+    transform        : scale(1);
+    -webkit-transform: scale(1)
+  }
+}
+
+@keyframes scaling2 {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.text-waiting {
+  bottom   : 25%;
+  font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+  @keyframes scaling1 {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(2);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .image-center-affiliate {
+    width: 220px
+  }
+
+  .circle1 {
+    height: 120px;
+    width : 120px;
+  }
+
+
+  .circle2 {
+    height: 160px;
+    width : 160px;
+  }
+
+  .text-waiting {
+    bottom   : 20%;
+    font-size: 20px
+  }
+}

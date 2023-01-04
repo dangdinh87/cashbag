@@ -2,7 +2,7 @@ import { serviceTransaction } from '@/services';
 
 const initState = {
   // transactionDetail: {}
-}
+};
 
 const TransactionDetailModel = {
   namespace: 'transactionDetailState',
@@ -11,7 +11,7 @@ const TransactionDetailModel = {
     *getDetailTransaction({ payload }, { call, put }) {
       const response = yield call(
         serviceTransaction.getDetailTransaction,
-        payload.transactionId
+        payload.transactionId,
       );
       if (!response) {
         return;

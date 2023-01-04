@@ -17,7 +17,7 @@ function HomePage({ dispatch, homeState, loading }) {
       type: 'homeState/getHomeBanners',
       payload: {
         data: {
-          type: 'primary',
+          // type: 'primary',
         },
       },
     });

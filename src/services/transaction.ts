@@ -16,8 +16,7 @@ const getDetailTransaction = (transactionId): any => {
   });
 };
 
-
 export default {
   getDetailTransaction,
-  getListTransaction
+  getListTransaction,
 };

@@ -83,7 +83,6 @@ function openOutApp(url) {
   });
 }
 
-
 export default {
   initZalo,
   getPhoneNumber,
@@ -93,5 +92,5 @@ export default {
   clearAppData,
   login,
   getAccessToken,
-  openOutApp
+  openOutApp,
 };

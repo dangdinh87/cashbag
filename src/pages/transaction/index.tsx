@@ -69,11 +69,13 @@ function TransactionPage() {
       </AppTabGroup>
       <AppSpacer size={44} />
       {}
-      <ListGroup variant="flush">
-        {isLoading ? (
-          <Spinner variant="border" className='mx-auto mt-3'/>
-        ) : transactionList?.length > 0 ? (
-          transactionList.map((transaction: any) => {
+      {isLoading ? (
+        <div className="w-100 d-flex justify-content-center  align-items-center text-center mt-3">
+          <Spinner variant="border" className="" />
+        </div>
+      ) : transactionList?.length > 0 ? (
+        <ListGroup variant="flush">
+          {transactionList.map((transaction: any) => {
             return (
               <ListGroup.Item key={transaction._id} className="p-2">
                 <TransactionItem
@@ -82,11 +84,11 @@ function TransactionPage() {
                 />
               </ListGroup.Item>
             );
-          })
-        ) : (
-          <EmptyTransaction />
-        )}
-      </ListGroup>
+          })}{' '}
+        </ListGroup>
+      ) : (
+        <EmptyTransaction />
+      )}
     </div>
   );
 }

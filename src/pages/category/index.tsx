@@ -14,7 +14,7 @@ function CategoryDetailPage({
   brandDetailState,
   loading,
 }) {
-  const { categoryId, brandId } = useParams<{ categoryId: string }>();
+  const { categoryId, brandId } = useParams<any>();
   const { category } = categoryDetailState;
   const { brandInfo, guides } = brandDetailState;
   const getDetailCategoryBrand = () => {
@@ -46,16 +46,17 @@ function CategoryDetailPage({
       dispatch({
         type: 'categoryDetailState/clearState',
       });
+      dispatch({
+        type: 'brandDetailState/clearState',
+      });
     };
   }, []);
 
-  if (!categoryId || !brandId || !category) return <></>;
+  if (!categoryId || !brandId || !category || !brandInfo?.name) return <></>;
 
   const getMinHeight = (size: any) => {
-    const { width, height } = size;
-    if (!width || !height) return 50;
-    const widthWidow = screen.width;
-    return (widthWidow * height) / width;
+    const widthWidow = screen?.width;
+    return (widthWidow * size?.height) / size?.width;
   };
 
   return (

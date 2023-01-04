@@ -20,19 +20,22 @@ const CommonEmpty: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <div className={`text-center p-3 ${className}`}>
+    <div
+      className={`text-center p-3 d-flex flex-column justify-content-center align-items-center ${className}`}
+      style={{ minHeight: 'inherit' }}
+    >
       <div className={classNames('mb-3')}>{icon}</div>
       {title && (
         <p
           className={classNames(
             'mb-2 fw-bold',
-            size === 'lg' ? 'fs-5' : 'fs-6',
+            size === 'lg' ? 'fs-6' : 'fs-6',
           )}
         >
           {title}
         </p>
       )}
-      <p className="text-center">{message}</p>
+      <p className="text-center fs-8">{message}</p>
     </div>
   );
 };

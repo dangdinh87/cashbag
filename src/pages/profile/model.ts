@@ -1,16 +1,13 @@
 import { serviceUser } from '@/services';
 
-const initState = {
-}
+const initState = {};
 
 const UserModel = {
   namespace: 'userState',
   state: initState,
   effects: {
-    *getUserDetail({ }, { call, put }) {
-      const response = yield call(
-        serviceUser.getDetailUser,
-      );
+    *getUserDetail({}, { call, put }) {
+      const response = yield call(serviceUser.getDetailUser);
       if (!response) {
         return;
       }

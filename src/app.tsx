@@ -86,7 +86,7 @@ export const request: RequestConfig = {
       if (response.status === 404) {
         // logger.error('API error:', response);
         // helper.handle404Error();
-        navigator.replacePath('/');
+        // navigator.replacePath('/');
       }
 
       if (response.status === 401) {
