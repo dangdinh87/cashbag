@@ -1,16 +1,16 @@
 import AppImage from '@/components/app/app-image';
 import { helper } from '@/utils';
 
-const SellerItem = ({ seller, primaryColor, viewDetailBrand }) => {
+const SellerItem = ({ seller, primaryColor, onClick }) => {
   return (
     <div
       style={{ width: 105, padding: 6 }}
       className="bg-white rounded-1 me-2 py-3 d-flex flex-column justify-content-center align-items-center"
-      onClick={() => viewDetailBrand(seller._id)}
+      onClick={onClick}
     >
       <div
         style={{ width: 72, height: 72 }}
-        className="p-1  rounded-circle border border-1 border-gray"
+        className="p-1 rounded-circle border border-1 border-gray"
       >
         <AppImage
           src={helper.getPhotoURL(seller.logo)}

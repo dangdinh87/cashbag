@@ -110,6 +110,9 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
           <AppButton
             showNext
             className="bg-primary w-100 rounded-bottom rounded-0 py-2c"
+            onClick={() =>
+              helper.navigateToRedirect(brandInfo._id, brandInfo?.affiliate.url)
+            }
           >
             Mua ngay
           </AppButton>

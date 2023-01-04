@@ -12,7 +12,7 @@ const ProductItem = ({ product, onClick = null, className }) => {
       <Ratio aspectRatio={'1x1'}>
         <AppImage
           src={helper.getPhotoURL(product.photo)}
-          className="w-100 rounded-2"
+          className="w-100 rounded-2 object-fit-contain bg-light"
         />
       </Ratio>
       <p

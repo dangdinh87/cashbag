@@ -2,6 +2,7 @@ import AppBottomSheet from '@/components/app/app-bottom-sheet';
 import AppButton from '@/components/app/app-button';
 import AppLoadMore from '@/components/app/app-loadmore';
 import { ArrowRightIcon, GridIcon } from '@/configs/assets';
+import { helper } from '@/utils';
 import classnames from 'classnames';
 import { useState } from 'react';
 import { Row } from 'react-bootstrap';
@@ -63,7 +64,13 @@ function ProductListBrandBonus({
               style={{ width: 160 }}
               className={classnames('px-0 me-2')}
             >
-              <ProductItem product={product} className={undefined} />
+              <ProductItem
+                product={product}
+                className={undefined}
+                onClick={() =>
+                  helper.navigateToRedirect(brand._id, product.url, true)
+                }
+              />
             </div>
           );
         })}
@@ -97,7 +104,7 @@ function ProductListBrandBonus({
           shouldLoadMore={!!filterProducts?.nextPageToken}
           loading={loading.effects['brandBonusState/getProductByBrandBonus']}
         >
-          <ProductListWrap products={products} />
+          <ProductListWrap brand={brand} products={products} />
         </AppLoadMore>
       </AppBottomSheet>
     </>

@@ -10,23 +10,7 @@ import SellerItem from './components/seller-item';
 import ViewMoreSeller from './components/view-more';
 
 function BrandBonusSection({ brand, viewDetailBrand }) {
-  const { products = [] } = brand;
-  // const [productList, setProductList] = useState<any>({});
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const {
-  //       data: { products = [], total },
-  //     } = await serviceBrand.getProductByBrandBonus(
-  //       {
-  //         order: 'desc',
-  //       },
-  //       brand._id,
-  //     );
-  //     setProductList({ products, total });
-  //   };
-  //   fetchData();
-  // }, [brand._id]);
+  const { products = [], totalProducts } = brand;
 
   const viewMoreBrand = () => {
     navigator.pushPath(`brand-bonus/${brand._id}`);
@@ -61,9 +45,11 @@ function BrandBonusSection({ brand, viewDetailBrand }) {
           {[...brand.sellers]?.slice(0, 6)?.map((seller) => {
             return (
               <SellerItem
-                viewDetailBrand={viewDetailBrand}
                 seller={seller}
                 primaryColor={brand.primaryColor}
+                onClick={() =>
+                  helper.navigateToRedirect(brand._id, seller.url, true)
+                }
               />
             );
           })}
@@ -84,12 +70,12 @@ function BrandBonusSection({ brand, viewDetailBrand }) {
           Xem tất cả <ArrowRightIcon width={20} height={20} />
         </div>
       </div>
-      {products.total > 0 && (
+      {totalProducts > 0 && (
         <div className="mt-2">
           <AppSpacer className="bg-gray-300 mx-n3 mb-2" size={1} />
           <ProductListBrandBonus
-            productList={products.products}
-            total={products.totalProducts}
+            productList={products}
+            total={totalProducts}
             brand={brand}
             classNameViewMore="border-0"
           />

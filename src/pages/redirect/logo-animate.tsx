@@ -6,7 +6,7 @@ function AnimateLogo() {
     <>
       <div className="box-center-affiliate">
         <AppImage
-          src={AssetConst.image.redirectLogo}
+          src={'https://cashbag.vn/static/icon-redirect.2bf7ef08.png'}
           className="image-center-affiliate"
         />
       </div>

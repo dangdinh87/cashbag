@@ -153,6 +153,9 @@ function CategoryDetailPage({
         showNext
         className="bg-primary w-100 rounded-0 py-2c position-fixed bottom-0 start-0"
         style={{ zIndex: 100 }}
+        onClick={() =>
+          helper.navigateToRedirect(brandInfo._id, category?.affiliate.url)
+        }
       >
         Mua ngay
       </AppButton>

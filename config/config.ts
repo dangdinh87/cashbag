@@ -29,10 +29,11 @@ export default defineConfig({
   favicon: '/assets/favicon.ico',
   title: false,
   define: {
-    'process.env.ZALO_OA_ID': '1719700711458700581',
+    'process.env.ZALO_OA_ID': '2193444627448645149',
     'process.env.API_ENDPOINT': 'https://svc.cashbag.vn/api',
   },
   headScripts: [
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js',
   ],
+
 });

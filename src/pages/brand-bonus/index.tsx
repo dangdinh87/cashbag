@@ -154,6 +154,10 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
                   width={72}
                   height={72}
                   className="object-fit-contain rounded-circle border-light me-2 border p-1"
+                  key={seller._id}
+                  onClick={() =>
+                    helper.navigateToRedirect(brandInfo._id, seller.url, true)
+                  }
                 />
               );
             })}
@@ -197,6 +201,9 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
             return (
               <>
                 <BrandBonusItem
+                  onClick={() =>
+                    helper.navigateToRedirect(brandInfo._id, item.url, true)
+                  }
                   brand={brandInfo}
                   seller={item}
                   key={item._id}

@@ -1,26 +1,30 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import AppPage from '@/components/app/app-page';
 import { serviceBrand } from '@/services';
+import zalo from '@/services/zalo';
+import { navigator } from '@/utils';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'umi';
 
 import './index.scss';
 import AnimateLogo from './logo-animate';
 
-const RedirectPage = (props) => {
-  // const location = useLocation();
-  // console.log(location);
-  // const [redirectLink, setRedirectLink] = useState<string>('');
+const RedirectPage = () => {
+  const [isSuccess, setIsSuccess] = useState(false);
+  const location = useLocation();
+  const { brand, url, type } = location.state as any;
 
-  // useEffect(() => {
-  //   serviceBrand
-  //     .getLinkRedirect(1, 1)
-  //     .then((res) => {
-  //       const result = res?.data?.url;
-  //       setRedirectLink(result);
-  //     })
-  //     .catch(() => setRedirectLink(''));
-  // }, []);
+  useEffect(() => {
+    if (brand && url) {
+      serviceBrand.getLinkRedirect({ brand, url, type }).then((res) => {
+        const result = res?.data?.url;
+        if (result) {
+          zalo.openOutApp(result);
+          setIsSuccess(true);
+        }
+      });
+    }
+  }, [location.state]);
 
   return (
     <AppPage title="Điều hướng" className="bg-white">
@@ -31,9 +35,18 @@ const RedirectPage = (props) => {
         }}
       >
         <AnimateLogo />
-        <p className="position-absolute fw-normal text-waiting fs-6 fw-bolder text-gray">
-          Vui lòng chờ trong giây lát
-        </p>
+        {!isSuccess ? (
+          <p className="position-absolute fw-normal text-waiting fs-6 fw-bolder text-gray">
+            {'Vui lòng chờ trong giây lát'}
+          </p>
+        ) : (
+          <a
+            className="text-waiting position-absolute fw-normal"
+            onClick={() => navigator.goBack()}
+          >
+            Quay lại Cashbag
+          </a>
+        )}
       </div>
     </AppPage>
   );

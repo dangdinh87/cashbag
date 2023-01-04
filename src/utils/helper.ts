@@ -2,7 +2,7 @@ import moment from 'moment';
 import { useState } from 'react';
 import { history, isBrowser } from 'umi';
 
-import { logger } from './';
+import { logger, navigator } from './';
 
 const chunkArray = (array: any[], chunk: number) => {
   var i, j;
@@ -252,6 +252,17 @@ function sortByValue(field, desc = false) {
   };
 }
 
+function navigateToRedirect(brand, url, isBrandBonus?) {
+  navigator.pushLocation({
+    pathname: '/redirect',
+    state: {
+      brand,
+      url,
+      type: isBrandBonus ? 'brand_bonus' : ''
+    }
+  });
+}
+
 export default {
   downloadFileFromLink,
   getPhotoURL,
@@ -282,4 +293,5 @@ export default {
   filterEmptyProperties,
   isZalo,
   copyToClipboard,
+  navigateToRedirect
 }

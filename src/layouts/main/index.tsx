@@ -2,6 +2,7 @@ import BottomMenu from '@/components/app/bottom-menu';
 import ScrollToTopOnMount from '@/components/app/scroll-to-top';
 import FloaterChat from '@/components/common/float-chat';
 import { HomeIcon, OrderIcon, UserIcon } from '@/configs/assets';
+import classNames from 'classnames';
 import React from 'react';
 import { Location, useDispatch } from 'umi';
 import styles from './styles.scss';
@@ -37,8 +38,8 @@ const Layout: React.FC<Props> = (props) => {
     });
   };
 
-  const isHideMenu = ['/search', '/category', 'brand'].some((el) =>
-    location.pathname.includes(el),
+  const isHideMenu = ['/search', '/category', '/brand', '/redirect'].some(
+    (el) => location.pathname.includes(el),
   );
 
   return (
@@ -47,7 +48,10 @@ const Layout: React.FC<Props> = (props) => {
         {children}
         <>
           {!isHideMenu && <BottomMenu menus={menus} location={location} />}
-          <FloaterChat className={styles.floatChat} onClick={handleOAChat} />
+          <FloaterChat
+            onClick={handleOAChat}
+            className={classNames({ 'mb-0': isHideMenu }, styles.floatChat)}
+          />
         </>
       </div>
     </ScrollToTopOnMount>

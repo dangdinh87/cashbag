@@ -3,7 +3,6 @@ import { isBrowser, RequestConfig } from 'umi';
 import api from 'zmp-sdk';
 
 import { AppConst } from '@/configs';
-import { helper, navigator } from '@/utils';
 import AppInitializer from './components/app/init';
 import { loading } from './components/app/loading-indicator/manager';
 import { toast } from './components/app/toast/manager';

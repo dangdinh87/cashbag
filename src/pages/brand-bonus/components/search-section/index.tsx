@@ -4,6 +4,7 @@ import AppSearchBox from '@/components/app/app-search';
 import { useState } from 'react';
 import { debounce } from 'lodash';
 import BrandBonusItem from '@/pages/search/components/brand-bonus-item';
+import { helper } from '@/utils';
 
 function SearchSection({
   searchSellersByBrand,
@@ -70,7 +71,14 @@ function SearchSection({
         >
           {searchSellers?.map((item) => {
             return (
-              <BrandBonusItem brand={brandInfo} seller={item} key={item._id} />
+              <BrandBonusItem
+                onClick={() =>
+                  helper.navigateToRedirect(brandInfo._id, item.url, true)
+                }
+                brand={brandInfo}
+                seller={item}
+                key={item._id}
+              />
             );
           })}
         </AppLoadMore>

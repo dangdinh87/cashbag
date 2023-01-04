@@ -42,9 +42,9 @@ function TransactionPage() {
   }, [query.status]);
 
   const orderMenus = [
-    { _id: 'cashback', name: 'Hoàn tiền' },
     { _id: 'pending', name: 'Đang chờ duyệt' },
     { _id: 'approved', name: 'Đã duyệt' },
+    { _id: 'cashback', name: 'Hoàn tiền' },
     { _id: 'rejected', name: 'Đã hủy' },
   ];
 

@@ -4,6 +4,7 @@ import AppSearchBox from '@/components/app/app-search';
 import AppSpacer from '@/components/app/app-spacer';
 import AppSwitchSelect from '@/components/app/app-switch-select';
 import BrandNormalLine from '@/components/common/brand-normal-line';
+import { helper } from '@/utils';
 import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { connect } from 'umi';
@@ -127,7 +128,14 @@ function SearchPage({ dispatch, loading, searchState }) {
           {listBrandBonus?.map((item) => {
             const { brand, seller } = item;
             return (
-              <BrandBonusItem brand={brand} seller={seller} key={item._id} />
+              <BrandBonusItem
+                brand={brand}
+                seller={seller}
+                key={item._id}
+                onClick={() =>
+                  helper.navigateToRedirect(brand._id, seller.url, true)
+                }
+              />
             );
           })}
         </AppLoadMore>

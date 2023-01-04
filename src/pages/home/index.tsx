@@ -66,16 +66,8 @@ function HomePage({ dispatch, homeState, loading }) {
       );
     });
 
-  const viewDetailBrand = () => {};
-
   const brandBonusList = brandBonus.map((brand: any) => {
-    return (
-      <BrandBonusSection
-        key={brand._id}
-        brand={brand}
-        viewDetailBrand={viewDetailBrand}
-      />
-    );
+    return <BrandBonusSection key={brand._id} brand={brand} />;
   });
 
   const brandByCategoryList = brandByCategory

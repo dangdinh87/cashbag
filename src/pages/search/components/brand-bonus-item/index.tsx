@@ -4,7 +4,7 @@ import { helper } from '@/utils';
 import classnames from 'classnames';
 import moment from 'moment';
 
-function BrandBonusItem({ brand, seller }) {
+function BrandBonusItem({ brand, seller, onClick }) {
   const expirationDate = (value: number) => {
     return moment
       .duration(value * 1000)
@@ -23,6 +23,7 @@ function BrandBonusItem({ brand, seller }) {
     <div
       className="my-2 mx-n3 px-3 overflow-scroll hide-scrollbar d-flex"
       style={{ height: 105 }}
+      onClick={onClick}
     >
       <div
         className="position-relative rounded-2 d-flex justify-content-between align-items-center h-100 bg-white flex-shrink-0 p-2 me-2 border-light border"

@@ -11,10 +11,6 @@ interface Props {
   location: Location;
 }
 const BottomMenu: React.FC<Props> = ({ menus, location }) => {
-  const isVisibleMenu = ['/home', '/search'].some((el) =>
-    el.includes(location.pathname),
-  );
-
   return (
     <>
       <AppSpacer size={54} />

@@ -98,14 +98,15 @@ const getGuidesByBrand = (brandId: string) => {
   });
 };
 
-const getLinkRedirect = (params: any, brandId: string) => {
+const getLinkRedirect = (data: any) => {
   const api = ApiConst.brand.getLink();
   return request.call(api.url, {
     method: api.method,
-    params,
+    data,
     Version: 1.0,
   });
 };
+
 export default {
   getBrandBonus,
   getBrandByCategory,
