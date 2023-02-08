@@ -3,12 +3,12 @@ import AppPage from '@/components/app/app-page';
 import AppSearchBox from '@/components/app/app-search';
 import AppSpacer from '@/components/app/app-spacer';
 import AppSwitchSelect from '@/components/app/app-switch-select';
+import BrandBonusItem from '@/components/common/brand-bonus-item';
 import BrandNormalLine from '@/components/common/brand-normal-line';
 import { helper } from '@/utils';
 import { debounce } from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'umi';
-import BrandBonusItem from './components/brand-bonus-item';
 
 enum SearchTypeEnum {
   BrandBonus,
@@ -99,7 +99,7 @@ function SearchPage({ dispatch, loading, searchState }) {
   };
 
   return (
-    <AppPage title="Tìm kiếm" className="bg-white px-2 ">
+    <AppPage title="Tìm kiếm" className="bg-white px-3">
       <div
         className="position-fixed bg-white w-100 start-0 px-2 pb-2"
         style={{ zIndex: 1 }}

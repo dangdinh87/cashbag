@@ -27,7 +27,7 @@ function BrandBonusItem({ brand, seller, onClick }) {
     >
       <div
         className="position-relative rounded-2 d-flex justify-content-between align-items-center h-100 bg-white flex-shrink-0 p-2 me-2 border-light border"
-        style={{ width: 'calc(100% - 125px)' }}
+        style={{ width: 'calc(100% - 115px)' }}
       >
         <div
           className={classnames(

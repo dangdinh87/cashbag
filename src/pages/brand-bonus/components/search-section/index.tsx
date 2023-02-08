@@ -3,8 +3,8 @@ import AppLoadMore from '@/components/app/app-loadmore';
 import AppSearchBox from '@/components/app/app-search';
 import { useState } from 'react';
 import { debounce } from 'lodash';
-import BrandBonusItem from '@/pages/search/components/brand-bonus-item';
 import { helper } from '@/utils';
+import BrandBonusItem from '@/components/common/brand-bonus-item';
 
 function SearchSection({
   searchSellersByBrand,

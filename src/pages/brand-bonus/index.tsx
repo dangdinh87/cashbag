@@ -2,11 +2,11 @@ import AppImage from '@/components/app/app-image';
 import AppLoadMore from '@/components/app/app-loadmore';
 import AppPage from '@/components/app/app-page';
 import AppSpacer from '@/components/app/app-spacer';
+import BrandBonusItem from '@/components/common/brand-bonus-item';
 import { helper, navigator } from '@/utils';
 import { useEffect } from 'react';
 import { connect, useParams } from 'umi';
 import ProductListBrandBonus from '../home/components/brand-bonus/components/product-brand-bonus';
-import BrandBonusItem from '../search/components/brand-bonus-item';
 import SearchSection from './components/search-section';
 import Section from './components/section';
 

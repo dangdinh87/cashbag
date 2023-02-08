@@ -6,7 +6,7 @@
     "statusBarColor": "#cc3366",
     "leftButton": "both"
   },
-  "debug": true,
+  "debug": false,
   "listCSS": ["umi.css"],
   "listSyncJS": [],
   "listAsyncJS": ["umi.js"],

@@ -54,7 +54,7 @@ function HomePage({ dispatch, homeState, loading }) {
       return (
         <Ratio
           key={item._id}
-          className="rounded-3 mb-4 overflow-hidden"
+          className="rounded-2 mb-4 overflow-hidden"
           aspectRatio={firstPhoto.sizes.md.height / firstPhoto.sizes.md.width}
         >
           <AppImage
