@@ -83,6 +83,17 @@ function openOutApp(url) {
   });
 }
 
+async function getAppInfo() {
+  const { name, version } = await api.getAppInfo({
+    fail: (error) => {
+      console.log(error);
+    },
+  });
+  return { version, name };
+
+}
+
+
 export default {
   initZalo,
   getPhoneNumber,
@@ -93,4 +104,5 @@ export default {
   login,
   getAccessToken,
   openOutApp,
+  getAppInfo
 };

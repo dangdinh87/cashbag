@@ -8,8 +8,9 @@ import { Row } from 'react-bootstrap';
 import ProductListBrandBonus from './components/product-brand-bonus';
 import SellerItem from './components/seller-item';
 import ViewMoreSeller from './components/view-more';
+import { history } from 'umi';
 
-function BrandBonusSection({ brand, viewDetailBrand }) {
+function BrandBonusSection({ brand }) {
   const { products = [], totalProducts } = brand;
 
   const viewMoreBrand = () => {
@@ -50,6 +51,7 @@ function BrandBonusSection({ brand, viewDetailBrand }) {
                 onClick={() =>
                   helper.navigateToRedirect(brand._id, seller.url, true)
                 }
+                key={seller._id}
               />
             );
           })}

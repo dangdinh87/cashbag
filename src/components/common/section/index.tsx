@@ -1,4 +1,5 @@
 import { CalendarIcon } from '@/configs/assets';
+import { helper } from '@/utils';
 import classNames from 'classnames';
 
 function Section({ className = '', brand, title, mainTitle, children }) {
@@ -11,7 +12,9 @@ function Section({ className = '', brand, title, mainTitle, children }) {
       >
         <div
           style={{
-            backgroundColor: brand?.primaryColor || '#BC4066',
+            backgroundColor: helper.isColorHex(brand?.primaryColor)
+              ? brand?.primaryColor
+              : '#BC4066',
             height: 48,
             width: 48,
           }}

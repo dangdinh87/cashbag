@@ -2,6 +2,7 @@ import BottomMenu from '@/components/app/bottom-menu';
 import ScrollToTopOnMount from '@/components/app/scroll-to-top';
 import FloaterChat from '@/components/common/float-chat';
 import { HomeIcon, OrderIcon, UserIcon } from '@/configs/assets';
+import useKeepPositionScroll from '@/hooks/useKeepPosition';
 import classNames from 'classnames';
 import React from 'react';
 import { Location, useDispatch } from 'umi';
@@ -13,6 +14,8 @@ interface Props {
 const Layout: React.FC<Props> = (props) => {
   const { children, location } = props;
   const dispatch = useDispatch();
+
+  // const locationA = useKeepPositionScroll();
 
   const menus = [
     {
@@ -43,7 +46,10 @@ const Layout: React.FC<Props> = (props) => {
   );
 
   return (
-    <ScrollToTopOnMount trigger={location.pathname}>
+    <ScrollToTopOnMount
+      isException={location.pathname === '/home'}
+      trigger={location.pathname}
+    >
       <div>
         {children}
         <>

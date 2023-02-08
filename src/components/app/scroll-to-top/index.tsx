@@ -7,8 +7,15 @@ function scrollToTop() {
 }
 export interface Props {
   trigger?: any;
+  isException?: boolean;
 }
-const ScrollToTopOnMount: React.FC<Props> = ({ trigger, children }) => {
+const ScrollToTopOnMount: React.FC<Props> = ({
+  trigger,
+  children,
+  isException,
+}) => {
+  if (isException) return <>{children}</>;
+
   useEffect(() => {
     scrollToTop();
     return () => {

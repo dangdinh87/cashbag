@@ -2,7 +2,7 @@ import AppImage from '@/components/app/app-image';
 import AppLoadMore from '@/components/app/app-loadmore';
 import AppPage from '@/components/app/app-page';
 import AppSpacer from '@/components/app/app-spacer';
-import { helper } from '@/utils';
+import { helper, navigator } from '@/utils';
 import { useEffect } from 'react';
 import { connect, useParams } from 'umi';
 import ProductListBrandBonus from '../home/components/brand-bonus/components/product-brand-bonus';
@@ -128,7 +128,13 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
   if (!brandInfo?.name) return <></>;
 
   return (
-    <AppPage title={`Ngày vàng ${brandInfo?.name}`} className="bg-white px-3">
+    <AppPage
+      title={`Ngày vàng ${brandInfo?.name}`}
+      className="bg-white px-3"
+      toolbarProps={{
+        onBack: () => navigator.goBack(),
+      }}
+    >
       <SearchSection
         className="my-2"
         brandInfo={brandInfo}

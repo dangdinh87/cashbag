@@ -1,17 +1,19 @@
 import AppBottomSheet from '@/components/app/app-bottom-sheet';
+import AppButton from '@/components/app/app-button';
 import AppImage from '@/components/app/app-image';
-import CategoryItem from '@/components/common/category-item';
-import { ArrowRightIcon, GridIcon } from '@/configs/assets';
-import { formatter, helper, navigator } from '@/utils';
+import AppLoadMore from '@/components/app/app-loadmore';
+import BrandNormalLine from '@/components/common/brand-normal-line';
+import { helper } from '@/utils';
 import classnames from 'classnames';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'umi';
 
 function BrandByCategoryItem({ item }) {
-  const [visible, setVisible] = useState(false);
-  const { categories } = useSelector((state: any) => state.brandDetailState);
-  const [brandSelected, setSelected] = useState<any>({});
+  const [visibleListBrand, setVisibleListBrand] = useState(false);
   const dispatch = useDispatch();
+  const { loading, homeState } = useSelector((state: any) => state);
+  const { listBrandByCategory, listBrandByCategoryFilter } = homeState;
+  // const { handleBottomSheet } = useBottomSheet();
   const getCategoriesByBrand = (brandId) => {
     dispatch({
       type: 'brandDetailState/getCategoriesByBrand',
@@ -21,10 +23,26 @@ function BrandByCategoryItem({ item }) {
     });
   };
 
-  const handleShowListCategories = (brand) => {
-    setSelected(brand);
-    setVisible(true);
-    getCategoriesByBrand(brand._id);
+  const getListBrandByCategory = (
+    categoryID = '',
+    pageToken?,
+    isLoadMore = false,
+  ) => {
+    dispatch({
+      type: 'homeState/getListBrandByCategory',
+      payload: {
+        data: {
+          pageToken,
+        },
+        categoryID,
+        isLoadMore,
+      },
+    });
+  };
+
+  const handleViewMore = (categoryID) => {
+    setVisibleListBrand(true);
+    getListBrandByCategory(categoryID);
   };
 
   const { category, brands, totalBrand } = item;
@@ -49,112 +67,55 @@ function BrandByCategoryItem({ item }) {
         </div>
       </div>
       {brands.map((item) => {
-        const { brand } = item;
-        const isCashback = brand?.statistic?.cashbackTotal > 0;
         return (
-          <div
-            className="my-2 mx-n3 px-3 overflow-scroll hide-scrollbar d-flex"
-            style={{ height: 105 }}
-          >
-            <div
-              className="rounded-2 d-flex justify-content-between align-items-center h-100 bg-white flex-shrink-0 p-2 me-2"
-              style={{ width: '66%' }}
-              onClick={() => navigator.pushPath(`/brand/${brand._id}`)}
-            >
-              <div
-                className={classnames(
-                  { 'justify-content-center': !isCashback },
-                  { 'justify-content-between': isCashback },
-                  'd-flex flex-column  h-100',
-                )}
-              >
-                {isCashback && <div style={{ height: 15 }} />}
-                <AppImage
-                  src={helper.getPhotoURL(brand?.logo)}
-                  className="object-fit-contain"
-                  style={{
-                    maxWidth: 120,
-                    maxHeight: 50,
-                  }}
-                />
-                {isCashback && (
-                  <p className="text-gray fs-9">
-                    {formatter.formatShortNumberCash(
-                      brand?.statistic?.cashbackTotal,
-                    )}{' '}
-                    tiền đã hoàn
-                  </p>
-                )}
-              </div>
-              <ArrowRightIcon className="text-muted" />
-            </div>
-            {item?.categories?.map((element, index) => {
-              const isLast = index === item?.categories?.length - 1;
-              return (
-                <div
-                  key={element._id}
-                  className={classnames(
-                    'p-2 bg-white rounded-2 flex-shrink-0',
-                    { 'me-2': !isLast },
-                  )}
-                  style={{ width: 105 }}
-                  onClick={() =>
-                    navigator.pushPath(`/category/${brand._id}/${element._id}`)
-                  }
-                >
-                  <div className="d-flex flex-column justify-content-between h-100">
-                    <p className="fs-8 mb-auto text-gray lh-sm max-line__ellipses">
-                      {element.name}
-                    </p>
-                    <div>
-                      <p className="text-primary fs-8">Hoàn tiền</p>
-                      <p className="text-primary fs-6 fw-bolder ">
-                        {element.cashbackText}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-            {item?.categories?.length > 1 && (
-              <div
-                onClick={() => handleShowListCategories(brand)}
-                style={{
-                  width: 105,
-                  height: 105,
-                }}
-                className={classnames(
-                  'flex-shrink-0 bg-primary rounded-2 d-flex flex-column justify-content-center align-items-center ms-2',
-                )}
-              >
-                <p className="ms-1 fs-8 text-white mb-1">Xem tất cả</p>
-                <GridIcon width={40} height={40} className="text-white" />
-              </div>
-            )}
-          </div>
+          <BrandNormalLine
+            itemClassName={'border border-light'}
+            item={item}
+            key={item._id}
+          />
         );
       })}
+
+      <AppButton
+        onClick={() => handleViewMore(category._id)}
+        showNext
+        className={classnames(
+          'w-100 text-gray bg-white py-2 fs-7 rounded-2 fw-bolder mt-2 border-0',
+        )}
+      >
+        Xem tất cả
+      </AppButton>
       <AppBottomSheet
-        title={
-          <AppImage src={helper.getPhotoURL(brandSelected?.logo)} width="30%" />
-        }
+        title={category?.name}
         headerClass="pb-2 pt-2"
-        onClose={() => setVisible(false)}
+        onClose={() => {
+          setVisibleListBrand(false);
+        }}
         closeBtn
-        visible={visible}
+        visible={visibleListBrand}
         bodyClass="pt-1"
       >
-        {categories?.map((category) => (
-          <CategoryItem
-            category={category}
-            key={category._id}
-            onClick={() =>
-              navigator.pushPath(
-                `/category/${brandSelected._id}/${category._id}`,
-              )
-            }
-          />
-        ))}
+        <AppLoadMore
+          onLoadMore={() => {
+            getListBrandByCategory(
+              category._id,
+              listBrandByCategoryFilter?.nextPageToken,
+              true,
+            );
+          }}
+          loading={loading.effects['homeState/getListBrandByCategory']}
+          shouldLoadMore={!!listBrandByCategoryFilter.nextPageToken}
+        >
+          {listBrandByCategory?.map((item) => {
+            return (
+              <BrandNormalLine
+                itemClassName={'border border-light'}
+                item={item}
+                key={item._id}
+              />
+            );
+          })}
+        </AppLoadMore>
       </AppBottomSheet>
     </div>
   );

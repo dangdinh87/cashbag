@@ -6,6 +6,7 @@ import { AppConst } from '@/configs';
 import AppInitializer from './components/app/init';
 import { loading } from './components/app/loading-indicator/manager';
 import { toast } from './components/app/toast/manager';
+import { BottomSheetWrap } from './wrappers/bottom-sheet';
 
 const Wrapper = ({ children }) => {
   const [mounted, setMounted] = useState(false);
@@ -17,7 +18,11 @@ const Wrapper = ({ children }) => {
     return null;
   }
 
-  return <AppInitializer>{children}</AppInitializer>;
+  return (
+    <AppInitializer>
+      <BottomSheetWrap>{children}</BottomSheetWrap>
+    </AppInitializer>
+  );
 };
 
 export function rootContainer(container) {

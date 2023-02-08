@@ -11,12 +11,14 @@ export interface IHomeState {
   brandBonus?: any[];
   brandByCategory?: any[];
   categories?: any[];
+  listBrandByCategoryFilter?: {}
 }
 const initState: IHomeState = {
   homeBanners: [],
   brandBonus: [],
   brandByCategory: [],
   categories: [],
+  listBrandByCategoryFilter: {}
 };
 
 interface IHomeModel {
@@ -26,7 +28,7 @@ interface IHomeModel {
     getHomeBanners: Effect;
     getBrandBonus: Effect;
     getBrandByCategory: Effect;
-    // getProductByBrandBonus:
+    getListBrandByCategory: Effect;
   };
   reducers: {
     updateState: Reducer<IHomeState>;
@@ -71,6 +73,42 @@ const HomeModel: IHomeModel = {
         type: 'updateState',
         payload: {
           brandByCategory: response.data.data,
+        },
+      });
+    },
+    *getListBrandByCategory({ payload }, { call, put, select }) {
+      const response = yield call(serviceBrand.getListBrandByCategories, payload.data, payload.categoryID);
+      if (response?.code !== ResponseCode.success) {
+        return;
+      }
+
+      const { data } = response;
+      const { listBrandByCategory, listBrandByCategoryFilter } = yield select(
+        (_: any) => _.homeState,
+      );
+
+      if (payload.isLoadMore) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            listBrandByCategory: [...listBrandByCategory, ...data.data],
+            listBrandByCategoryFilter: {
+              ...listBrandByCategoryFilter,
+              nextPageToken: data.nextPageToken,
+            },
+          },
+        });
+        return;
+      }
+
+      yield put({
+        type: 'updateState',
+        payload: {
+          listBrandByCategory: data.data,
+          listBrandByCategoryFilter: {
+            nextPageToken: data.nextPageToken,
+
+          }
         },
       });
     },

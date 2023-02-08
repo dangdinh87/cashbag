@@ -62,7 +62,7 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
   };
 
   return (
-    <ScrollToTopOnMount trigger={location.pathname}>
+    // <ScrollToTopOnMount trigger={location.pathname}>
       <AppPage title={brandInfo?.name} className="p-3">
         <div className="rounded-2">
           <div className="w-100 position-relative">
@@ -170,7 +170,7 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
           </Section>
         )}
         <Section
-          className="mt-3"
+          className="mt-4"
           brand={brandInfo}
           mainTitle={'Hoàn Tiền Như Thế Nào'}
           title={'Đọc kỹ trước khi mua sắm'}
@@ -201,7 +201,7 @@ function BrandDetailPage({ dispatch, brandDetailState, loading }) {
           })}
         </Section>
       </AppPage>
-    </ScrollToTopOnMount>
+    // </ScrollToTopOnMount>
   );
 }
 

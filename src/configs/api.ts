@@ -117,6 +117,10 @@ export default {
       url: `/brand/zalo/click`,
       method: methods.post,
     }),
+    getListBrandByCategories: (categoryID): IApi => ({
+      url: `/brand/categories/${categoryID}/brands`,
+      method: methods.get,
+    }),
   },
   transaction: {
     getListTransaction: (): IApi => ({

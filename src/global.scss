@@ -2,10 +2,10 @@
 @import '../node_modules/bootstrap/scss/bootstrap';
 
 #app {
-  min-height                : 100%;
+  // min-height                : 100%;
   -webkit-overflow-scrolling: touch;
   font-family               : 'Inter';
-  scroll-behavior           : auto;
+  scroll-behavior           : auto !important;
 
   .has-overlay {
     overflow: hidden;
@@ -14,7 +14,9 @@
 
 html,
 body {
-  overflow-x: hidden; // NOTE: Important for hiding vertical scrollbar
+  // overflow-x: hidden;
+  // NOTE: Important for hiding vertical scrollbar
+  // But not keep prev scroll position
 }
 
 body {
@@ -32,6 +34,12 @@ body {
     display   : none;
   }
 }
+
+// @media (prefers-reduced-motion) {
+//   :root {
+//     scroll-behavior: auto !important;
+//   }
+// }
 
 .app-width {
   min-width: 1440px;

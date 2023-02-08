@@ -263,6 +263,12 @@ function navigateToRedirect(brand, url, isBrandBonus?) {
   });
 }
 
+
+function isColorHex(string) {
+  return /^#[0-9A-F]{6}$/i.test(string)
+}
+
+
 export default {
   downloadFileFromLink,
   getPhotoURL,
@@ -293,5 +299,6 @@ export default {
   filterEmptyProperties,
   isZalo,
   copyToClipboard,
-  navigateToRedirect
+  navigateToRedirect,
+  isColorHex
 }

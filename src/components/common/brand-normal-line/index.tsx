@@ -1,11 +1,35 @@
+import AppBottomSheet from '@/components/app/app-bottom-sheet';
 import AppImage from '@/components/app/app-image';
-import { ArrowRightIcon } from '@/configs/assets';
+import { ArrowRightIcon, GridIcon } from '@/configs/assets';
 import { formatter, helper, navigator } from '@/utils';
 import classnames from 'classnames';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'umi';
+import CategoryItem from '../category-item';
 
 function BrandNormalLine({ item, itemClassName }) {
+  const [visibleListCategory, setVisibleListCategory] = useState(false);
+  const dispatch = useDispatch();
+  const { categories: moreCategories } = useSelector(
+    (state: any) => state.brandDetailState,
+  );
+
   const { brand, categories } = item;
   const isCashback = brand?.statistic?.cashbackTotal > 0;
+
+  const getCategoriesByBrand = (brandId) => {
+    dispatch({
+      type: 'brandDetailState/getCategoriesByBrand',
+      payload: {
+        brandId,
+      },
+    });
+  };
+
+  const handleShowListCategories = (brand) => {
+    setVisibleListCategory(true);
+    getCategoriesByBrand(brand._id);
+  };
 
   return (
     <div
@@ -76,6 +100,39 @@ function BrandNormalLine({ item, itemClassName }) {
           </div>
         );
       })}
+      {categories?.length > 1 && (
+        <div
+          onClick={() => handleShowListCategories(brand)}
+          style={{
+            width: 105,
+            height: 105,
+          }}
+          className={classnames(
+            'flex-shrink-0 bg-primary rounded-2 d-flex flex-column justify-content-center align-items-center ms-2',
+          )}
+        >
+          <p className="ms-1 fs-8 text-white mb-1">Xem tất cả</p>
+          <GridIcon width={40} height={40} className="text-white" />
+        </div>
+      )}
+      <AppBottomSheet
+        title={<AppImage src={helper.getPhotoURL(brand?.logo)} width="30%" />}
+        headerClass="pb-2 pt-2"
+        onClose={() => setVisibleListCategory(false)}
+        closeBtn
+        visible={visibleListCategory}
+        bodyClass="pt-1"
+      >
+        {moreCategories?.map((category) => (
+          <CategoryItem
+            category={category}
+            key={category._id}
+            onClick={() =>
+              navigator.pushPath(`/category/${brand._id}/${category._id}`)
+            }
+          />
+        ))}
+      </AppBottomSheet>
     </div>
   );
 }

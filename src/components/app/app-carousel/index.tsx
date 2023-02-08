@@ -23,6 +23,7 @@ const AppCarousel: React.FC<Props> = ({
       className={className}
       style={style}
       controls={showControl && content?.length > 1}
+      indicators={showControl && content?.length > 1}
     >
       {content.map((item: any, index) => (
         <Carousel.Item key={index}>{item}</Carousel.Item>

@@ -107,6 +107,14 @@ const getLinkRedirect = (data: any) => {
   });
 };
 
+const getListBrandByCategories = (params: any, categoryID: string) => {
+  const api = ApiConst.brand.getListBrandByCategories(categoryID);
+  return request.call(api.url, {
+    method: api.method,
+    params,
+  });
+};
+
 export default {
   getBrandBonus,
   getBrandByCategory,
@@ -120,5 +128,6 @@ export default {
   getCategoriesByBrand,
   getDetailCategoryBrand,
   getGuidesByBrand,
-  getLinkRedirect
+  getLinkRedirect,
+  getListBrandByCategories
 };

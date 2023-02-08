@@ -1,6 +1,7 @@
 import { ApiConst } from '@/configs';
 import { request } from 'umi';
 
+import { serviceZalo } from '@/services';
 import storage from './storage';
 
 export interface RequestOptions {
@@ -21,22 +22,14 @@ const timeout = 30000; // 30s
 const isTimeoutErr = (err: Error): boolean => {
   return err.toString() === `RequestError: timeout of ${timeout}ms exceeded`;
 };
-
 async function getDefaultOption(options: any) {
   const headers = ApiConst.getDefaultHeader();
-
+  // const { version } = await (serviceZalo.getAppInfo());
   let result: any = {
-    // ['os-name']: headers.osName,
-    // ['os-version']: headers.osVersion,
-    // PLATFORM: headers.platform,
-    // ['DEVICE-TYPE']: headers.deviceType,
-    // ['BROWSER-NAME']: headers.browserName,
-    // ['BROWSER-VERSION']: headers.browserVersion,
-    // ['App-Version']: headers.appVersion,
-    // ['App-Version-Code']: headers.appVersionCode,
-    // ...headers,
-    // version: 1.2,
+    Platform: 'zalo',
+    // AppVersion: version,
     ...options.headers,
+    ...headers
   };
   const { authToken } = await storage.getUserToken();
   if (authToken) {

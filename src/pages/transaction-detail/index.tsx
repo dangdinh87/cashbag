@@ -53,7 +53,7 @@ function TransactionDetail() {
       content: transactionDetail?.brand?.name,
     },
     {
-      title: 'Giá trì',
+      title: 'Giá trị',
       content: formatter.currency(transactionDetail?.transactionValue),
     },
     {

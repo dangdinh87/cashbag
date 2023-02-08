@@ -27,11 +27,12 @@ const AppBottomSheet: React.FC<Props> = (props) => {
   return (
     <Offcanvas
       className={classNames('rounded-top-3', styles.bottomSheet)}
-      scroll
       backdropClassName="offcanvas-backdrop"
       placement="bottom"
       show={visible}
       onHide={onClose}
+      enforceFocus
+      scroll={false}
     >
       {(title || closeBtn) && (
         <Offcanvas.Header className={classNames('px-3 py-2c', headerClass)}>

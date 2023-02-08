@@ -1,13 +1,14 @@
-import { LocationDescriptorObject } from 'history-with-query';
-import { history, isBrowser } from 'umi';
+import { LocationDescriptorObject } from "history-with-query";
+import { history, isBrowser } from "umi";
 
 const defaultState = { prev: location.pathname };
 
-function pushPath(path: string, state?: any): void {
+
+function pushPath(path: string, state?): void {
   if (!isBrowser()) {
     return;
   }
-  history.push(path, { ...defaultState, ...state });
+  history.push(path, { prev: location.pathname, ...state });
 }
 
 function pushLocation(location: LocationDescriptorObject): void {
@@ -16,10 +17,22 @@ function pushLocation(location: LocationDescriptorObject): void {
   }
   const statedLocation = {
     ...location,
-    state: { ...defaultState, ...location.state },
+    state: { prev: location.pathname, ...location.state },
   };
   history.push(statedLocation);
 }
+
+const goBack = () => {
+  if (!isBrowser()) {
+    return;
+  }
+  const prev = history.location.state?.["prev"];
+  if (prev) {
+    history.goBack();
+    return;
+  }
+  pushPath("/home");
+};
 
 function replacePath(path: string, state?: any): void {
   if (!isBrowser()) {
@@ -39,34 +52,9 @@ function replaceLocation(location: LocationDescriptorObject): void {
   history.replace(statedLocation);
 }
 
-const goBack = () => {
-  if (!isBrowser()) {
-    return;
-  }
-  const prev = history.location.state?.['prev'];
-  if (prev) {
-    history.goBack();
-    return;
-  }
-  pushPath('/home');
-};
-
-function redirectLogin() {
-  if (!isBrowser()) {
-    return;
-  }
-  pushLocation({
-    pathname: '/login-social',
-    // query: { redirect: window.location.href },
-  });
-}
-
 export default {
   pushPath,
   pushLocation,
   goBack,
-  redirectLogin,
-  replacePath,
-  replaceLocation,
-  defaultState,
+  replacePath, replaceLocation
 };
