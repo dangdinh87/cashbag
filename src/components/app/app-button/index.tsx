@@ -43,24 +43,26 @@ const AppButton: React.FC<Props> = (props) => {
       size={size}
     >
       <Row className="position-relative g-0 row-cols-auto align-items-center justify-content-center w-100 flex-nowrap">
-        {loading && (
+        {loading ? (
           <Spinner
             size="sm"
             role="status"
-            className="position-absolute start-0"
-            variant="white"
+            variant="primary"
             animation="border"
           />
-        )}
-        <div>
-          {icon && <span className="me-3">{icon}</span>}
-          {children}
-        </div>
-        {showNext && (
-          <ArrowRightIcon
-            className={classNames('end-0', nextClassName)}
-            stroke={nextColor}
-          />
+        ) : (
+          <>
+            <div>
+              {icon && <span className="me-3">{icon}</span>}
+              {children}
+            </div>
+            {showNext && (
+              <ArrowRightIcon
+                className={classNames('end-0', nextClassName)}
+                stroke={nextColor}
+              />
+            )}
+          </>
         )}
       </Row>
     </Button>

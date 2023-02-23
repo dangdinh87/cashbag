@@ -3,16 +3,22 @@ import { LogoIcon, SuccessIcon } from '@/configs/assets';
 import firebase from '@/utils/firebase';
 import React, { useEffect, useState } from 'react';
 import { Card, Modal } from 'react-bootstrap';
-import { connect, Dispatch, Loading } from 'umi';
+import { connect, Dispatch, IMainState, Loading } from 'umi';
 import AppButton from '../app-button';
 import AppImage from '../app-image';
 
 interface Props {
   dispatch: Dispatch;
   loading: Loading;
+  mainState: IMainState;
 }
-const AppInitializer: React.FC<Props> = ({ dispatch, loading, children }) => {
-  const [showGuide, setShowGuide] = useState(true);
+const AppInitializer: React.FC<Props> = ({
+  dispatch,
+  loading,
+  children,
+  mainState,
+}) => {
+  const { showOnboarding, loadingNewUser } = mainState;
   useEffect(() => {
     dispatch({
       type: 'mainState/initApp',
@@ -25,6 +31,15 @@ const AppInitializer: React.FC<Props> = ({ dispatch, loading, children }) => {
     return <></>;
   }
 
+  const closeModal = () => {
+    dispatch({
+      type: 'mainState/updateState',
+      payload: {
+        showOnboarding: false,
+      },
+    });
+  };
+
   const listInfo = [
     'Khám phá ưu đãi hoàn tiền đến 20% từ các thương hiệu uy tín trên Cashbag',
     'Hoàn tiền không giới hạn tại các thương hiệu ngày vàng',
@@ -36,7 +51,7 @@ const AppInitializer: React.FC<Props> = ({ dispatch, loading, children }) => {
       <Modal
         centered
         fullscreen
-        show={showGuide}
+        show={showOnboarding}
         contentClassName="bg-primary d-flex align-items-center justify-content-center p-3"
       >
         <LogoIcon
@@ -58,9 +73,11 @@ const AppInitializer: React.FC<Props> = ({ dispatch, loading, children }) => {
           ))}
         </Card>
         <AppButton
-          className="w-100 bg-white text-primary py-2 mt-3 fs-7"
+          className="w-100"
+          variant="outline-primary bg-white py-2c mt-3 fs-7"
           showNext
-          onClick={() => setShowGuide(false)}
+          onClick={closeModal}
+          loading={loadingNewUser}
         >
           Tiếp tục
         </AppButton>

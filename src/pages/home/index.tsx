@@ -59,7 +59,7 @@ function HomePage({ dispatch, homeState, loading }) {
         >
           <AppImage
             className="w-100 h-100 object-fit-cover"
-            src={helper.getPhotoURL(photo, 'md')}
+            src={helper.getPhotoURL(photo, 'sm')}
           />
         </Ratio>
       );

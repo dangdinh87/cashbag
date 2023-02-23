@@ -3,6 +3,7 @@ import './style.scss';
 import ReactDOM from 'react-dom';
 
 import AppLoadingIndicator from './';
+import OnBoarding from './load-onboarding';
 
 interface ILoadingManager {
   show(): void;
@@ -50,6 +51,17 @@ export class LoadingManager implements ILoadingManager {
       <AppLoadingIndicator show={!this.disabled && this.isLoading} />,
       this.containerRef,
     );
+  }
+
+  showModal(): void {
+    this.setupContainer();
+    this.isLoading = true;
+    this.renderCustom();
+    this.body.classList.add('overflow-hidden');
+  }
+
+  private renderCustom(): void {
+    ReactDOM.render(<OnBoarding show={!this.disabled} />, this.containerRef);
   }
 }
 
