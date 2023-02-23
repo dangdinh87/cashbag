@@ -48,12 +48,12 @@ function HomePage({ dispatch, homeState, loading }) {
 
   const homeBannerImages = homeBanners
     .sort(helper.sortByValue('order'))
-    .map((item: any) => {
+    .map((item: any, index: number) => {
       const firstPhoto = homeBanners[0].photo;
       const photo = item.photo;
       return (
         <Ratio
-          key={item._id}
+          key={`${item._id}-${index}`}
           className="rounded-2 mb-4 overflow-hidden"
           aspectRatio={firstPhoto.sizes.md.height / firstPhoto.sizes.md.width}
         >
@@ -71,8 +71,10 @@ function HomePage({ dispatch, homeState, loading }) {
 
   const brandByCategoryList = brandByCategory
     .sort(helper.sortByValue('order'))
-    .map((item) => {
-      return <BrandByCategorySection key={item._id} item={item} />;
+    .map((item, index) => {
+      return (
+        <BrandByCategorySection key={`${item._id}-${index}`} item={item} />
+      );
     });
 
   const handleClickSearch = () => navigator.pushPath('/search');

@@ -35,7 +35,9 @@
     "rooks": "^7.4.2",
     "sass-loader": "^7.0.1",
     "umi": "^3.5.35",
-    "zmp-sdk": "2.23.3"
+    "zmp-sdk": "2.23.3",
+    "firebase": "^9.5.0"
+
   },
   "devDependencies": {
     "@types/react": "^17.0.0",

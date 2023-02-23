@@ -1,5 +1,5 @@
-import AppTabGroup from '@/components/app-tab-group';
 import AppSpacer from '@/components/app/app-spacer';
+import AppTabGroup from '@/components/app/app-tab-group';
 import { navigator } from '@/utils';
 import { useEffect } from 'react';
 import { ListGroup, Spinner } from 'react-bootstrap';

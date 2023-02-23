@@ -66,12 +66,12 @@ function BrandByCategoryItem({ item }) {
           <p className="fs-6 text-gray fw-bolder">{category.name}</p>
         </div>
       </div>
-      {brands.map((item) => {
+      {brands.map((item, index) => {
         return (
           <BrandNormalLine
             itemClassName={'border border-light'}
             item={item}
-            key={item._id}
+            key={`${item._id}-${index}`}
           />
         );
       })}
@@ -106,12 +106,12 @@ function BrandByCategoryItem({ item }) {
           loading={loading.effects['homeState/getListBrandByCategory']}
           shouldLoadMore={!!listBrandByCategoryFilter.nextPageToken}
         >
-          {listBrandByCategory?.map((item) => {
+          {listBrandByCategory?.map((item, index) => {
             return (
               <BrandNormalLine
                 itemClassName={'border border-light'}
                 item={item}
-                key={item._id}
+                key={`${item._id}-${index}`}
               />
             );
           })}
