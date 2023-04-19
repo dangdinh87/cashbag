@@ -1,16 +1,13 @@
 import AppImage from '@/components/app/app-image';
 import AppSpacer from '@/components/app/app-spacer';
 import { ArrowRightIcon, CalendarIcon } from '@/configs/assets';
-import { serviceBrand } from '@/services';
 import { helper, navigator } from '@/utils';
-import { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
 import ProductListBrandBonus from './components/product-brand-bonus';
 import SellerItem from './components/seller-item';
 import ViewMoreSeller from './components/view-more';
-import { history } from 'umi';
 
-function BrandBonusSection({ brand }) {
+function BrandBonusSection({ brand, hideListProduct }) {
   const { products = [], totalProducts } = brand;
 
   const viewMoreBrand = () => {
@@ -72,7 +69,7 @@ function BrandBonusSection({ brand }) {
           Xem tất cả <ArrowRightIcon width={20} height={20} />
         </div>
       </div>
-      {totalProducts > 0 && (
+      {totalProducts > 0 && !hideListProduct && (
         <div className="mt-2">
           <AppSpacer className="bg-gray-300 mx-n3 mb-2" size={1} />
           <ProductListBrandBonus

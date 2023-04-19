@@ -41,9 +41,22 @@ const AppInitializer: React.FC<Props> = ({
   };
 
   const listInfo = [
-    'Khám phá ưu đãi hoàn tiền đến 20% từ các thương hiệu uy tín trên Cashbag',
-    'Hoàn tiền không giới hạn tại các thương hiệu ngày vàng',
-    'Được rút tiền hoàn về tài khoản ngân hàng của bạn',
+    {
+      title: 'Tiết kiệm hơn khi mua sắm online ',
+      content:
+        'Nhận hoàn tiền đến 20% khi mua sắm tại hơn 200 thương hiệu liên kết trên Cashbag',
+      photo: require('../../../assets/images/onboaring_1.png'),
+    },
+    {
+      title: 'Hoàn tiền thật, không hoàn xu',
+      content: 'Được rút tiền hoàn về tài khoản ngân hàng khi số dư đủ 70.000đ',
+      photo: require('../../../assets/images/onboaring_2.png'),
+    },
+    {
+      title: 'Đơn giản, dễ sử dụng',
+      content: 'Mua sắm và nhận hoàn tiền dễ dàng chỉ với 3 chạm',
+      photo: require('../../../assets/images/onboaring_3.png'),
+    },
   ];
 
   return (
@@ -60,15 +73,22 @@ const AppInitializer: React.FC<Props> = ({
           height="42px"
         />
         <AppImage
-          className="mt-3"
+          className="mt-3 object-fit-contain"
           src={AssetConst.image.splash}
-          style={{ maxWidth: 256, minHeight: 343 }}
+          style={{ maxWidth: 332, minHeight: 332 }}
         />
         <Card className="p-3 mt-3">
           {listInfo.map((item, index) => (
-            <div className="d-flex align-items-center justify-content-start py-1">
-              <SuccessIcon className="flex-shrink-0" />
-              <p className="text-dark ms-3 fs-8">{item}</p>
+            <div className="text-center text-primary">
+              <div className="d-flex align-items-center justify-content-center pt-1">
+                <AppImage
+                  className="flex-shrink-0 object-fit-cover"
+                  src={item.photo}
+                  style={{ width: 22 }}
+                />
+                <p className=" ms-2 fs-6 fw-bold">{item.title}</p>
+              </div>
+              <p className='fs-7'>{item.content}</p>
             </div>
           ))}
         </Card>

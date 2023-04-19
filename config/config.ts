@@ -33,14 +33,13 @@ export default defineConfig({
     'process.env.API_ENDPOINT': 'https://svc.cashbag.vn/api',
 
     //Firebase
-    'process.env.FB_API_KEY': 'AIzaSyDFDA2Dx93ZOoM-1FNb5o6sb7IifZUO9vQ',
-    'process.env.FB_AUTH_DOMAIN': 'cashbag-12db4.firebaseapp.com',
-    'process.env.FB_PROJECT_ID': 'cashbag-12db4',
-    'process.env.FB_STORAGE_BUCKET': 'cashbag-12db4.appspot.com',
-    'process.env.FB_MESSAGING_SENDER': '583547103918',
-    'process.env.FB_APP_ID': '1:583547103918:web:038c884d4c7298bb315b3f',
-    'process.env.FB_MEASUREMENT_ID': 'G-35V3MJFTBX',
-    'process.env.FB_DATABASE_URL': 'https://cashbag-12db4.firebaseio.com',
+    'process.env.FB_API_KEY': 'AIzaSyDMHt5WSZ4y6Te1i2KbhyeqY8NeggN9w8I',
+    'process.env.FB_AUTH_DOMAIN': 'cashbag-miniapp.firebaseapp.com',
+    'process.env.FB_PROJECT_ID': 'cashbag-miniapp',
+    'process.env.FB_STORAGE_BUCKET': 'cashbag-miniapp.appspot.com',
+    'process.env.FB_MESSAGING_SENDER': 'miniapp',
+    'process.env.FB_APP_ID': '1:926352190108:web:62083a6b79d70e7b9d1b59',
+    'process.env.FB_MEASUREMENT_ID': 'G-HEYGH60MWP',
   },
   headScripts: [
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js',

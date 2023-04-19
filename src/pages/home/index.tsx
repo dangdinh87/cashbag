@@ -1,7 +1,6 @@
 import AppCarousel from '@/components/app/app-carousel';
 import AppImage from '@/components/app/app-image';
 import Header from '@/components/app/header';
-import useKeepPositionScroll from '@/hooks/useKeepPosition';
 import { helper, navigator } from '@/utils';
 import { useEffect } from 'react';
 import { Ratio } from 'react-bootstrap';
@@ -66,7 +65,7 @@ function HomePage({ dispatch, homeState, loading }) {
     });
 
   const brandBonusList = brandBonus.map((brand: any) => {
-    return <BrandBonusSection key={brand._id} brand={brand} />;
+    return <BrandBonusSection key={brand._id} brand={brand} hideListProduct />;
   });
 
   const brandByCategoryList = brandByCategory

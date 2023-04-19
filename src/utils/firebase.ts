@@ -10,7 +10,6 @@ function initFirebaseApp(callback?) {
     messagingSenderId: process.env.FB_MESSAGING_SENDER,
     appId: process.env.FB_APP_ID,
     measurementId: process.env.FB_MEASUREMENT_ID,
-    databaseURL: process.env.FB_DATABASE_URL,
   };
 
   // Initialize Firebase

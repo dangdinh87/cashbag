@@ -22,6 +22,10 @@ export default {
   image: {
     emptyOrder: require('@/assets/images/photo_order_empty.jpg'),
     redirectLogo: require('@/assets/images/redirect_logo.png'),
-    splash: 'https://media.sellycdn.net/files/md_cb.png',
+    splash: 'https://cdn.cashbag.vn/md_139204253841_1681902507558.png',
+
+    onBoarding1 : require('@/assets/images/photo_order_empty.jpg'),
+    onBoarding2 : require('@/assets/images/photo_order_empty.jpg'),
+    onBoarding3 : require('@/assets/images/photo_order_empty.jpg'),
   },
 };
