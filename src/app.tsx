@@ -7,6 +7,7 @@ import AppInitializer from './components/app/init';
 import { loading } from './components/app/loading-indicator/manager';
 import { toast } from './components/app/toast/manager';
 import { BottomSheetWrap } from './wrappers/bottom-sheet';
+import { serviceZalo } from './services';
 
 const Wrapper = ({ children }) => {
   const [mounted, setMounted] = useState(false);
@@ -30,15 +31,8 @@ export function rootContainer(container) {
 }
 
 export function render(oldRender) {
-  api.login({
-    success: () => {
-      oldRender();
-      console.log('Login zalo success');
-    },
-    fail: (error) => {
-      console.log(error);
-    },
-  });
+  serviceZalo.login(oldRender());
+  console.log('login zalo success');
 }
 
 const timeout = 30000; // 30s

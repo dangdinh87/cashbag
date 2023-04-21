@@ -53,8 +53,8 @@ const AppInitializer: React.FC<Props> = ({
       photo: require('../../../assets/images/onboaring_2.png'),
     },
     {
-      title: 'Đơn giản, dễ sử dụng',
-      content: 'Mua sắm và nhận hoàn tiền dễ dàng chỉ với 3 chạm',
+      title: 'Hỗ trợ 24/7',
+      content: 'Cho phép xác nhận khách hàng qua số điện thoại để Cashbag phục vụ tốt nhất',
       photo: require('../../../assets/images/onboaring_3.png'),
     },
   ];

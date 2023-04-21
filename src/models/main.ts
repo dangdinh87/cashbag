@@ -52,9 +52,9 @@ const MainModel: IMainModel = {
     // NOTE: For initialize home page after when SSR is applied for main app. Temporary unused!!
     *initApp({ callback }, { call, put }) {
       yield call(serviceZalo.initZalo);
-      const zaloAppData = yield call(serviceZalo.getAppData);
-      yield put({ type: 'updateState', payload: { zaloAppData } });
-      yield put({ type: 'getAppData' });
+      // const zaloAppData = yield call(serviceZalo.getAppData);
+      // yield put({ type: 'updateState', payload: { zaloAppData } });
+      // yield put({ type: 'getAppData' });
       const { authToken } = yield call(storage.getUserToken);
       if (!authToken) {
         yield put({

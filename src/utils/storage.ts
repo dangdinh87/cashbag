@@ -1,6 +1,6 @@
 import { isBrowser } from 'umi';
 import { v4 as uuidv4 } from 'uuid';
-import api from 'zmp-sdk';
+import { getStorage, setStorage, removeStorage } from 'zmp-sdk/apis';
 
 import { AppConst } from '@/configs';
 
@@ -10,11 +10,8 @@ import { helper } from './';
  * Get user token from storage
  */
 const getUserToken = (): string | any => {
-  if (!isBrowser()) {
-    return null;
-  }
   if (helper.isZalo()) {
-    return api.getStorage({
+    return getStorage({
       keys: [AppConst.localStorage.authToken],
       fail: (error) => {
         console.log(error);
@@ -37,7 +34,7 @@ const getUserToken = (): string | any => {
 const setUserToken = (token: string) => {
   if (helper.isZalo()) {
     console.log('setUserToken', token);
-    return api.setStorage({
+    return setStorage({
       data: {
         [AppConst.localStorage.authToken]: token,
       },
@@ -60,7 +57,7 @@ const clearUserToken = () => {
   }
   if (helper.isZalo()) {
     console.log('clearUserToken');
-    return api.removeStorage({
+    return removeStorage({
       keys: [AppConst.localStorage.authToken],
       fail: (error) => {
         console.log(error);

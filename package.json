@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "umi dev",
-    "build": "umi build",
+    "build": "umi build && zmp deploy",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
@@ -35,7 +35,7 @@
     "rooks": "^7.4.2",
     "sass-loader": "^7.0.1",
     "umi": "^3.5.35",
-    "zmp-sdk": "2.23.3",
+    "zmp-sdk": "2.25.6",
     "firebase": "^9.5.0"
 
   },
