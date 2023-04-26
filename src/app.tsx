@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { isBrowser, RequestConfig } from 'umi';
-import api from 'zmp-sdk';
 
 import { AppConst } from '@/configs';
 import AppInitializer from './components/app/init';
 import { loading } from './components/app/loading-indicator/manager';
 import { toast } from './components/app/toast/manager';
-import { BottomSheetWrap } from './wrappers/bottom-sheet';
+import { RequestPhoneWrap } from './wrappers/request-phone';
 import { serviceZalo } from './services';
 
 const Wrapper = ({ children }) => {
@@ -21,7 +20,7 @@ const Wrapper = ({ children }) => {
 
   return (
     <AppInitializer>
-      <BottomSheetWrap>{children}</BottomSheetWrap>
+      <RequestPhoneWrap>{children}</RequestPhoneWrap>
     </AppInitializer>
   );
 };

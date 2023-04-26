@@ -2,7 +2,6 @@ import * as apis from 'zmp-sdk/apis';
 
 import { toast } from '@/components/app/toast/manager';
 import { AppConst, ZaloConst } from '@/configs';
-import { getStorage } from 'zmp-sdk';
 import { helper } from '@/utils';
 
 async function initZalo() {
@@ -10,12 +9,16 @@ async function initZalo() {
     type: 'home',
   });
 }
-async function getPhoneNumber() {
-  const { number } = await apis.getPhoneNumber({
+async function getPhoneNumber(callback) {
+  const { number, token } = await apis.getPhoneNumber({
+    success: () => {
+      callback?.();
+    },
     fail: (error) => {
-      console.log(error);
+      callback?.();
     },
   });
+  console.log(number, token);
   return number;
 }
 
@@ -29,8 +32,6 @@ async function openChat() {
     },
   });
 }
-
-
 
 function getAppData() {
   if (helper.isZalo()) {
@@ -55,12 +56,11 @@ function getAppData() {
       ),
     });
   });
-
 }
 
 function clearAppData() {
   return apis.clearStorage({
-    success: (data) => {
+    success: (data: any) => {
       console.log('success');
     },
     fail: (error) => {
@@ -78,7 +78,7 @@ async function setOnBoarded() {
   });
 }
 
-async function login(callback) {
+async function login(callback: () => void) {
   return await apis.login({
     success: (data) => {
       callback?.();
@@ -97,10 +97,10 @@ async function getAccessToken() {
   });
 }
 
-function openOutApp(url) {
+function openOutApp(url: any) {
   return apis.openOutApp({
     url,
-    fail: (error) => {
+    fail: (error: any) => {
       console.log(error);
     },
   });
@@ -113,9 +113,7 @@ async function getAppInfo() {
     },
   });
   return { version, name };
-
 }
-
 
 export default {
   initZalo,
@@ -127,5 +125,5 @@ export default {
   login,
   getAccessToken,
   openOutApp,
-  getAppInfo
+  getAppInfo,
 };

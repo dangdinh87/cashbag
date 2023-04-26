@@ -1,9 +1,10 @@
 import { AssetConst } from '@/configs';
-import { LogoIcon, SuccessIcon } from '@/configs/assets';
+import { LogoIcon } from '@/configs/assets';
 import firebase from '@/utils/firebase';
-import React, { useEffect, useState } from 'react';
+import { useContextRequestPhone } from '@/wrappers/request-phone';
+import React, { useEffect } from 'react';
 import { Card, Modal } from 'react-bootstrap';
-import { connect, Dispatch, IMainState, Loading } from 'umi';
+import { Dispatch, IMainState, Loading, connect } from 'umi';
 import AppButton from '../app-button';
 import AppImage from '../app-image';
 
@@ -19,6 +20,7 @@ const AppInitializer: React.FC<Props> = ({
   mainState,
 }) => {
   const { showOnboarding, loadingNewUser } = mainState;
+  const { handleRequestPhone } = useContextRequestPhone();
   useEffect(() => {
     dispatch({
       type: 'mainState/initApp',
@@ -54,7 +56,8 @@ const AppInitializer: React.FC<Props> = ({
     },
     {
       title: 'Hỗ trợ 24/7',
-      content: 'Cho phép xác nhận khách hàng qua số điện thoại để Cashbag phục vụ tốt nhất',
+      content:
+        'Cho phép xác nhận khách hàng qua số điện thoại để Cashbag phục vụ tốt nhất',
       photo: require('../../../assets/images/onboaring_3.png'),
     },
   ];
@@ -79,7 +82,7 @@ const AppInitializer: React.FC<Props> = ({
         />
         <Card className="p-3 mt-3">
           {listInfo.map((item, index) => (
-            <div className="text-center text-primary">
+            <div className="text-center text-primary" key={index}>
               <div className="d-flex align-items-center justify-content-center pt-1">
                 <AppImage
                   className="flex-shrink-0 object-fit-cover"
@@ -88,7 +91,7 @@ const AppInitializer: React.FC<Props> = ({
                 />
                 <p className=" ms-2 fs-6 fw-bold">{item.title}</p>
               </div>
-              <p className='fs-7'>{item.content}</p>
+              <p className="fs-7">{item.content}</p>
             </div>
           ))}
         </Card>
@@ -96,7 +99,10 @@ const AppInitializer: React.FC<Props> = ({
           className="w-100"
           variant="outline-primary bg-white py-2c mt-3 fs-7"
           showNext
-          onClick={closeModal}
+          onClick={() => {
+            handleRequestPhone();
+            closeModal();
+          }}
           loading={loadingNewUser}
         >
           Tiếp tục

@@ -11,12 +11,14 @@ import {
 import { navigator, storage } from '@/utils';
 
 export interface IMainState {
+  appData: any;
   // user: IUser;
   isLoggedIn: boolean;
   cartChanged: boolean;
   zaloAppData: any;
   showOnboarding?: boolean;
   loadingNewUser?: boolean;
+  isPhoneRequested: boolean;
 }
 
 const initState: any = {
@@ -30,6 +32,7 @@ const initState: any = {
   productCities: [],
   showOnboarding: false,
   loadingNewUser: false,
+  isPhoneRequested: false,
 };
 
 export interface IMainModel {
@@ -68,7 +71,6 @@ const MainModel: IMainModel = {
         yield call(storage.setUserToken, data.token);
       }
       navigator.pushPath('/home');
-      yield put({ type: 'updateState', payload: { loadingNewUser: false } });
     },
 
     *openZaloChat(_, { call }) {
@@ -82,7 +84,7 @@ const MainModel: IMainModel = {
         ...action.payload,
       };
     },
-    clearState(state, action) {
+    clearState(state) {
       return {
         ...initState,
         appData: state.appData,

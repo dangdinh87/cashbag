@@ -1,9 +1,8 @@
 import AppImage from '@/components/app/app-image';
 import AppPage from '@/components/app/app-page';
-import { AppConst } from '@/configs';
 import { ArrowRightIcon, HandIcon, WalletIcon } from '@/configs/assets';
-import { formatter, helper } from '@/utils';
-import React, { useEffect } from 'react';
+import { formatter } from '@/utils';
+import { useEffect } from 'react';
 import { ListGroup, Ratio } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'umi';
 

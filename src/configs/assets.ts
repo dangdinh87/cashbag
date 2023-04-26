@@ -15,6 +15,7 @@ export { ReactComponent as NoSuccessIcon } from '@/assets/icons/ic_no_success.sv
 export { ReactComponent as WalletIcon } from '@/assets/icons/ic_wallet.svg';
 export { ReactComponent as HandIcon } from '@/assets/icons/ic_hand.svg';
 export { ReactComponent as ContactIcon } from '@/assets/icons/ic_contact.svg';
+export { ReactComponent as PhoneInfoIcon } from '@/assets/icons/ic_phone_request.svg';
 export default {
   bg: {
     bgDefault: require('@/assets/backgrounds/bg_default_placeholder.svg'),
@@ -24,8 +25,8 @@ export default {
     redirectLogo: require('@/assets/images/redirect_logo.png'),
     splash: 'https://cdn.cashbag.vn/md_139204253841_1681902507558.png',
 
-    onBoarding1 : require('@/assets/images/photo_order_empty.jpg'),
-    onBoarding2 : require('@/assets/images/photo_order_empty.jpg'),
-    onBoarding3 : require('@/assets/images/photo_order_empty.jpg'),
+    onBoarding1: require('@/assets/images/photo_order_empty.jpg'),
+    onBoarding2: require('@/assets/images/photo_order_empty.jpg'),
+    onBoarding3: require('@/assets/images/photo_order_empty.jpg'),
   },
 };

@@ -96,7 +96,8 @@ function HomePage({ dispatch, homeState, loading }) {
   );
 }
 
-export default connect(({ homeState, loading }: any) => ({
+export default connect(({ homeState, userState, loading }: any) => ({
   homeState,
+  userState,
   loading,
 }))(HomePage);

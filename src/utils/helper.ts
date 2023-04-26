@@ -26,7 +26,7 @@ const isInViewport = (element: any) => {
     rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <=
-    (window.innerHeight || document.documentElement.clientHeight) &&
+      (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 };
@@ -258,16 +258,14 @@ function navigateToRedirect(brand, url, isBrandBonus?) {
     state: {
       brand,
       url,
-      type: isBrandBonus ? 'brand_bonus' : ''
-    }
+      type: isBrandBonus ? 'brand_bonus' : '',
+    },
   });
 }
 
-
 function isColorHex(string) {
-  return /^#[0-9A-F]{6}$/i.test(string)
+  return /^#[0-9A-F]{6}$/i.test(string);
 }
-
 
 export default {
   downloadFileFromLink,
@@ -300,5 +298,5 @@ export default {
   isZalo,
   copyToClipboard,
   navigateToRedirect,
-  isColorHex
-}
+  isColorHex,
+};
