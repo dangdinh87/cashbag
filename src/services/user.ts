@@ -17,7 +17,16 @@ const getDetailUser = (params): any => {
   });
 };
 
+const verifyPhoneUser = (params): any => {
+  const api = ApiConst.user.verifyPhone();
+  return request.call(api.url, {
+    method: api.method,
+    params,
+  });
+};
+
 export default {
   loginZalo,
   getDetailUser,
+  verifyPhoneUser,
 };

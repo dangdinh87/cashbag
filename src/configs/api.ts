@@ -33,10 +33,11 @@ function getDefaultHeader() {
   }
   const deviceId = storage.getDeviceId();
   const splitted = appVersion.split('.');
-  const appVersionCode = `${Number(splitted[0]) * 10000 +
+  const appVersionCode = `${
+    Number(splitted[0]) * 10000 +
     Number(splitted[1]) * 100 +
     Number(splitted[2])
-    }`;
+  }`;
 
   const query = {
     apiVersion,
@@ -140,6 +141,10 @@ export default {
     getUserDetail: (): IApi => ({
       url: '/user/me',
       method: methods.get,
+    }),
+    verifyPhone: (): IApi => ({
+      url: '/user/me/verify-phone-zalo',
+      method: methods.post,
     }),
   },
 };

@@ -72,7 +72,6 @@ const MainModel: IMainModel = {
       }
       navigator.pushPath('/home');
     },
-
     *openZaloChat(_, { call }) {
       yield call(serviceZalo.openChat);
     },

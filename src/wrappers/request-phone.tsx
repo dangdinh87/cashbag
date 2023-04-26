@@ -15,9 +15,10 @@ export function RequestPhoneWrap({ children }) {
   const [visible, setVisible] = useState<any>(<></>);
   const {
     mainState: { isPhoneRequested },
-    userState: { phone = '' },
+    userState,
   } = useSelector((state: any) => state);
   const dispatch = useDispatch();
+  const isVerifiedPhone = userState?.phone?.verified;
 
   const getUserDetail = () => {
     dispatch({
@@ -25,16 +26,12 @@ export function RequestPhoneWrap({ children }) {
     });
   };
 
-  // useEffect(() => {
-  //   setVisible(visible);
-  // }, [visible]);
-
   useEffect(() => {
-    // getUserDetail();
+    getUserDetail();
   }, []);
 
-  const handleRequestPhone = (callback) => {
-    if (isPhoneRequested || phone) {
+  const handleRequestPhone = (callback?) => {
+    if (isVerifiedPhone || isPhoneRequested) {
       callback?.();
       return;
     }
@@ -69,12 +66,13 @@ export function RequestPhoneWrap({ children }) {
     });
   };
 
-  const handleAllowGetPhoneUser = (callback) => {
+  const handleAllowGetPhoneUser = (callback?) => {
     updateStateRequestPhone();
     getPhoneNumber({
       success: async (data) => {
         // xử lý khi gọi api thành công
         let { token, number } = data;
+        console.log('handleAllowGetPhoneUser', token, number);
         // xử lý cho trường hợp sử dụng phiên bản Zalo mới (phiên bản lớn hơn 23.02.01)
         if (number) {
           await updatePhoneUser(token);
