@@ -13,7 +13,6 @@ function TransactionPage() {
   const { transactionList = [] } = transactionState;
   const dispatch = useDispatch();
   const { query } = useLocation() as any;
-
   const getListOrder = (status?, pageToken?, isLoadMore?) => {
     dispatch({
       type: 'transactionState/getListOrder',

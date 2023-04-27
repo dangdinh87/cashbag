@@ -1,7 +1,6 @@
 import AppConfirmModal from '@/components/app/app-confirm-modal';
 import { PhoneInfoIcon } from '@/configs/assets';
-import { serviceZalo } from '@/services';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'umi';
 import { getPhoneNumber } from 'zmp-sdk/apis';
 
@@ -19,16 +18,6 @@ export function RequestPhoneWrap({ children }) {
   } = useSelector((state: any) => state);
   const dispatch = useDispatch();
   const isVerifiedPhone = userState?.phone?.verified;
-
-  const getUserDetail = () => {
-    dispatch({
-      type: 'userState/getUserDetail',
-    });
-  };
-
-  useEffect(() => {
-    getUserDetail();
-  }, []);
 
   const handleRequestPhone = (callback?) => {
     if (isVerifiedPhone || isPhoneRequested) {
@@ -53,8 +42,20 @@ export function RequestPhoneWrap({ children }) {
     );
   };
 
-  const updatePhoneUser = (number) => {
-    console.log('call api server', number);
+  const updatePhoneUser = (token) => {
+    dispatch({
+      type: 'userState/requestPhoneUser',
+      payload: {
+        query: {
+          token,
+        },
+      },
+      callback: () => {
+        dispatch({
+          type: 'userState/getUserDetail',
+        });
+      },
+    });
   };
 
   const updateStateRequestPhone = () => {
@@ -71,10 +72,10 @@ export function RequestPhoneWrap({ children }) {
     getPhoneNumber({
       success: async (data) => {
         // xử lý khi gọi api thành công
-        let { token, number } = data;
-        console.log('handleAllowGetPhoneUser', token, number);
+        let { token } = data;
+        console.log('handleAllowGetPhoneUser', token);
         // xử lý cho trường hợp sử dụng phiên bản Zalo mới (phiên bản lớn hơn 23.02.01)
-        if (number) {
+        if (token) {
           await updatePhoneUser(token);
           setVisible(<></>);
           callback?.();

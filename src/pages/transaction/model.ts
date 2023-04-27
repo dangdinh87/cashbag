@@ -2,8 +2,8 @@ import { serviceTransaction } from '@/services';
 
 const initState = {
   transactionList: [],
-  transactionDetail: {}
-}
+  transactionDetail: {},
+};
 
 const TransactionModel = {
   namespace: 'transactionState',
@@ -12,7 +12,7 @@ const TransactionModel = {
     *getListOrder({ payload }, { call, put }) {
       const response = yield call(
         serviceTransaction.getListTransaction,
-        payload.data
+        payload.data,
       );
       if (!response) {
         return;
@@ -20,7 +20,7 @@ const TransactionModel = {
       yield put({
         type: 'updateState',
         payload: {
-          transactionList: response.data.transactions,
+          transactionList: response?.data?.transactions,
         },
       });
     },

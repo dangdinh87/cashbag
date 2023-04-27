@@ -1,4 +1,3 @@
-
 import formatter from './formatter';
 import helper from './helper';
 import logger from './logger';
@@ -8,6 +7,7 @@ import numberToWords from './number-to-words';
 import request from './request';
 import socket from './socket';
 import storage from './storage';
+import checksum from './checksum';
 
 export {
   request,
@@ -19,4 +19,5 @@ export {
   logger,
   numberToWords,
   socket,
+  checksum,
 };

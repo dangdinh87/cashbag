@@ -14,9 +14,16 @@ const UserModel = {
       yield put({
         type: 'updateState',
         payload: {
-          user: response.data.user,
+          user: response?.data?.user,
         },
       });
+    },
+    *requestPhoneUser({ payload, callback }, { call, put }) {
+      const response = yield call(serviceUser.verifyPhoneUser, payload.query);
+      if (!response) {
+        return;
+      }
+      callback?.();
     },
   },
   reducers: {
