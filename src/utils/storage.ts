@@ -131,6 +131,44 @@ function generateDeviceId() {
   return localStorage.setItem(AppConst.localStorage.deviceId, generatedId);
 }
 
+const getShowPhoneRequested = (): string | any => {
+  if (helper.isZalo()) {
+    return getStorage({
+      keys: [AppConst.localStorage.isShowPhoneRequest],
+      fail: (error) => {
+        console.log(error);
+      },
+    });
+  }
+  return new Promise((resolve, reject) => {
+    resolve({
+      [AppConst.localStorage.isShowPhoneRequest]: localStorage.getItem(
+        AppConst.localStorage.isShowPhoneRequest,
+      ),
+    });
+  });
+};
+
+const setShowPhoneRequested = () => {
+  if (helper.isZalo()) {
+    console.log('setShowPhoneRequest', true);
+    return setStorage({
+      data: {
+        [AppConst.localStorage.isShowPhoneRequest]: true,
+      },
+      fail: (error) => {
+        console.log(error);
+      },
+    });
+  } else {
+    return new Promise((resolve, reject) => {
+      console.log('setShowPhoneRequest', true);
+      localStorage.setItem(AppConst.localStorage.isShowPhoneRequest, 'true');
+      return resolve({});
+    });
+  }
+};
+
 export default {
   getUserToken,
   setUserToken,
@@ -144,4 +182,6 @@ export default {
   removeDeliveryInfo,
   getDeviceId,
   generateDeviceId,
+  getShowPhoneRequested,
+  setShowPhoneRequested,
 };

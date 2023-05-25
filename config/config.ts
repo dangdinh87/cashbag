@@ -30,7 +30,7 @@ export default defineConfig({
   title: false,
   define: {
     'process.env.ZALO_OA_ID': '2193444627448645149',
-    'process.env.API_ENDPOINT': 'https://svc.cashbag.dev/api',
+    'process.env.API_ENDPOINT': 'https://svc.cashbag.vn/api',
     'process.env.CHCEKSUM_SECRET_KEY': 'qRUcQu39Z2elzW8iV65QZsBe',
 
     //Firebase

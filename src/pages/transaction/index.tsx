@@ -6,8 +6,10 @@ import { ListGroup, Spinner } from 'react-bootstrap';
 import { useDispatch, useLocation, useSelector } from 'umi';
 import EmptyTransaction from './components/transaction-empty';
 import TransactionItem from './components/transaction-item';
+import { useContextRequestPhone } from '@/wrappers/request-phone';
 
 function TransactionPage() {
+  const { handleRequestPhone } = useContextRequestPhone();
   const state = useSelector((state: any) => state);
   const { loading, transactionState } = state;
   const { transactionList = [] } = transactionState;
@@ -33,7 +35,7 @@ function TransactionPage() {
   };
 
   const handleClickTransaction = (transactionId) => {
-    navigator.pushPath(`/transaction/${transactionId}`);
+    handleRequestPhone(navigator.pushPath(`/transaction/${transactionId}`));
   };
 
   useEffect(() => {

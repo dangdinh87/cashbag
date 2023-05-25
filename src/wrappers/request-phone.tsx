@@ -1,5 +1,6 @@
 import AppConfirmModal from '@/components/app/app-confirm-modal';
 import { PhoneInfoIcon } from '@/configs/assets';
+import { storage } from '@/utils';
 import { createContext, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'umi';
 import { getPhoneNumber } from 'zmp-sdk/apis';
@@ -19,8 +20,9 @@ export function RequestPhoneWrap({ children }) {
   const dispatch = useDispatch();
   const isVerifiedPhone = userState?.phone?.verified;
 
-  const handleRequestPhone = (callback?) => {
-    if (isVerifiedPhone || isPhoneRequested) {
+  const handleRequestPhone = async (callback?) => {
+    const { isShowPhoneRequest } = await storage.getShowPhoneRequested();
+    if (isVerifiedPhone || isShowPhoneRequest || isPhoneRequested) {
       callback?.();
       return;
     }
@@ -67,13 +69,13 @@ export function RequestPhoneWrap({ children }) {
     });
   };
 
-  const handleAllowGetPhoneUser = (callback?) => {
+  const handleAllowGetPhoneUser = async (callback?) => {
+    await storage.setShowPhoneRequested();
     updateStateRequestPhone();
     getPhoneNumber({
       success: async (data) => {
         // xử lý khi gọi api thành công
         let { token } = data;
-        console.log('handleAllowGetPhoneUser', token);
         // xử lý cho trường hợp sử dụng phiên bản Zalo mới (phiên bản lớn hơn 23.02.01)
         if (token) {
           await updatePhoneUser(token);

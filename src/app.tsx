@@ -19,9 +19,9 @@ const Wrapper = ({ children }) => {
   }
 
   return (
-    <AppInitializer>
-      <RequestPhoneWrap>{children}</RequestPhoneWrap>
-    </AppInitializer>
+    <RequestPhoneWrap>
+      <AppInitializer>{children}</AppInitializer>
+    </RequestPhoneWrap>
   );
 };
 

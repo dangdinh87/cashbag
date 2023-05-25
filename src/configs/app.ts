@@ -59,5 +59,6 @@ export default {
     city: 'city',
     deviceId: 'deviceId',
     onBoarded: 'onBoarded',
+    isShowPhoneRequest: 'isShowPhoneRequest',
   },
 };
