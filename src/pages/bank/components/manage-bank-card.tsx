@@ -236,6 +236,7 @@ const BankCardManagement = ({
                 placeholder="Vui lòng nhập số tài khoản"
                 onChange={(e) => setValueForm('cardNumber', e.target.value)}
                 value={value['cardNumber']}
+                inputMode="numeric"
               />
             </div>
           </ListGroup.Item>
@@ -244,6 +245,7 @@ const BankCardManagement = ({
             <div className="w-100">
               <p className="fs-7">Tên chủ tài khoản</p>
               <FormControl
+                autoCapitalize="characters"
                 className="bg-transparent border-0 fw-bolder fs-7 p-0 rounded-0 text-primary my-1"
                 placeholder="Vui lòng nhập tên chủ tài khoản"
                 onChange={(e) => setValueForm('cardHolderName', e.target.value)}

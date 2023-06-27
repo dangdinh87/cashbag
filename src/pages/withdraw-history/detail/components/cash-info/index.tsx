@@ -3,7 +3,7 @@ import React from 'react';
 import { useIntl } from 'umi';
 
 interface Props {
-  withdrawDetail: IWithdraw;
+  withdrawDetail: any;
 }
 const CashInfo: React.FC<Props> = ({ withdrawDetail }) => {
   const { formatMessage } = useIntl();
@@ -23,13 +23,11 @@ const CashInfo: React.FC<Props> = ({ withdrawDetail }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending':
-        return 'orange';
-      case 'processed':
-        return 'dark';
+        return 'warning';
       case 'approved':
         return 'green';
       case 'rejected':
-        return 'red';
+        return 'danger';
     }
   };
 

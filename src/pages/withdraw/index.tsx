@@ -21,7 +21,7 @@ const WithDrawPage = () => {
   }
 
   const handleWithdrawSuccess = (requestId: string) => {
-    navigator.pushPath(`/withdraw-history/${requestId}`);
+    navigator.replacePath(`/withdraw-history/${requestId}`);
   };
 
   return (
