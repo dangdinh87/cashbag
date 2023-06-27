@@ -1,0 +1,18 @@
+.suffix {
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  padding: 7px 12px 7px 0;
+  // border: 1px solid transparent;
+}
+
+.suffixInput {
+  padding-right: 21px !important;
+  ::placeholder {
+    color: red;
+    font-size: 16px !important;
+  }
+}
+
+.numberInput::placeholder {
+}

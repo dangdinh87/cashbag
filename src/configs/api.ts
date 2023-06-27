@@ -147,4 +147,50 @@ export default {
       method: methods.post,
     }),
   },
+  bank: {
+    getBankCards: (): IApi => ({
+      url: '/withdraw/bank-cards',
+      method: methods.get,
+    }),
+    createBankCards: (): IApi => ({
+      url: '/withdraw/bank-cards',
+      method: methods.post,
+    }),
+    updateBankCards: (id: string): IApi => ({
+      url: `/withdraw/bank-cards/${id}`,
+      method: methods.put,
+    }),
+    deleteBankCards: (id: string): IApi => ({
+      url: `/withdraw/bank-cards/${id}`,
+      method: methods.delete,
+    }),
+    getBankList: (): IApi => ({
+      url: '/withdraw/banks',
+      method: methods.get,
+    }),
+    getBranchBankList: (brandId: string): IApi => ({
+      url: `/withdraw/banks/${brandId}/branches`,
+      method: methods.get,
+    }),
+  },
+  config: {
+    getAppData: (): IApi => ({
+      url: '/common/app-data',
+      method: methods.get,
+    }),
+  },
+  withdraw: {
+    createRequestWithdraw: (): IApi => ({
+      url: '/withdraw/withdraw-cash',
+      method: methods.post,
+    }),
+    getWithdrawCashList: (): IApi => ({
+      url: `/withdraw/withdraw-cash`,
+      method: methods.get,
+    }),
+    getWithdrawDetail: (withdrawId): IApi => ({
+      url: `/withdraw/withdraw-cash/${withdrawId}`,
+      method: methods.get,
+    }),
+  },
 };

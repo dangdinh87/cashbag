@@ -46,11 +46,9 @@ function TransactionDetail() {
     };
   }, []);
 
-  if (!transactionDetail) return <></>;
-
   const listInfo = [
     {
-      content: transactionDetail?.brand?.name,
+      content: <p className="fs-5">{transactionDetail?.brand?.name}</p>,
     },
     {
       title: 'Giá trị',
@@ -104,54 +102,64 @@ function TransactionDetail() {
 
   return (
     <AppPage title="Đơn hàng" className="bg-white">
-      <div className="p-3">
-        <Row>
-          <Col xs={'auto'}>
-            <OrderIcon width={20} />
-          </Col>
-          <Col className="px-1">
-            {listInfo.map((item: any, index: number) => (
-              <SectionItem
-                key={index}
-                color={AppConst.colorState.cashback[transactionDetail?.status]}
-                title={item.title}
-                content={item.content}
-                extraContent={item.extraContent}
-              />
-            ))}
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={'auto'}>
-            <OrderIcon width={20} />
-          </Col>
-          <Col className="px-1 fs-5 text-gray fw-bolder">
-            Quy trình hoàn tiền
-          </Col>
-        </Row>
-        <Row className="px-1 mt-2">
-          <Timeline>
-            {handleListBeforeRender()
-              ?.reverse()
-              ?.map((history) => {
-                return (
-                  <Timeline.Item
-                    key={history._id}
-                    dot={history?.isBlock ? <NoSuccessIcon /> : <SuccessIcon />}
-                  >
-                    <div className="text-gray ms-1">
-                      <p className="fs-8 fw-bold ">{history.title}</p>
-                      <p className="fs-9 ">
-                        {history.defaultText ||
-                          formatter.dateTime(history.createdAt)}
-                      </p>
-                    </div>
-                  </Timeline.Item>
-                );
-              })}
-          </Timeline>
-        </Row>
-      </div>
+      {transactionDetail && (
+        <div className="p-3">
+          <Row>
+            <Col xs={'auto'}>
+              <OrderIcon width={20} className="mt-1 pt-1" />
+            </Col>
+            <Col className="px-1">
+              {listInfo.map((item: any, index: number) => (
+                <SectionItem
+                  key={index}
+                  color={
+                    AppConst.colorState.cashback[transactionDetail?.status]
+                  }
+                  title={item.title}
+                  content={item.content}
+                  extraContent={item.extraContent}
+                />
+              ))}
+            </Col>
+          </Row>
+          <Row className="align-items-center">
+            <Col xs={'auto'}>
+              <OrderIcon width={20} />
+            </Col>
+            <Col className="px-1 fs-5 text-gray fw-bolder">
+              Quy trình hoàn tiền
+            </Col>
+          </Row>
+          <Row className="px-1 mt-3 m-0">
+            <Timeline className="px-0">
+              {handleListBeforeRender()
+                ?.reverse()
+                ?.map((history) => {
+                  return (
+                    <Timeline.Item
+                      key={history._id}
+                      dot={
+                        history?.isBlock ? (
+                          <NoSuccessIcon />
+                        ) : (
+                          <SuccessIcon color="#23C6C8" />
+                        )
+                      }
+                    >
+                      <div className="text-gray ms-1">
+                        <p className="fs-8 fw-bold ">{history.title}</p>
+                        <p className="fs-9 ">
+                          {history.defaultText ||
+                            formatter.dateTime(history.createdAt)}
+                        </p>
+                      </div>
+                    </Timeline.Item>
+                  );
+                })}
+            </Timeline>
+          </Row>
+        </div>
+      )}
     </AppPage>
   );
 }

@@ -8,8 +8,7 @@ interface Props extends ImageProps {
   placeholder?: any;
 }
 const AppImage: React.FC<Props> = (props) => {
-  const { handleError = true, placeholder = AssetConst.bg.imagePlaceholder } =
-    props;
+  const { handleError = true, placeholder = AssetConst.bg.bgDefault } = props;
   return (
     <Image
       {...props}

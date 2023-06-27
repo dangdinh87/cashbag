@@ -1,31 +1,45 @@
-import AppConfirmModal from '@/components/app/app-confirm-modal';
-import { PhoneInfoIcon } from '@/configs/assets';
-import { storage } from '@/utils';
-import { createContext, useContext, useState } from 'react';
-import { useDispatch, useSelector } from 'umi';
+import { createContext, useContext, useState, ReactNode } from 'react';
 import { getPhoneNumber } from 'zmp-sdk/apis';
 
-const RequestPhoneContext = createContext({}) as any;
+import { RootState } from '@/interface/common';
+import AppConfirmModal from '@/components/app/app-confirm-modal';
+import { PhoneInfoIcon } from '@/configs/assets';
+import { serviceZalo } from '@/services';
+import { useDispatch, useSelector } from 'umi';
+import { toast } from '@/components/app/toast/manager';
 
-export function useContextRequestPhone() {
-  return useContext(RequestPhoneContext) as any;
+type RequestPhoneContextType = {
+  handleRequestPhone: (callback?: () => void, forceRequest?: boolean) => void;
+};
+
+const RequestPhoneContext = createContext<RequestPhoneContextType>({
+  handleRequestPhone: () => {},
+});
+
+export function useContextRequestPhone(): RequestPhoneContextType {
+  return useContext(RequestPhoneContext);
 }
 
-export function RequestPhoneWrap({ children }) {
-  const [visible, setVisible] = useState<any>(<></>);
+type RequestPhoneWrapProps = {
+  children: ReactNode;
+};
+
+export function RequestPhoneWrap({ children }: RequestPhoneWrapProps) {
+  const [visible, setVisible] = useState<ReactNode>(<></>);
   const {
     mainState: { isPhoneRequested },
     userState,
-  } = useSelector((state: any) => state);
+  } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
-  const isVerifiedPhone = userState?.phone?.verified;
+  const handleRequestPhone = (callback?: () => void, forceRequest?: false) => {
+    const isVerifiedPhone = !!userState?.user?.phone?.verified;
 
-  const handleRequestPhone = async (callback?) => {
-    const { isShowPhoneRequest } = await storage.getShowPhoneRequested();
-    if (isVerifiedPhone || isShowPhoneRequest || isPhoneRequested) {
-      callback?.();
-      return;
+    if (isVerifiedPhone) return callback?.();
+
+    if (!forceRequest && isPhoneRequested) {
+      return callback?.();
     }
+
     setVisible(
       <AppConfirmModal
         showCloseIcon={false}
@@ -35,22 +49,21 @@ export function RequestPhoneWrap({ children }) {
         content="Chúng tôi cần thông tin số điện thoại của bạn để định danh tài khoản"
         cancelLabel="Đóng"
         okLabel="Cho Phép"
-        onConfirm={() => handleAllowGetPhoneUser(callback)}
+        onConfirm={() => handleAllowGetPhoneUser(callback, forceRequest)}
         onClose={() => {
+          setVisible(<></>);
           updateStateRequestPhone();
-          callback?.();
+          !forceRequest && callback?.();
         }}
       />,
     );
   };
 
-  const updatePhoneUser = (token) => {
+  const updatePhoneUser = (data) => {
     dispatch({
       type: 'userState/requestPhoneUser',
       payload: {
-        query: {
-          token,
-        },
+        data,
       },
       callback: () => {
         dispatch({
@@ -69,24 +82,36 @@ export function RequestPhoneWrap({ children }) {
     });
   };
 
-  const handleAllowGetPhoneUser = async (callback?) => {
-    await storage.setShowPhoneRequested();
+  const handleAllowGetPhoneUser = async (
+    callback?: () => void,
+    forceRequest?: false,
+  ) => {
+    // await storage.setShowPhoneRequested();
     updateStateRequestPhone();
-    getPhoneNumber({
+    await getPhoneNumber({
       success: async (data) => {
         // xử lý khi gọi api thành công
         let { token } = data;
+        const accessToken = await serviceZalo.getAccessToken();
+
         // xử lý cho trường hợp sử dụng phiên bản Zalo mới (phiên bản lớn hơn 23.02.01)
         if (token) {
-          await updatePhoneUser(token);
+          await updatePhoneUser({ token, accessToken });
           setVisible(<></>);
-          callback?.();
+          !forceRequest && callback?.();
         }
       },
       fail: (error) => {
-        callback?.();
-        // xử lý khi gọi api thất bại
         console.log(error);
+        // xử lý khi gọi api thất bại
+        setVisible(<></>);
+        !forceRequest && callback?.();
+
+        if (error.code === -2002) {
+          toast.show(
+            'Bạn đã từ chối quyền truy cập SĐT trước đó. Vui lòng cấp lại tại mục Cấp Quyền của Zalo mini App.',
+          );
+        }
       },
     });
   };

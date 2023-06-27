@@ -1,8 +1,7 @@
-import { LocationDescriptorObject } from "history-with-query";
-import { history, isBrowser } from "umi";
+import { LocationDescriptorObject } from 'history-with-query';
+import { history, isBrowser } from 'umi';
 
 const defaultState = { prev: location.pathname };
-
 
 function pushPath(path: string, state?): void {
   if (!isBrowser()) {
@@ -26,12 +25,12 @@ const goBack = () => {
   if (!isBrowser()) {
     return;
   }
-  const prev = history.location.state?.["prev"];
+  const prev = history.location.state?.['prev'];
   if (prev) {
     history.goBack();
     return;
   }
-  pushPath("/home");
+  pushPath('/home');
 };
 
 function replacePath(path: string, state?: any): void {
@@ -56,5 +55,7 @@ export default {
   pushPath,
   pushLocation,
   goBack,
-  replacePath, replaceLocation
+  replacePath,
+  replaceLocation,
+  defaultState,
 };

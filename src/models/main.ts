@@ -1,17 +1,16 @@
 import { Effect, Reducer } from 'umi';
 
-// import {
-//   IUser,
-// } from '@/interfaces';
 import {
+  serviceSystem,
   serviceUser,
   // serviceUser,
   serviceZalo,
 } from '@/services';
 import { navigator, storage } from '@/utils';
+import { AppData } from '@/interface';
 
 export interface IMainState {
-  appData: any;
+  appData: AppData;
   // user: IUser;
   isLoggedIn: boolean;
   cartChanged: boolean;
@@ -41,6 +40,7 @@ export interface IMainModel {
   effects: {
     initApp: Effect;
     openZaloChat: Effect;
+    getAppData: Effect;
   };
   reducers: {
     updateState: Reducer<IMainState>;
@@ -72,11 +72,22 @@ const MainModel: IMainModel = {
         type: 'userState/updateState',
         payload: { user: data?.user },
       });
+      yield put({
+        type: 'getAppData',
+      });
       yield put({ type: 'updateState', payload: { loadingNewUser: false } });
       navigator.pushPath('/home');
     },
     *openZaloChat(_, { call }) {
       yield call(serviceZalo.openChat);
+    },
+    *getAppData(_, { call, put }) {
+      const response = yield call(serviceSystem.getAppData);
+      const { data } = response;
+      yield put({
+        type: 'updateState',
+        payload: { appData: data },
+      });
     },
   },
   reducers: {

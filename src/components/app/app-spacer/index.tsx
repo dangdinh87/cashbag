@@ -12,7 +12,7 @@ const AppSpacer: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <pre
+    <div
       className={classNames('app-spacer m-0', className)}
       style={direction === 'vertical' ? { height: size } : { width: size }}
     />

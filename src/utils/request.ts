@@ -1,7 +1,6 @@
 import { ApiConst } from '@/configs';
 import { request } from 'umi';
 
-import { serviceZalo } from '@/services';
 import storage from './storage';
 
 export interface RequestOptions {
@@ -10,11 +9,11 @@ export interface RequestOptions {
   body?: any;
   file?: any;
   headers?: any;
-}
-
-interface Response {
+  bodyData?: any;
+  params?: any;
   data?: any;
-  err?: any;
+  Version?: string | number;
+  showLoading?: boolean;
 }
 
 const timeout = 30000; // 30s
@@ -24,12 +23,10 @@ const isTimeoutErr = (err: Error): boolean => {
 };
 async function getDefaultOption(options: any) {
   const headers = ApiConst.getDefaultHeader();
-  // const { version } = await (serviceZalo.getAppInfo());
   let result: any = {
     Platform: 'zalo',
-    // AppVersion: version,
     ...options.headers,
-    ...headers
+    ...headers,
   };
   const { authToken } = await storage.getUserToken();
   if (authToken) {
@@ -48,13 +45,14 @@ async function getDefaultOption(options: any) {
  * @param options contain method or query
  * @param type request type
  */
-async function call(url: any, options: any, type?: any) {
+async function call(url: string, options?: RequestOptions, type?: any) {
   const requestEndpoint = type || ApiConst.endpointType.appEndpoint;
   const endpointUrl = requestEndpoint + url;
   const headers = await getDefaultOption(options);
 
   const newOptions = {
-    headers, ...options,
+    headers,
+    ...options,
   };
 
   if (options.file) {

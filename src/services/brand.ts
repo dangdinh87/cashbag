@@ -129,5 +129,5 @@ export default {
   getDetailCategoryBrand,
   getGuidesByBrand,
   getLinkRedirect,
-  getListBrandByCategories
+  getListBrandByCategories,
 };

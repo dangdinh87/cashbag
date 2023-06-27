@@ -16,6 +16,15 @@ export { ReactComponent as WalletIcon } from '@/assets/icons/ic_wallet.svg';
 export { ReactComponent as HandIcon } from '@/assets/icons/ic_hand.svg';
 export { ReactComponent as ContactIcon } from '@/assets/icons/ic_contact.svg';
 export { ReactComponent as PhoneInfoIcon } from '@/assets/icons/ic_phone_request.svg';
+export { ReactComponent as BankIcon } from '@/assets/icons/ic_bank.svg';
+export { ReactComponent as CashIcon } from '@/assets/icons/ic_cash.svg';
+
+//two tone
+export { ReactComponent as WalletTwoTone } from '@/assets/icons/two-tones/ic_wallet.svg';
+export { ReactComponent as BankTwoTone } from '@/assets/icons/two-tones/ic_bank.svg';
+export { ReactComponent as BankNumberTwoTone } from '@/assets/icons/two-tones/ic_card_number.svg';
+export { ReactComponent as UserTwoTone } from '@/assets/icons/two-tones/ic_user.svg';
+
 export default {
   bg: {
     bgDefault: require('@/assets/backgrounds/bg_default_placeholder.svg'),

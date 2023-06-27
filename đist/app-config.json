@@ -1,0 +1,14 @@
+{
+  "app": {
+    "title": "Cashbag",
+    "headerColor": "#cc3366",
+    "textColor": "white",
+    "statusBarColor": "#cc3366",
+    "leftButton": "both"
+  },
+  "debug": false,
+  "listCSS": ["umi.css"],
+  "listSyncJS": [],
+  "listAsyncJS": ["umi.js"],
+  "pages": []
+}

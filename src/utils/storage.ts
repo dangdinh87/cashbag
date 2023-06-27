@@ -151,7 +151,6 @@ const getShowPhoneRequested = (): string | any => {
 
 const setShowPhoneRequested = () => {
   if (helper.isZalo()) {
-    console.log('setShowPhoneRequest', true);
     return setStorage({
       data: {
         [AppConst.localStorage.isShowPhoneRequest]: true,
@@ -162,7 +161,6 @@ const setShowPhoneRequested = () => {
     });
   } else {
     return new Promise((resolve, reject) => {
-      console.log('setShowPhoneRequest', true);
       localStorage.setItem(AppConst.localStorage.isShowPhoneRequest, 'true');
       return resolve({});
     });

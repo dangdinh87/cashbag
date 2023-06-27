@@ -1,13 +1,35 @@
+import { User } from '@/interface';
+import { Response } from '@/interface/common';
 import { serviceUser } from '@/services';
+import { Effect, Reducer } from 'umi';
 
-const initState = {};
+export interface UserState {
+  user?: User;
+}
 
-const UserModel = {
+const initState: UserState = {};
+
+interface UserModel {
+  namespace: string;
+  state: UserState;
+  effects: {
+    getUserDetail: Effect;
+    requestPhoneUser: Effect;
+  };
+  reducers: {
+    updateState: Reducer<UserState>;
+    clearState: Reducer<UserState>;
+  };
+}
+
+const UserModel: UserModel = {
   namespace: 'userState',
   state: initState,
   effects: {
     *getUserDetail({}, { call, put }) {
-      const response = yield call(serviceUser.getDetailUser);
+      const response: Response<User, 'user'> = yield call(
+        serviceUser.getDetailUser,
+      );
       if (!response) {
         return;
       }
@@ -18,8 +40,11 @@ const UserModel = {
         },
       });
     },
-    *requestPhoneUser({ payload, callback }, { call, put }) {
-      const response = yield call(serviceUser.verifyPhoneUser, payload.query);
+    *requestPhoneUser({ payload, callback }, { call }) {
+      const response: Response<Object> = yield call(
+        serviceUser.verifyPhoneUser,
+        payload.data,
+      );
       if (!response) {
         return;
       }
@@ -27,7 +52,7 @@ const UserModel = {
     },
   },
   reducers: {
-    updateState(state, action) {
+    updateState(state: UserState, action: any) {
       return {
         ...state,
         ...action.payload,

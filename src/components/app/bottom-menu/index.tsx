@@ -1,7 +1,6 @@
 import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Location } from 'umi';
-import Button from 'react-bootstrap/Button';
 
 import { navigator } from '@/utils';
 import AppSpacer from '../app-spacer';
@@ -33,4 +32,4 @@ const BottomMenu: React.FC<Props> = ({ menus, location }) => {
     </>
   );
 };
-export default BottomMenu;
+export default React.memo(BottomMenu);

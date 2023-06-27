@@ -1,18 +1,17 @@
 import classNames from 'classnames';
 import React from 'react';
 import { Offcanvas } from 'react-bootstrap';
-
 import { CancelIcon } from '@/configs/assets';
-
 import styles from './styles.scss';
 
 interface Props {
   visible: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   title?: string | React.ReactNode;
   closeBtn?: boolean;
   bodyClass?: string;
   headerClass?: string;
+  className?: string;
 }
 const AppBottomSheet: React.FC<Props> = (props) => {
   const {
@@ -23,10 +22,11 @@ const AppBottomSheet: React.FC<Props> = (props) => {
     closeBtn,
     bodyClass,
     headerClass,
+    className,
   } = props;
   return (
     <Offcanvas
-      className={classNames('rounded-top-3', styles.bottomSheet)}
+      className={classNames('rounded-top-3', className, styles.bottomSheet)}
       backdropClassName="offcanvas-backdrop"
       placement="bottom"
       show={visible}

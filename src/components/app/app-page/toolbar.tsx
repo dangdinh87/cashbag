@@ -32,7 +32,6 @@ const MobileToolbar: React.FC<MobileToolbarProps> = ({
   };
   return (
     <>
-      <AppSpacer size={50} />
       <Navbar
         style={{ height: 50, zIndex: 1000 }}
         className={classNames(

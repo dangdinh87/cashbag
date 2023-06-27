@@ -32,7 +32,7 @@ export default function OnBoarding({ show }) {
       <Card className="p-3 mt-3">
         {listInfo.map((item, index) => (
           <div className="d-flex align-items-center justify-content-start py-1">
-            <SuccessIcon className="flex-shrink-0" />
+            <SuccessIcon className="flex-shrink-0" color="#23C6C8" />
             <p className="text-dark ms-3 fs-8">{item}</p>
           </div>
         ))}

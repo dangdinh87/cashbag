@@ -68,7 +68,7 @@ const AppInitializer: React.FC<Props> = ({
         centered
         fullscreen
         show={showOnboarding}
-        contentClassName="bg-primary d-flex align-items-center justify-content-center p-3"
+        contentClassName="bg-primary d-flex align-items-center justify-content-start p-3"
       >
         <LogoIcon
           className="text-white flex-shrink-0"

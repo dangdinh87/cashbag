@@ -1,4 +1,9 @@
 .bottomSheet {
-  height: calc(100% - 30px) !important;
+  height: calc(100% - 48px) !important;
+  z-index: 1200 !important;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.5) !important;
+}
 
+.fitContent {
+  height: auto;
 }

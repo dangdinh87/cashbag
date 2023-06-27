@@ -1,16 +1,17 @@
 .confirmDialog {
   max-width: 305px !important;
-  margin   : 20vh auto auto auto !important;
+  margin: 20vh auto auto auto !important;
+  z-index: 1500 !important;
 }
 
 .confirmDialogLarge {
   max-width: 345px !important;
-  margin   : 20vh auto auto auto !important;
+  margin: 20vh auto auto auto !important;
 }
 
 .zaloConfirmDialog {
   max-width: 305px !important;
-  margin   : 40vh auto auto auto !important;
+  margin: 40vh auto auto auto !important;
 }
 
 .confirmModalBackdrop {
@@ -18,9 +19,9 @@
 }
 
 .confirmDialogImage {
-  width    : 100% !important;
+  width: 100% !important;
   max-width: 405px !important;
-  padding  : 0 30px;
+  padding: 0 30px;
 }
 
 .mobile {
@@ -33,5 +34,9 @@
 
 .imageCashConfirm {
   max-width: 200px !important;
-  margin   : 20px;
+  margin: 20px;
+}
+
+.modal-fullscreen {
+  height: auto !important;
 }

@@ -18,7 +18,6 @@ async function getPhoneNumber(callback) {
       callback?.();
     },
   });
-  console.log(number, token);
   return number;
 }
 

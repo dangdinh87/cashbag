@@ -125,103 +125,113 @@ function BrandBonusDetailPage({ dispatch, loading, brandBonusState }) {
     );
   };
 
-  if (!brandInfo?.name) return <></>;
+  const isLoading = loading.effects['brandBonusState/getBrandInfo'];
+
+  // if (!brandInfo?.name) return <></>;
 
   return (
     <AppPage
       title={`Ngày vàng ${brandInfo?.name}`}
-      className="bg-white px-3"
+      className="bg-white px-3 pt-2"
       toolbarProps={{
         onBack: () => navigator.goBack(),
       }}
+      loading={isLoading}
     >
-      <SearchSection
-        className="my-2"
-        brandInfo={brandInfo}
-        searchSellers={searchSellers}
-        filterSearchSellers={filterSearchSellers}
-        searchSellersByBrand={searchSellersByBrand}
-        loading={loading.effects['brandBonusState/searchSellersByBrand']}
-        dispatch={dispatch}
-      />
-      {/* <AppSpacer size={5} className="bg-light mx-n3" /> */}
-      {brandsNewest?.length > 0 && (
-        <Section
-          brand={brandInfo}
-          mainTitle={'Mới nhất'}
-          title={`${brandsNewest?.length} thương hiệu hoàn tiền`}
-          className="my-2"
-        >
-          <div className="d-flex overflow-auto hide-scrollbar mx-n3 px-3 mt-2">
-            {brandsNewest.map((seller) => {
-              return (
-                <AppImage
-                  src={helper.getPhotoURL(seller.logo)}
-                  width={72}
-                  height={72}
-                  className="object-fit-contain rounded-circle border-light me-2 border p-1"
-                  key={seller._id}
-                  onClick={() =>
-                    helper.navigateToRedirect(brandInfo._id, seller.url, true)
-                  }
-                />
-              );
-            })}
-          </div>
-        </Section>
-      )}
-
-      <AppSpacer size={5} className="bg-light mx-n3" />
-      {totalProducts > 0 && (
+      {brandInfo && (
         <>
+          <SearchSection
+            className=""
+            brandInfo={brandInfo}
+            searchSellers={searchSellers}
+            filterSearchSellers={filterSearchSellers}
+            searchSellersByBrand={searchSellersByBrand}
+            loading={loading.effects['brandBonusState/searchSellersByBrand']}
+            dispatch={dispatch}
+          />
+          {/* <AppSpacer size={5} className="bg-light mx-n3" /> */}
+          {brandsNewest?.length > 0 && (
+            <Section
+              brand={brandInfo}
+              mainTitle={'Mới nhất'}
+              title={`${brandsNewest?.length} thương hiệu hoàn tiền`}
+              className="my-2"
+            >
+              <div className="d-flex overflow-auto hide-scrollbar mx-n3 px-3 mt-2">
+                {brandsNewest.map((seller) => {
+                  return (
+                    <AppImage
+                      src={helper.getPhotoURL(seller.logo)}
+                      width={72}
+                      height={72}
+                      className="object-fit-contain rounded-circle border-light me-2 border p-1"
+                      key={seller._id}
+                      onClick={() =>
+                        helper.navigateToRedirect(
+                          brandInfo._id,
+                          seller.url,
+                          true,
+                        )
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </Section>
+          )}
+          <AppSpacer size={5} className="bg-light mx-n3" />
+          {totalProducts > 0 && (
+            <>
+              <Section
+                brand={brandInfo}
+                mainTitle={'Mới nhất'}
+                title={'thương hiệu hoàn tiền'}
+                className="my-2"
+              >
+                <ProductListBrandBonus
+                  brand={brandInfo}
+                  total={totalProducts}
+                  productList={products}
+                  classNameViewMore="border border-light"
+                />
+              </Section>
+              <AppSpacer size={5} className="bg-light mx-n3" />
+            </>
+          )}
           <Section
             brand={brandInfo}
-            mainTitle={'Mới nhất'}
-            title={'thương hiệu hoàn tiền'}
+            mainTitle={`Ngày vàng ${brandInfo?.name} - Tất cả`}
+            title={`${totalSellers} thương hiệu`}
             className="my-2"
           >
-            <ProductListBrandBonus
-              brand={brandInfo}
-              total={totalProducts}
-              productList={products}
-              classNameViewMore="border border-light"
-            />
+            <AppLoadMore
+              loading={loading.effects['brandBonusState/getSellersByBrand']}
+              onLoadMore={() =>
+                getSellersByBrand(filterSellers?.nextPageToken, true)
+              }
+              shouldLoadMore={!!filterSellers?.nextPageToken}
+            >
+              {sellers?.map((item, index) => {
+                return (
+                  <>
+                    <BrandBonusItem
+                      onClick={() =>
+                        helper.navigateToRedirect(brandInfo._id, item.url, true)
+                      }
+                      brand={brandInfo}
+                      seller={item}
+                      key={item._id}
+                    />
+                    {(index === 5 ||
+                      (totalSellers < 6 && totalSellers === index + 1)) &&
+                      sectionNotice()}
+                  </>
+                );
+              })}
+            </AppLoadMore>
           </Section>
-          <AppSpacer size={5} className="bg-light mx-n3" />
         </>
       )}
-      <Section
-        brand={brandInfo}
-        mainTitle={`Ngày vàng ${brandInfo?.name} - Tất cả`}
-        title={`${totalSellers} thương hiệu`}
-        className="my-2"
-      >
-        <AppLoadMore
-          loading={loading.effects['brandBonusState/getSellersByBrand']}
-          onLoadMore={() =>
-            getSellersByBrand(filterSellers?.nextPageToken, true)
-          }
-          shouldLoadMore={!!filterSellers?.nextPageToken}
-        >
-          {sellers?.map((item, index) => {
-            return (
-              <>
-                <BrandBonusItem
-                  onClick={() =>
-                    helper.navigateToRedirect(brandInfo._id, item.url, true)
-                  }
-                  brand={brandInfo}
-                  seller={item}
-                  key={item._id}
-                />
-                {(index === 5 ||
-                  (totalSellers < 6 && totalSellers === index + 1)) &&
-                  sectionNotice()}
-              </>
-            );
-          })}
-        </AppLoadMore>
-      </Section>
     </AppPage>
   );
 }

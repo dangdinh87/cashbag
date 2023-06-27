@@ -3,17 +3,16 @@ export default [
     path: '/',
     component: '@/layouts/main',
     routes: [
-      // {
-      //   exact: true,
-      //   path: '/',
-      //   component: '@/pages/home',
-      // },
       {
         path: '/redirect',
         component: '@/pages/redirect',
       },
       {
         path: '/home',
+        component: '@/pages/home',
+      },
+      {
+        path: '/',
         component: '@/pages/home',
       },
       {
@@ -43,6 +42,28 @@ export default [
       {
         path: '/transaction/:transactionId',
         component: '@/pages/transaction-detail',
+      },
+      {
+        path: '/withdraw',
+        component: '@/pages/withdraw',
+      },
+      {
+        path: '/withdraw-history',
+        routes: [
+          {
+            path: '/withdraw-history/:id',
+            component: '@/pages/withdraw-history/detail',
+          },
+          {
+            path: '/withdraw-history',
+            component: '@/pages/withdraw-history',
+          },
+        ],
+      },
+
+      {
+        path: '/bank',
+        component: '@/pages/bank',
       },
     ],
   },

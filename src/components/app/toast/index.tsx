@@ -66,10 +66,8 @@ const AppToast = (props: any) => {
       animation={true}
     >
       <Toast.Body>
-        {renderIcon()}
-        <span className="ms-3 fw-bold">
-          {content || renderDefaultMessage()}
-        </span>
+        {/* {renderIcon()} */}
+        <span className="fw-bold">{content || renderDefaultMessage()}</span>
       </Toast.Body>
     </Toast>
   );
