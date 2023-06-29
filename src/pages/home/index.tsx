@@ -76,11 +76,12 @@ function HomePage({ dispatch, homeState, loading }) {
       );
     });
 
-  const handleClickSearch = () => navigator.pushPath('/search');
-
   return (
     <div className="w-100 h-100">
-      <Header onClickSearch={handleClickSearch} className="px-3" />
+      <Header
+        onClickSearch={() => navigator.pushPath('/search')}
+        className="px-3"
+      />
       <div className="px-3">
         <AppCarousel
           carouselProps={{

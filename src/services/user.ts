@@ -24,6 +24,7 @@ const verifyPhoneUser = (data: any): any => {
   return request.call(api.url, {
     method: api.method,
     data,
+    showLoading: true,
   });
 };
 
