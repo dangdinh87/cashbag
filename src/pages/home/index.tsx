@@ -15,7 +15,7 @@ function HomePage({ dispatch, homeState, loading }) {
       type: 'homeState/getHomeBanners',
       payload: {
         data: {
-          // type: 'primary',
+          positions: 'home_banner',
         },
       },
     });
@@ -48,8 +48,8 @@ function HomePage({ dispatch, homeState, loading }) {
   const homeBannerImages = homeBanners
     .sort(helper.sortByValue('order'))
     .map((item: any, index: number) => {
-      const firstPhoto = homeBanners[0].photo;
-      const photo = item.photo;
+      const firstPhoto = homeBanners[0].cover;
+      const photo = item.cover;
       return (
         <Ratio
           key={`${item._id}-${index}`}

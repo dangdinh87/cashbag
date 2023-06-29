@@ -1,24 +1,21 @@
 import { Effect, Reducer } from 'umi';
 
 import { ResponseCode } from '@/configs/app';
-import {
-  serviceBrand,
-  serviceNews
-} from '@/services';
+import { serviceBrand, serviceNews } from '@/services';
 
 export interface IHomeState {
   homeBanners?: any[];
   brandBonus?: any[];
   brandByCategory?: any[];
   categories?: any[];
-  listBrandByCategoryFilter?: {}
+  listBrandByCategoryFilter?: {};
 }
 const initState: IHomeState = {
   homeBanners: [],
   brandBonus: [],
   brandByCategory: [],
   categories: [],
-  listBrandByCategoryFilter: {}
+  listBrandByCategoryFilter: {},
 };
 
 interface IHomeModel {
@@ -48,11 +45,11 @@ const HomeModel: IHomeModel = {
       yield put({
         type: 'updateState',
         payload: {
-          homeBanners: response.data.data,
+          homeBanners: response.data.data?.[0]?.news,
         },
       });
     },
-    *getBrandBonus({ }, { call, put }) {
+    *getBrandBonus({}, { call, put }) {
       const response = yield call(serviceBrand.getBrandBonus);
       if (response?.code !== ResponseCode.success) {
         return;
@@ -64,7 +61,7 @@ const HomeModel: IHomeModel = {
         },
       });
     },
-    *getBrandByCategory({ }, { call, put }) {
+    *getBrandByCategory({}, { call, put }) {
       const response = yield call(serviceBrand.getBrandByCategory);
       if (response?.code !== ResponseCode.success) {
         return;
@@ -77,7 +74,11 @@ const HomeModel: IHomeModel = {
       });
     },
     *getListBrandByCategory({ payload }, { call, put, select }) {
-      const response = yield call(serviceBrand.getListBrandByCategories, payload.data, payload.categoryID);
+      const response = yield call(
+        serviceBrand.getListBrandByCategories,
+        payload.data,
+        payload.categoryID,
+      );
       if (response?.code !== ResponseCode.success) {
         return;
       }
@@ -107,8 +108,7 @@ const HomeModel: IHomeModel = {
           listBrandByCategory: data.data,
           listBrandByCategoryFilter: {
             nextPageToken: data.nextPageToken,
-
-          }
+          },
         },
       });
     },
@@ -125,7 +125,6 @@ const HomeModel: IHomeModel = {
         ...initState,
       };
     },
-
   },
 };
 

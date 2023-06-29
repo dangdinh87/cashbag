@@ -61,7 +61,7 @@ export default {
   endpointType,
   news: {
     getNews: (): IApi => ({
-      url: '/common/zalo/banners',
+      url: '/common/news-group',
       method: methods.get,
     }),
   },
